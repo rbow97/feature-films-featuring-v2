@@ -2,11 +2,32 @@
 const { props } = Astro.props;
 ---
 
-<div class="bg-primary-grey p-4 rounded-lg">
+<input-wrapper class="bg-primary-grey p-4 rounded-lg">
   <input
+    autocomplete="off"
+    id="input"
     placeholder="Search for someone..."
     type="text"
     class="block appearance-none border-none outline-none bg-transparent w-full"
     {...props}
   />
-</div>
+</input-wrapper>
+
+<script>
+  import { handleInputSearch } from "../utils/handleInputSearch";
+
+  class InputWrapper extends HTMLElement {
+    constructor() {
+      super();
+      const input = this.querySelector("#input");
+
+      // TODO: Reset on clear of input
+
+      input?.addEventListener("keydown", (e) => {
+        handleInputSearch(e);
+      });
+    }
+  }
+
+  customElements.define("input-wrapper", InputWrapper);
+</script>

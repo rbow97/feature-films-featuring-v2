@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse } from "axios";
+import axios from "axios";
 
 // Get popular people
 export const getPopularPeople = async (): Promise<any> => {
@@ -17,7 +17,9 @@ export const getPopularPeople = async (): Promise<any> => {
 export const getSearchedPeople = async (input): Promise<any> => {
   const response: any = await axios
     .get(
-      `https://api.themoviedb.org/3/search/person/?query=${input}&api_key=${key}`
+      `https://api.themoviedb.org/3/search/person?query=${input}&api_key=${
+        import.meta.env.PUBLIC_API_KEY
+      }`
     )
     .catch((error) => {
       console.log(error);

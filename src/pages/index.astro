@@ -3,10 +3,10 @@ import { getPopularPeople } from "../api";
 import Container from "../components/Container.astro";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/homepage/Header.astro";
-import SearchAndResults from "../components/homepage/SearchAndResults";
-// import SearchAndResults from "../components/homepage/SearchAndResults.astro";
+import SearchAndResults from "../components/homepage/SearchAndResults.astro";
 
 const people = await getPopularPeople();
+console.log("people:", people);
 ---
 
 <Layout title="Feature Films Featuring.">
@@ -20,8 +20,7 @@ const people = await getPopularPeople();
           >
             <h3>Tagged</h3>
           </div>
-          <SearchAndResults client:load />
-          <!-- <SearchAndResults people={people} /> -->
+          {people && <SearchAndResults people={people} />}
         </div>
       </div>
     </Container>
