@@ -1,0 +1,20 @@
+---
+const { profilePath, name, workedOn, profession } = Astro.props;
+---
+
+<article
+  class="flex p-3 gap-2 rounded-lg border-primary-black border-2 h-full items-start"
+>
+  <img
+    loading="lazy"
+    width="40"
+    decoding="async"
+    class="h-full w-16 rounded-md aspect-auto object-cover object-center"
+    src={`https://image.tmdb.org/t/p/w185/${profilePath}`}
+  />
+  <div class="flex flex-col">
+    <p>{name}</p>
+    <p class="text-sm text-primary-darkGrey">{profession}</p>
+    <button class="w-fit text-sm text-primary-darkGrey">Tag</button>
+  </div>
+</article>

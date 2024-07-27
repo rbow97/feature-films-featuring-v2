@@ -1,7 +1,12 @@
-<div class="bg-[rgba(45,86,128,.06)] p-4 rounded-lg">
+---
+const { props } = Astro.props;
+---
+
+<div class="bg-primary-grey p-4 rounded-lg">
   <input
     placeholder="Search for someone..."
     type="text"
-    class="block appearance-none border-none bg-transparent outline-none "
+    class="block appearance-none border-none outline-none bg-transparent w-full"
+    {...props}
   />
 </div>
