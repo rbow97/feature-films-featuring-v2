@@ -13,3 +13,14 @@ export const getPopularPeople = async (): Promise<any> => {
     });
   return response.data.results;
 };
+
+export const getSearchedPeople = async (input): Promise<any> => {
+  const response: any = await axios
+    .get(
+      `https://api.themoviedb.org/3/search/person/?query=${input}&api_key=${key}`
+    )
+    .catch((error) => {
+      console.log(error);
+    });
+  return response.data.results;
+};
