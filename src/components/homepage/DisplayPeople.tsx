@@ -1,13 +1,33 @@
 import { useStore } from "@nanostores/preact";
 import { inputSearchResult } from "../../stores/inputSearchResultStore";
+import { taggedPeople } from "../../stores/taggedPeopleStore";
+import { useState } from "preact/hooks";
 
 interface Props {
   people: any;
 }
 
 export default function DisplayPeople({ people }: Props) {
-  // read the store value with the `useStore` hook
+  const [currentTaggedPeople, setCurrentTaggedPeople] = useState<Array<{}>>([]);
+
   const $searchedResult = useStore(inputSearchResult);
+
+  // TODO: Improve this
+  function handleButtonClick(clickedPerson: any) {
+    const doesHaveClickedPerson =
+      currentTaggedPeople.find((person) => person.id === clickedPerson.id) !==
+      undefined
+        ? true
+        : false;
+
+    doesHaveClickedPerson
+      ? setCurrentTaggedPeople(
+          currentTaggedPeople.filter((person) => person.id !== clickedPerson.id)
+        )
+      : setCurrentTaggedPeople([...currentTaggedPeople, clickedPerson]);
+  }
+
+  taggedPeople.set(currentTaggedPeople);
 
   const resultToBeMapped =
     $searchedResult?.length > 0 ? $searchedResult : people;
@@ -33,7 +53,10 @@ export default function DisplayPeople({ people }: Props) {
                   <p class="text-sm text-primary-darkGrey">
                     {person.known_for_department}
                   </p>
-                  <button class="w-fit text-sm text-primary-darkGrey">
+                  <button
+                    onClick={() => handleButtonClick(person)}
+                    class="w-fit text-sm text-primary-darkGrey"
+                  >
                     Tag
                   </button>
                 </div>

@@ -4,9 +4,9 @@ import Container from "../components/Container.astro";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/homepage/Header.astro";
 import SearchAndResults from "../components/homepage/SearchAndResults.astro";
+import TaggedColumn from "../components/homepage/TaggedColumn";
 
 const people = await getPopularPeople();
-console.log("people:", people);
 ---
 
 <Layout title="Feature Films Featuring.">
@@ -15,11 +15,7 @@ console.log("people:", people);
       <div class="h-svh flex flex-col">
         <Header />
         <div class="flex grow">
-          <div
-            class="w-[200px] shrink-0 h-full border-r-primary-black border-r"
-          >
-            <h3>Tagged</h3>
-          </div>
+          <TaggedColumn client:load />
           {people && <SearchAndResults people={people} />}
         </div>
       </div>
