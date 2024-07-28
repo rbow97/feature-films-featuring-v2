@@ -2,6 +2,8 @@ import { useStore } from "@nanostores/preact";
 import { inputSearchResult } from "../../stores/inputSearchResultStore";
 import { taggedPeople } from "../../stores/taggedPeopleStore";
 import { useState } from "preact/hooks";
+import { getAllCredits } from "../../utils/getAllCredits";
+import { getCreditsPerPerson } from "../../api";
 
 interface Props {
   people: any;
@@ -10,22 +12,33 @@ interface Props {
 export default function DisplayPeople({ people }: Props) {
   const [currentTaggedPeople, setCurrentTaggedPeople] = useState<Array<{}>>([]);
 
+  async function handleAddNewPerson(clickedPerson: any) {
+    setCurrentTaggedPeople([...currentTaggedPeople, clickedPerson]);
+    const credits = await getCreditsPerPerson(clickedPerson.id);
+  }
+
   const $searchedResult = useStore(inputSearchResult);
 
   // TODO: Improve this
   function handleButtonClick(clickedPerson: any) {
-    const doesHaveClickedPerson =
-      currentTaggedPeople.find((person) => person.id === clickedPerson.id) !==
-      undefined
-        ? true
-        : false;
+    const doesHaveClickedPerson = Boolean(
+      currentTaggedPeople.find(
+        (person: any) => person.id === clickedPerson.id
+      ) !== undefined
+    );
 
     doesHaveClickedPerson
       ? setCurrentTaggedPeople(
-          currentTaggedPeople.filter((person) => person.id !== clickedPerson.id)
+          currentTaggedPeople.filter(
+            (person: any) => person.id !== clickedPerson.id
+          )
         )
-      : setCurrentTaggedPeople([...currentTaggedPeople, clickedPerson]);
+      : handleAddNewPerson(clickedPerson);
   }
+
+  // doesn't have clicked person? do get all credits search
+  // Add that to a new state of api calls
+  // Add that to a nano store of api calls
 
   taggedPeople.set(currentTaggedPeople);
 

@@ -14,7 +14,8 @@ export const getPopularPeople = async (): Promise<any> => {
   return response.data.results;
 };
 
-export const getSearchedPeople = async (input): Promise<any> => {
+// Get the result of searching for a person by name
+export const getSearchedPeople = async (input: string): Promise<any> => {
   const response: any = await axios
     .get(
       `https://api.themoviedb.org/3/search/person?query=${input}&api_key=${
@@ -25,4 +26,18 @@ export const getSearchedPeople = async (input): Promise<any> => {
       console.log(error);
     });
   return response.data.results;
+};
+
+// Get the credits of a single person's id
+export const getCreditsPerPerson = async (id: string): Promise<any> => {
+  const response: any = await axios
+    .get(
+      `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${
+        import.meta.env.PUBLIC_API_KEY
+      }&language=en-US`
+    )
+    .catch((error) => {
+      console.log(error);
+    });
+  return response.data;
 };
