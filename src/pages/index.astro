@@ -5,20 +5,18 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/homepage/Header.astro";
 import SearchAndResults from "../components/homepage/SearchAndResults.astro";
 import TaggedColumn from "../components/homepage/TaggedColumn";
+import SideBar from "../components/homepage/SideBar.astro";
 
 const people = await getPopularPeople();
 ---
 
 <Layout title="Feature Films Featuring.">
-  <main>
-    <Container>
-      <div class="h-svh flex flex-col">
-        <Header />
-        <div class="flex grow">
-          <TaggedColumn client:load />
-          {people && <SearchAndResults people={people} />}
-        </div>
-      </div>
-    </Container>
+  <main class="h-fit">
+    <div class="flex">
+      <SideBar />
+      <Container>
+        {people && <SearchAndResults people={people} />}
+      </Container>
+    </div>
   </main>
 </Layout>

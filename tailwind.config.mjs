@@ -5,12 +5,24 @@ export default {
     extend: {
       colors: {
         primary: {
-          black: "rgba(3,15,29,.92)",
-          grey: "rgba(45,86,128,.06)",
-          darkGrey: "#b7b7b7",
+          black: "#011502",
+          darkGrey: "rgba(45,86,128,.06)",
+          lightGrey: "rgba(63, 86, 109, 0.12)",
+          grey: "#b7b7b7",
+          lightBlack: "#0e1111",
+          blue: "#00228E",
+          white: "#FCFCFC",
         },
       },
-      fontFamily: { limelight: ["Limelight", "sans-serif"] },
+      fontFamily: { oswald: ["Oswald", "sans-serif"] },
+      fontSize: {
+        heading: "28px",
+        subheading: "22px",
+        text: "18px",
+        subtext: "16px",
+        button: "16px",
+        tag: "14px",
+      },
       transitionDuration: {
         primary: "750ms",
         secondary: "1000ms",
