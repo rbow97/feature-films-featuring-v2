@@ -1,23 +1,33 @@
 import { useStore } from "@nanostores/preact";
-import { useEffect, useState } from "preact/hooks";
 import { getCreditsPerPerson } from "../../api";
+import { creditsPerSearchStore } from "../../stores/creditsStore";
 import { inputSearchResult } from "../../stores/inputSearchResultStore";
 import { taggedPeople } from "../../stores/taggedPeopleStore";
 import { handleRemoveFromTags } from "../../utils/handleRemoveFromTags";
 
-function handleAddToTags(clickedPerson: any, $taggedPeople: any) {
+async function handleAddToTags(
+  clickedPerson: any,
+  $taggedPeople: any,
+  $creditsPerSearchStore: any
+) {
   taggedPeople.set([...$taggedPeople, clickedPerson]);
+  const credits = await getCreditsPerPerson(clickedPerson.id);
+  creditsPerSearchStore.set([...$creditsPerSearchStore, credits]);
 }
 
-function handleButtonClick(clickedPerson: any, $taggedPeople: any) {
+function handleButtonClick(
+  clickedPerson: any,
+  $taggedPeople: any,
+  $creditsPerSearchStore: any
+) {
   const doesHaveClickedPerson = Boolean(
     $taggedPeople.find((person: any) => person.id === clickedPerson.id) !==
       undefined
   );
 
   doesHaveClickedPerson
-    ? handleRemoveFromTags(clickedPerson, $taggedPeople)
-    : handleAddToTags(clickedPerson, $taggedPeople);
+    ? handleRemoveFromTags(clickedPerson, $taggedPeople, $creditsPerSearchStore)
+    : handleAddToTags(clickedPerson, $taggedPeople, $creditsPerSearchStore);
 }
 
 interface Props {
@@ -26,8 +36,7 @@ interface Props {
 
 export default function DisplayPeople({ people }: Props) {
   const $taggedPeople = useStore(taggedPeople);
-
-  const [taggedPeopleCredits, setTaggedPeopleCredits] = useState([]);
+  const $creditsPerSearchStore = useStore(creditsPerSearchStore);
 
   const $searchedResult = useStore(inputSearchResult);
 
@@ -41,7 +50,7 @@ export default function DisplayPeople({ people }: Props) {
   return (
     <>
       {resultToBeMapped.map((person: any, i: number) => {
-        if (i < 10)
+        if (i < 20)
           return (
             // TODO:
             // On hover, image expands to take up whole space, some kind of tooltip appears with more info, can click whole image to tag
@@ -62,7 +71,13 @@ export default function DisplayPeople({ people }: Props) {
                   </p>
                 </div>
                 <button
-                  onClick={() => handleButtonClick(person, $taggedPeople)}
+                  onClick={() =>
+                    handleButtonClick(
+                      person,
+                      $taggedPeople,
+                      $creditsPerSearchStore
+                    )
+                  }
                 >
                   Tag
                 </button>

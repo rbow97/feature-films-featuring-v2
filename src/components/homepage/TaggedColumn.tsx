@@ -1,13 +1,19 @@
 import { useStore } from "@nanostores/preact";
 import { taggedPeople } from "../../stores/taggedPeopleStore";
 import { handleRemoveFromTags } from "../../utils/handleRemoveFromTags";
+import { creditsPerSearchStore } from "../../stores/creditsStore";
+import { findCommonProjects } from "../../utils/returnCommonProjects";
 
 export default function TaggedColumn() {
   const $taggedPeople = useStore(taggedPeople);
+  const $creditsPerSearchStore = useStore(creditsPerSearchStore);
 
   return (
     <div class="h-2/3">
       <h3 class="text-text mb-2">Tagged</h3>
+      <button onClick={() => findCommonProjects($creditsPerSearchStore)}>
+        Search
+      </button>
       <ul class="flex flex-col gap-2">
         {$taggedPeople.length > 0 &&
           $taggedPeople.map((person: any) => (
@@ -18,7 +24,13 @@ export default function TaggedColumn() {
               />
               <span class="block truncate">{person.name}</span>
               <button
-                onClick={() => handleRemoveFromTags(person, $taggedPeople)}
+                onClick={() =>
+                  handleRemoveFromTags(
+                    person,
+                    $taggedPeople,
+                    $creditsPerSearchStore
+                  )
+                }
               >
                 <svg
                   fill="#000000"
