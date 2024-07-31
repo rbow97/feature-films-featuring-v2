@@ -1,3 +1,6 @@
+import { searchedCreditsTotalStore } from "../stores/creditsStore";
+import { currentDisplayedResults } from "../stores/taggingSystemStore";
+
 // Function to filter out projects with specified genre_ids
 function filterProjects(projects: Array<any>, excludedGenreIds: Array<number>) {
   return projects.filter(
@@ -6,7 +9,7 @@ function filterProjects(projects: Array<any>, excludedGenreIds: Array<number>) {
 }
 
 // Function to find projects that all people have in common
-export function findCommonProjects(people: Array<any>) {
+export function getAllCommonCredits(people: Array<any>) {
   const excludedGenreIds = [10767, 10763];
 
   // Step 1: Filter projects for each person
@@ -38,5 +41,6 @@ export function findCommonProjects(people: Array<any>) {
   );
 
   // return result;
-  console.log(result);
+  searchedCreditsTotalStore.set(result);
+  currentDisplayedResults.set(result);
 }

@@ -1,5 +1,5 @@
 import { creditsPerSearchStore } from "../stores/creditsStore";
-import { taggedPeople } from "../stores/taggedPeopleStore";
+import { taggedPeople } from "../stores/taggingSystemStore";
 
 export function handleRemoveFromTags(
   clickedPerson: any,

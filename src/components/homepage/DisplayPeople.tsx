@@ -1,8 +1,14 @@
 import { useStore } from "@nanostores/preact";
 import { getCreditsPerPerson } from "../../api";
-import { creditsPerSearchStore } from "../../stores/creditsStore";
+import {
+  creditsPerSearchStore,
+  searchedCreditsTotalStore,
+} from "../../stores/creditsStore";
 import { inputSearchResult } from "../../stores/inputSearchResultStore";
-import { taggedPeople } from "../../stores/taggedPeopleStore";
+import {
+  currentDisplayedResults,
+  taggedPeople,
+} from "../../stores/taggingSystemStore";
 import { handleRemoveFromTags } from "../../utils/handleRemoveFromTags";
 
 async function handleAddToTags(
@@ -37,15 +43,28 @@ interface Props {
 export default function DisplayPeople({ people }: Props) {
   const $taggedPeople = useStore(taggedPeople);
   const $creditsPerSearchStore = useStore(creditsPerSearchStore);
+  const $searchedCreditsTotal = useStore(searchedCreditsTotalStore);
+
+  let mappedData = people;
 
   const $searchedResult = useStore(inputSearchResult);
+  const $currentDisplayedResults = useStore(currentDisplayedResults);
 
-  // doesn't have clicked person? do get all credits search
-  // Add that to a new state of api calls
-  // Add that to a nano store of api calls
+  // Needs to show one of three results: Search bar result, tag search result, popular people
+  //
+  //
 
   const resultToBeMapped =
-    $searchedResult?.length > 0 ? $searchedResult : people;
+    $currentDisplayedResults.length > 0 ? $currentDisplayedResults : people;
+
+  console.log(resultToBeMapped);
+
+  // const resultToBeMapped =
+  //   $searchedResult?.length > 0
+  //     ? $searchedResult
+  //     : $searchedCreditsTotal.length > 0
+  //     ? $searchedCreditsTotal
+  //     : people;
 
   return (
     <>
@@ -62,12 +81,14 @@ export default function DisplayPeople({ people }: Props) {
                   height="100"
                   decoding="async"
                   class="h-[100px] shrink-0 w-[100px] rounded-full aspect-auto object-cover object-center"
-                  src={`https://image.tmdb.org/t/p/w185/${person.profile_path}`}
+                  src={`https://image.tmdb.org/t/p/w185/${
+                    person.profile_path || person.poster_path
+                  }`}
                 />
                 <div class="flex grow flex-col">
-                  <p>{person.name}</p>
+                  <p>{person.name || person.title}</p>
                   <p class="text-sm text-primary-grey">
-                    {person.known_for_department}
+                    {person.known_for_department || person.rating}
                   </p>
                 </div>
                 <button

@@ -1,8 +1,8 @@
 import { useStore } from "@nanostores/preact";
-import { taggedPeople } from "../../stores/taggedPeopleStore";
-import { handleRemoveFromTags } from "../../utils/handleRemoveFromTags";
 import { creditsPerSearchStore } from "../../stores/creditsStore";
-import { findCommonProjects } from "../../utils/returnCommonProjects";
+import { taggedPeople } from "../../stores/taggingSystemStore";
+import { getAllCommonCredits } from "../../utils/getAllCommonCredits";
+import { handleRemoveFromTags } from "../../utils/handleRemoveFromTags";
 
 export default function TaggedColumn() {
   const $taggedPeople = useStore(taggedPeople);
@@ -11,7 +11,7 @@ export default function TaggedColumn() {
   return (
     <div class="h-2/3">
       <h3 class="text-text mb-2">Tagged</h3>
-      <button onClick={() => findCommonProjects($creditsPerSearchStore)}>
+      <button onClick={() => getAllCommonCredits($creditsPerSearchStore)}>
         Search
       </button>
       <ul class="flex flex-col gap-2">
