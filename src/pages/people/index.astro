@@ -11,12 +11,3 @@ const people = await getPopularPeople();
     <DisplayPeople client:load people={people} />
   </div>
 </Layout>
-
-<script>
-  import { creditsPerSearchStore } from "../../stores/creditsStore";
-  import { getAllCommonCredits } from "../../utils/getAllCommonCredits";
-
-  creditsPerSearchStore.subscribe((creditsPerSearchStore: any) => {
-    getAllCommonCredits(creditsPerSearchStore);
-  });
-</script>

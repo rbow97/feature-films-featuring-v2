@@ -1,12 +1,15 @@
 import { useStore } from "@nanostores/preact";
-import { searchedCreditsTotalStore } from "../../stores/creditsStore";
+import { currentTaggedAndCredits } from "../../stores/newSystem";
+import { getAllCommonCredits } from "../../utils/getAllCommonCredits";
 
 export default function DisplayMedia() {
-  const $searchedCreditsTotal = useStore(searchedCreditsTotalStore);
+  const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
+
+  const credits = getAllCommonCredits($currentTaggedAndCredits);
 
   return (
     <div>
-      {$searchedCreditsTotal.map((credit) => (
+      {credits.map((credit) => (
         <p>{credit.title}</p>
       ))}
     </div>

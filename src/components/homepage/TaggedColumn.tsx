@@ -1,29 +1,23 @@
 import { useStore } from "@nanostores/preact";
-import { taggedPeople } from "../../stores/taggingSystemStore";
-import { handleRemoveFromTags } from "../../utils/handleRemoveFromTags";
-import { creditsPerPersonSearchStore } from "../../stores/newSystem";
+import { handleRemoveFromTags } from "../../utils/taggingSystem/handleRemoveFromTags";
+import { currentTaggedAndCredits } from "../../stores/newSystem";
 
 export default function TaggedColumn() {
-  const $taggedPeople = useStore(taggedPeople);
-  const $creditsPerSearchStore = useStore(creditsPerPersonSearchStore);
+  const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
 
   return (
     <>
-      {$taggedPeople.length > 0 &&
-        $taggedPeople.map((person: any) => (
+      {$currentTaggedAndCredits !== null &&
+        $currentTaggedAndCredits.map((person: any) => (
           <li class="rounded-full p-1 pr-2 flex gap-2 items-center border border-primary-black w-fit max-w-full">
             <img
               class="h-8 w-8 shrink-0 rounded-full aspect-auto object-cover object-center"
-              src={`https://image.tmdb.org/t/p/w185/${person.profile_path}`}
+              src={`https://image.tmdb.org/t/p/w185/${person.person.profile_path}`}
             />
-            <span class="block truncate">{person.name}</span>
+            <span class="block truncate">{person.person.name}</span>
             <button
               onClick={() =>
-                handleRemoveFromTags(
-                  person,
-                  $taggedPeople,
-                  $creditsPerSearchStore
-                )
+                handleRemoveFromTags(person.person, $currentTaggedAndCredits)
               }
             >
               <svg

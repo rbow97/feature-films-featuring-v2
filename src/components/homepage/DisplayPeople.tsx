@@ -1,45 +1,14 @@
 import { useStore } from "@nanostores/preact";
-import { getCreditsPerPerson } from "../../api";
-import { creditsPerSearchStore } from "../../stores/creditsStore";
-import {
-  currentDisplayedResults,
-  taggedPeople,
-} from "../../stores/taggingSystemStore";
-import { handleRemoveFromTags } from "../../utils/handleRemoveFromTags";
-
-async function handleAddToTags(
-  clickedPerson: any,
-  $taggedPeople: any,
-  $creditsPerSearchStore: any
-) {
-  taggedPeople.set([...$taggedPeople, clickedPerson]);
-
-  const credits = await getCreditsPerPerson(clickedPerson.id);
-  creditsPerSearchStore.set([...$creditsPerSearchStore, credits]);
-}
-
-function handleButtonClick(
-  clickedPerson: any,
-  $taggedPeople: any,
-  $creditsPerSearchStore: any
-) {
-  const doesHaveClickedPerson = Boolean(
-    $taggedPeople.find((person: any) => person.id === clickedPerson.id) !==
-      undefined
-  );
-
-  doesHaveClickedPerson
-    ? handleRemoveFromTags(clickedPerson, $taggedPeople, $creditsPerSearchStore)
-    : handleAddToTags(clickedPerson, $taggedPeople, $creditsPerSearchStore);
-}
+import { currentTaggedAndCredits, resultsType } from "../../stores/newSystem";
+import { handleTagButtonClick } from "../../utils/taggingSystem/handleTagButtonClick";
+import { currentDisplayedResults } from "../../stores/taggingSystemStore";
 
 interface Props {
   people: any;
 }
 
 export default function DisplayPeople({ people }: Props) {
-  const $taggedPeople = useStore(taggedPeople);
-  const $creditsPerSearchStore = useStore(creditsPerSearchStore);
+  const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
   const $currentDisplayedResults = useStore(currentDisplayedResults);
 
   const resultToBeMapped =
@@ -47,7 +16,7 @@ export default function DisplayPeople({ people }: Props) {
 
   return (
     <>
-      {resultToBeMapped.map((person: any, i: number) => {
+      {resultToBeMapped.map((currentPerson: any, i: number) => {
         if (i < 20)
           return (
             // TODO:
@@ -61,21 +30,20 @@ export default function DisplayPeople({ people }: Props) {
                   decoding="async"
                   class="h-[100px] shrink-0 w-[100px] rounded-full aspect-auto object-cover object-center"
                   src={`https://image.tmdb.org/t/p/w185/${
-                    person.profile_path || person.poster_path
+                    currentPerson.profile_path || currentPerson.poster_path
                   }`}
                 />
                 <div class="flex grow flex-col">
-                  <p>{person.name || person.title}</p>
+                  <p>{currentPerson.name || currentPerson.title}</p>
                   <p class="text-sm text-primary-grey">
-                    {person.known_for_department || person.rating}
+                    {currentPerson.known_for_department || currentPerson.rating}
                   </p>
                 </div>
                 <button
                   onClick={() =>
-                    handleButtonClick(
-                      person,
-                      $taggedPeople,
-                      $creditsPerSearchStore
+                    handleTagButtonClick(
+                      currentPerson,
+                      $currentTaggedAndCredits
                     )
                   }
                 >
