@@ -1,5 +1,3 @@
-import { useStore } from "@nanostores/preact";
-import { searchedCreditsTotalStore } from "../stores/creditsStore";
 import { type CurrentTaggedAndCreditsType } from "../stores/newSystem";
 
 // Function to filter out projects with specified genre_ids

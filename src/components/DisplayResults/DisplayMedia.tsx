@@ -7,9 +7,9 @@ export default function DisplayMedia() {
   const credits = getAllCommonCredits($currentTaggedAndCredits);
 
   return (
-    <div class="flex flex-wrap">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
       {credits.map((credit) => (
-        <div class="w-1/2 lg:w-1/3 pr-4 pb-4 relative group">
+        <div class="col-span-1 pr-4 pb-4 relative group">
           <article class="flex px-1 pt-1 pb-3 gap-2 border-b-primary-lightGrey border-b h-fit items-start">
             <img
               loading="lazy"
