@@ -35,7 +35,7 @@ export default function DisplayPeople({ people }: Props) {
                   src={`https://image.tmdb.org/t/p/w185/${currentPerson.profile_path}`}
                 />
                 <div class="flex grow flex-col">
-                  <p>{currentPerson.name || currentPerson.title}</p>
+                  <p>{currentPerson.name}</p>
                   <p class="text-sm text-primary-grey">
                     {currentPerson.known_for_department}
                   </p>

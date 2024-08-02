@@ -4,7 +4,6 @@ import { getAllCommonCredits } from "../../utils/getAllCommonCredits";
 
 export default function DisplayMedia() {
   const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
-
   const credits = getAllCommonCredits($currentTaggedAndCredits);
 
   return (
@@ -21,8 +20,9 @@ export default function DisplayMedia() {
               src={`https://image.tmdb.org/t/p/w185/${credit.poster_path}`}
             />
             <div class="flex grow flex-col">
-              <p>{credit.title}</p>
-              <p class="text-sm text-primary-grey">{credit.rating}</p>
+              <p>{credit.title || credit.original_name}</p>
+
+              <p class="text-sm text-primary-grey">{credit.vote_average}</p>
             </div>
           </article>
         </div>

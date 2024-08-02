@@ -47,6 +47,5 @@ export function getAllCommonCredits(people: CurrentTaggedAndCreditsType) {
     commonProjectIds.has(project.id)
   );
 
-  console.log(commonProjects);
   return commonProjects;
 }
