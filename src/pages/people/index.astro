@@ -1,0 +1,22 @@
+---
+import { getPopularPeople } from "../../api";
+import DisplayPeople from "../../components/homepage/DisplayPeople";
+import Layout from "../../layouts/Layout.astro";
+
+const people = await getPopularPeople();
+---
+
+<Layout title="Feature Films Featuring">
+  <div class="flex flex-wrap">
+    <DisplayPeople client:load people={people} />
+  </div>
+</Layout>
+
+<script>
+  import { creditsPerSearchStore } from "../../stores/creditsStore";
+  import { getAllCommonCredits } from "../../utils/getAllCommonCredits";
+
+  creditsPerSearchStore.subscribe((creditsPerSearchStore: any) => {
+    getAllCommonCredits(creditsPerSearchStore);
+  });
+</script>

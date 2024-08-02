@@ -1,57 +1,50 @@
 import { useStore } from "@nanostores/preact";
-import { creditsPerSearchStore } from "../../stores/creditsStore";
 import { taggedPeople } from "../../stores/taggingSystemStore";
-import { getAllCommonCredits } from "../../utils/getAllCommonCredits";
 import { handleRemoveFromTags } from "../../utils/handleRemoveFromTags";
+import { creditsPerPersonSearchStore } from "../../stores/newSystem";
 
 export default function TaggedColumn() {
   const $taggedPeople = useStore(taggedPeople);
-  const $creditsPerSearchStore = useStore(creditsPerSearchStore);
+  const $creditsPerSearchStore = useStore(creditsPerPersonSearchStore);
 
   return (
-    <div class="h-2/3">
-      <h3 class="text-text mb-2">Tagged</h3>
-      <button onClick={() => getAllCommonCredits($creditsPerSearchStore)}>
-        Search
-      </button>
-      <ul class="flex flex-col gap-2">
-        {$taggedPeople.length > 0 &&
-          $taggedPeople.map((person: any) => (
-            <li class="rounded-full p-1 pr-2 flex gap-2 items-center border border-primary-black w-fit max-w-full">
-              <img
-                class="h-8 w-8 shrink-0 rounded-full aspect-auto object-cover object-center"
-                src={`https://image.tmdb.org/t/p/w185/${person.profile_path}`}
-              />
-              <span class="block truncate">{person.name}</span>
-              <button
-                onClick={() =>
-                  handleRemoveFromTags(
-                    person,
-                    $taggedPeople,
-                    $creditsPerSearchStore
-                  )
-                }
+    <>
+      {$taggedPeople.length > 0 &&
+        $taggedPeople.map((person: any) => (
+          <li class="rounded-full p-1 pr-2 flex gap-2 items-center border border-primary-black w-fit max-w-full">
+            <img
+              class="h-8 w-8 shrink-0 rounded-full aspect-auto object-cover object-center"
+              src={`https://image.tmdb.org/t/p/w185/${person.profile_path}`}
+            />
+            <span class="block truncate">{person.name}</span>
+            <button
+              onClick={() =>
+                handleRemoveFromTags(
+                  person,
+                  $taggedPeople,
+                  $creditsPerSearchStore
+                )
+              }
+            >
+              <svg
+                fill="#000000"
+                height="800px"
+                width="800px"
+                viewBox="0 0 460.775 460.775"
+                class="h-3 w-3"
               >
-                <svg
-                  fill="#000000"
-                  height="800px"
-                  width="800px"
-                  viewBox="0 0 460.775 460.775"
-                  class="h-3 w-3"
-                >
-                  <path
-                    d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
-	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
-	c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
-	c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
-	l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
-	c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
-                  />
-                </svg>
-              </button>
-            </li>
-          ))}
-      </ul>
-    </div>
+                <path
+                  d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
+                />
+              </svg>
+            </button>
+          </li>
+        ))}
+    </>
   );
 }

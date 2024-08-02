@@ -2,16 +2,27 @@
 import TaggedColumn from "./TaggedColumn";
 ---
 
-<div
-  class="border-r-primary-lightGrey border-r shrink-0 p-12 sticky top-0 h-svh flex flex-col w-72"
->
-  <header class="grow">
-    <img src="film-camera.svg" class="h-8" />
-    <a href="/"
-      ><h1 class="text-heading font-oswald font-semibold text-primary-blue">
-        Feature<br />Films<br />Featuring
-      </h1></a
-    >
-  </header>
-  <TaggedColumn client:load />
-</div>
+<!-- TODO: Make button redirect to /credits on click -->
+<sidebar-wrapper>
+  <div
+    class="border-r-primary-lightGrey border-r shrink-0 p-12 sticky top-0 h-svh flex flex-col w-72"
+  >
+    <header class="grow">
+      <img src="film-camera.svg" class="h-8" />
+      <a href="/people"
+        ><h1 class="text-heading font-oswald font-semibold text-primary-blue">
+          Feature<br />Films<br />Featuring
+        </h1></a
+      >
+    </header>
+    <div class="h-2/3">
+      <h3 class="text-text mb-2">Tagged</h3>
+      <form action="/credits" method="POST">
+        <button id="search-button" type="submit">Submit</button>
+      </form>
+      <ul class="flex flex-col gap-2">
+        <TaggedColumn client:load />
+      </ul>
+    </div>
+  </div>
+</sidebar-wrapper>

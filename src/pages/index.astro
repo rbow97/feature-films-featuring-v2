@@ -1,13 +1,6 @@
 ---
-import { useStore } from "@nanostores/preact";
 import { getPopularPeople } from "../api";
-import Container from "../components/Container.astro";
-import Input from "../components/Input.astro";
-import DisplayPeople from "../components/homepage/DisplayPeople";
-import SideBar from "../components/homepage/SideBar.astro";
 import Layout from "../layouts/Layout.astro";
-import { resultsType } from "../stores/newSystem";
-import DisplayMedia from "../components/DisplayResults/DisplayMedia.astro";
 
 const people = await getPopularPeople();
 
@@ -22,26 +15,15 @@ const people = await getPopularPeople();
 // Homepage - /people
 // Routing under that --> /popular-tv /popular-movies
 // On search --> /credits
+
+// Nano stores layout
+// On tag, you add tha persons profile and all of their credits to a store
+// On remove tag, you remove that person and their credits
+// On search, the cross referencing happens
 ---
 
 <Layout title="Feature Films Featuring.">
-  <main class="h-fit flex">
-    <SideBar />
-    <Container>
-      <div class="flex flex-col py-12 gap-12 w-full">
-        <div class="flex justify-between w-full gap-6">
-          <Input />
-          <button
-            class="rounded-lg px-4 py-2 bg-primary-lightGrey text-primary-grey"
-            >Search</button
-          >
-        </div>
-        <div class="flex flex-wrap">
-          <DisplayPeople client:load people={people} />
-        </div>
-      </div>
-    </Container>
-  </main>
+  <p>hi</p>
 </Layout>
 
 <script>

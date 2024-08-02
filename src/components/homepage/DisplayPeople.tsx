@@ -1,10 +1,6 @@
 import { useStore } from "@nanostores/preact";
 import { getCreditsPerPerson } from "../../api";
-import {
-  creditsPerSearchStore,
-  searchedCreditsTotalStore,
-} from "../../stores/creditsStore";
-import { inputSearchResult } from "../../stores/inputSearchResultStore";
+import { creditsPerSearchStore } from "../../stores/creditsStore";
 import {
   currentDisplayedResults,
   taggedPeople,
@@ -17,6 +13,7 @@ async function handleAddToTags(
   $creditsPerSearchStore: any
 ) {
   taggedPeople.set([...$taggedPeople, clickedPerson]);
+
   const credits = await getCreditsPerPerson(clickedPerson.id);
   creditsPerSearchStore.set([...$creditsPerSearchStore, credits]);
 }
@@ -43,28 +40,10 @@ interface Props {
 export default function DisplayPeople({ people }: Props) {
   const $taggedPeople = useStore(taggedPeople);
   const $creditsPerSearchStore = useStore(creditsPerSearchStore);
-  const $searchedCreditsTotal = useStore(searchedCreditsTotalStore);
-
-  let mappedData = people;
-
-  const $searchedResult = useStore(inputSearchResult);
   const $currentDisplayedResults = useStore(currentDisplayedResults);
-
-  // Needs to show one of three results: Search bar result, tag search result, popular people
-  //
-  //
 
   const resultToBeMapped =
     $currentDisplayedResults.length > 0 ? $currentDisplayedResults : people;
-
-  console.log(resultToBeMapped);
-
-  // const resultToBeMapped =
-  //   $searchedResult?.length > 0
-  //     ? $searchedResult
-  //     : $searchedCreditsTotal.length > 0
-  //     ? $searchedCreditsTotal
-  //     : people;
 
   return (
     <>

@@ -8,8 +8,11 @@ function filterProjects(projects: Array<any>, excludedGenreIds: Array<number>) {
   );
 }
 
+// TODO:
+// We have to pass in tagged people and do a new credits search every time
+
 // Function to find projects that all people have in common
-export function getAllCommonCredits(people: Array<any>) {
+export async function getAllCommonCredits(people: Array<any>) {
   const excludedGenreIds = [10767, 10763];
 
   // Step 1: Filter projects for each person
@@ -42,5 +45,4 @@ export function getAllCommonCredits(people: Array<any>) {
 
   // return result;
   searchedCreditsTotalStore.set(result);
-  currentDisplayedResults.set(result);
 }
