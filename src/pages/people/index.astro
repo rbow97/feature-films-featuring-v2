@@ -7,7 +7,5 @@ const people = await getPopularPeople();
 ---
 
 <Layout title="Feature Films Featuring">
-  <div class="flex flex-wrap">
-    <DisplayPeople client:load people={people} />
-  </div>
+  <DisplayPeople client:load people={people} />
 </Layout>

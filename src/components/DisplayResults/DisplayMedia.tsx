@@ -7,7 +7,7 @@ export default function DisplayMedia() {
   const credits = getAllCommonCredits($currentTaggedAndCredits);
 
   return (
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
+    <>
       {credits.map((credit) => (
         <div class="col-span-1 pr-4 pb-4 relative group">
           <article class="flex px-1 pt-1 pb-3 gap-2 border-b-primary-lightGrey border-b h-fit items-start">
@@ -27,6 +27,6 @@ export default function DisplayMedia() {
           </article>
         </div>
       ))}
-    </div>
+    </>
   );
 }

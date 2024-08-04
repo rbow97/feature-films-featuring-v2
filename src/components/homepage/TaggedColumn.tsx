@@ -9,23 +9,20 @@ export default function TaggedColumn() {
     <>
       {$currentTaggedAndCredits !== null &&
         $currentTaggedAndCredits.map((person: any) => (
-          <li class="rounded-full p-1 pr-2 flex gap-2 items-center border border-primary-black w-fit max-w-full">
-            <img
-              class="h-8 w-8 shrink-0 rounded-full aspect-auto object-cover object-center"
-              src={`https://image.tmdb.org/t/p/w185/${person.person.profile_path}`}
-            />
+          <li class=" flex gap-1 items-center w-fit max-w-full text-tag">
             <span class="block truncate">{person.person.name}</span>
             <button
+              type="button"
               onClick={() =>
                 handleRemoveFromTags(person.person, $currentTaggedAndCredits)
               }
             >
               <svg
-                fill="#000000"
-                height="800px"
-                width="800px"
+                fill="#011502"
+                height="200px"
+                width="200px"
                 viewBox="0 0 460.775 460.775"
-                class="h-3 w-3"
+                class="h-2 w-2"
               >
                 <path
                   d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
