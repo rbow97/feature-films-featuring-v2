@@ -3,6 +3,14 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      height: {
+        small: "20px",
+        medium: "100px",
+      },
+      width: {
+        small: "20px",
+        medium: "100px",
+      },
       colors: {
         primary: {
           black: "#011502",
@@ -24,6 +32,7 @@ export default {
         subtext: "16px",
         button: "16px",
         tag: "14px",
+        buttonSmall: "10px",
       },
       transitionDuration: {
         primary: "750ms",

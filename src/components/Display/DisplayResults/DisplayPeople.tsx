@@ -1,8 +1,12 @@
 import { useStore } from "@nanostores/preact";
 import { useEffect, useState } from "preact/hooks";
-import { currentTaggedAndCredits, resultsType } from "../../stores/newSystem";
-import { handleTagButtonClick } from "../../utils/taggingSystem/handleTagButtonClick";
-import { currentDisplayedResults } from "../../stores/taggingSystemStore";
+import {
+  currentTaggedAndCredits,
+  resultsType,
+} from "../../../stores/newSystem";
+import { handleTagButtonClick } from "../../../utils/taggingSystem/handleTagButtonClick";
+import { currentDisplayedResults } from "../../../stores/taggingSystemStore";
+import { ImageWithText } from "../ImageWithText";
 
 interface Props {
   people: any;
@@ -27,20 +31,8 @@ export default function DisplayPeople({ people }: Props) {
             // TODO:
             // On hover, image expands to take up whole space, some kind of tooltip appears with more info, can click whole image to tag
             <div class="col-span-1 relative group">
-              <article class="flex px-1 pt-1 pb-3 gap-2 border-b-primary-lightGrey border-b h-fit items-start">
-                <img
-                  loading="lazy"
-                  width="100"
-                  height="100"
-                  decoding="async"
-                  class="h-[100px] shrink-0 w-[100px] rounded-full aspect-auto object-cover object-center"
-                  src={
-                    currentPerson.profile_path
-                      ? `https://image.tmdb.org/t/p/w185/${currentPerson.profile_path}`
-                      : "/film-camera.svg"
-                  }
-                />
-                <div class="flex grow flex-col">
+              <ImageWithText imagePath={currentPerson.profile_path}>
+                <div class="flexCol grow">
                   <div class="flex justify-between">
                     <p>{currentPerson.name}</p>
                     <button
@@ -58,11 +50,12 @@ export default function DisplayPeople({ people }: Props) {
                   <p class="text-sm text-primary-grey">
                     {currentPerson.known_for_department}
                   </p>
-                  <div class="flex gap-2 overflow-x-auto w-full mt-3">
+                  <div class="flex gapxXS overflow-x-auto w-full mtSmall">
                     {currentPerson.known_for.map((item: any, i: number) => {
-                      if (i < 3) {
+                      // TODO: figure out why this doesnt work with 3
+                      if (i < 2) {
                         return (
-                          <div class="py-0.5 px-2 border shrink-0 border-primary-black rounded-full">
+                          <div class="py-0.5 pxXS border shrink-0 border-primary-black rounded-full">
                             <p class="text-[10px] uppercase">
                               {item.title || item.name}
                             </p>
@@ -72,7 +65,7 @@ export default function DisplayPeople({ people }: Props) {
                     })}
                   </div>
                 </div>
-              </article>
+              </ImageWithText>
             </div>
           );
       })}

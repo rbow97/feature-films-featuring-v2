@@ -9,11 +9,11 @@ export default function TaggedColumn() {
     <>
       {$currentTaggedAndCredits !== null &&
         $currentTaggedAndCredits.map((person: any) => (
-          <li class="first:mt-4 flex gap-1 items-center w-full max-w-full text-tag">
+          <li class="first:mtSmall flex gapyXS items-center w-full max-w-full text-tag">
             <img
               width="100"
               height="100"
-              class="h-[20px] shrink-0 w-[20px] rounded-full aspect-auto object-cover object-center"
+              class="imageLayout smallImage"
               src={
                 person.person.profile_path
                   ? `https://image.tmdb.org/t/p/w185/${person.person.profile_path}`

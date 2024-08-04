@@ -1,8 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import SideBar from "../components/homepage/SideBar.astro";
+import SideBar from "../components/SideBar/SideBar.astro";
 import Container from "../components/Container.astro";
-import Input from "../components/Input.astro";
 import SearchForPeople from "../components/homepage/SearchForPeople.astro";
 
 interface Props {
@@ -49,24 +48,136 @@ const { title } = Astro.props;
     <ViewTransitions />
   </head>
   <body class="h-full bg-white text-primary-black">
-    <main class="h-fit flex flex-col"></main>
-    <Container>
-      <SideBar />
-      <div class="flex flex-col pb-8 gap-8 w-full mt-12">
-        <SearchForPeople />
-        <div
-          class="grid gap-x-8 gap-y-10 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full"
-        >
-          <slot />
+    <main class="h-fit flexCol">
+      <Container>
+        <SideBar />
+        <div class="flexCol pbMedium gapyMedium w-full mtXL">
+          <SearchForPeople />
+          <div class="gridLayout w-full">
+            <slot />
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </main>
   </body>
 </html>
 <style is:global>
   html {
     font-family: "DM Sans", sans-serif;
   }
+
+  .imageLayout {
+    @apply shrink-0  rounded-full aspect-auto object-cover object-center;
+  }
+
+  .smallImage {
+    @apply h-small w-small;
+  }
+
+  .mediumImage {
+    @apply h-medium w-medium;
+  }
+  .flexCol {
+    @apply flex flex-col;
+  }
+  .gridLayout {
+    @apply grid gap-x-8 gap-y-10 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3;
+  }
+
+  /* GAP */
+  /* gapy */
+  .gapyXS {
+    @apply gap-y-2;
+  }
+  .gapySmall {
+    @apply gap-y-4;
+  }
+  .gapyMedium {
+    @apply gap-y-8;
+  }
+  .gapyLarge {
+    @apply gap-y-10;
+  }
+
+  /* gapx */
+  .gapxXS {
+    @apply gap-x-2;
+  }
+  .gapxSmall {
+    @apply gap-x-4;
+  }
+  .gapxMedium {
+    @apply gap-x-8;
+  }
+
+  .gapxLarge {
+    @apply gap-x-10;
+  }
+
+  /* PADDING */
+  /* pt */
+  .ptXS {
+    @apply pt-2;
+  }
+  .ptSmall {
+    @apply pt-4;
+  }
+  .ptXL {
+    @apply pt-12;
+  }
+
+  /* pb */
+  .pbXS {
+    @apply pb-2;
+  }
+  .pbSmall {
+    @apply pb-4;
+  }
+  .pbMedium {
+    @apply pb-8;
+  }
+  /* pr */
+  .prXS {
+    @apply pr-2;
+  }
+  .prSmall {
+    @apply pr-4;
+  }
+  .prMedium {
+    @apply pr-8;
+  }
+  /* pl */
+  /* px */
+  .pxXS {
+    @apply px-2;
+  }
+  .pxSmall {
+    @apply px-4;
+  }
+  .pxMedium {
+    @apply px-8;
+  }
+  /* py */
+  .pyXS {
+    @apply py-2;
+  }
+  .pySmall {
+    @apply py-4;
+  }
+
+  /* MARGIN */
+  /* mt */
+  .mtSmall {
+    @apply mt-4;
+  }
+  .mtXL {
+    @apply mt-12;
+  }
+  /* mb */
+  .mbSmall {
+    @apply mb-4;
+  }
+
   code {
     font-family:
       Menlo,

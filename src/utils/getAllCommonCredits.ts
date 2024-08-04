@@ -9,7 +9,7 @@ function filterProjects(projects, excludedGenreIds) {
 
 // Function to find projects that all people have in common
 export function getAllCommonCredits(people: CurrentTaggedAndCreditsType) {
-  const excludedGenreIds = [10767, 10763];
+  const excludedGenreIds = [10767, 10763, 27023];
 
   if (people === null) return [];
 

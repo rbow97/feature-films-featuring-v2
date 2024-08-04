@@ -2,7 +2,7 @@
 
 ---
 
-<input-wrapper class="flex justify-between w-full gap-3">
+<search-wrapper class="flex justify-between w-full gapxSmall">
   <label for="text-input" class="sr-only">Search for someone</label>
   <input
     autocomplete="off"
@@ -10,19 +10,19 @@
     name="text-input"
     placeholder="Search for someone..."
     type="text"
-    class="bg-primary-lightGrey px-4 py-2.5 rounded-lg grow"
+    class="bg-primary-lightGrey pxSmall pyXS-2.5 rounded-lg grow"
   />
   <button
     id="submit"
-    class="rounded-lg px-4 py-2 bg-primary-lightGrey text-primary-grey"
+    class="rounded-lg pxSmall pyXS bg-primary-lightGrey text-primary-black"
     >Search</button
   >
-</input-wrapper>
+</search-wrapper>
 
 <script>
   import { handleInputSearchButton } from "../../utils/handleInputSearch";
 
-  class InputWrapper extends HTMLElement {
+  class SearchWrapper extends HTMLElement {
     constructor() {
       super();
       const textInputString = "#text-input";
@@ -44,5 +44,5 @@
     }
   }
 
-  customElements.define("input-wrapper", InputWrapper);
+  customElements.define("search-wrapper", SearchWrapper);
 </script>
