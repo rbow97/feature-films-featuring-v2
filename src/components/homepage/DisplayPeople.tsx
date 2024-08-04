@@ -13,8 +13,6 @@ export default function DisplayPeople({ people }: Props) {
   const $currentDisplayedResults = useStore(currentDisplayedResults);
   const [resultsToBeMapped, setResultsToBeMapped] = useState(people);
 
-  console.log(resultsToBeMapped);
-
   useEffect(() => {
     $currentDisplayedResults?.length === 0
       ? setResultsToBeMapped(people)
@@ -36,7 +34,11 @@ export default function DisplayPeople({ people }: Props) {
                   height="100"
                   decoding="async"
                   class="h-[100px] shrink-0 w-[100px] rounded-full aspect-auto object-cover object-center"
-                  src={`https://image.tmdb.org/t/p/w185/${currentPerson.profile_path}`}
+                  src={
+                    currentPerson.profile_path
+                      ? `https://image.tmdb.org/t/p/w185/${currentPerson.profile_path}`
+                      : "/film-camera.svg"
+                  }
                 />
                 <div class="flex grow flex-col">
                   <div class="flex justify-between">

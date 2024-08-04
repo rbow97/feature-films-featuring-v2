@@ -10,6 +10,7 @@ import TaggedColumn from "./TaggedColumn";
       <a
         class="w-fit gap-4 flex flex-col justify-start items-start mb-6"
         href="/people"
+        id="header-link"
       >
         <img class="h-[40px]" src="/film-camera.svg" />
         <h1 class="text-heading text-primary-blue font-oswald font-semibold">
@@ -34,3 +35,22 @@ import TaggedColumn from "./TaggedColumn";
     </form>
   </div>
 </sidebar-wrapper>
+
+<script>
+  import { currentTaggedAndCredits } from "../../stores/newSystem";
+  import { currentDisplayedResults } from "../../stores/taggingSystemStore";
+
+  class SidebarWrapper extends HTMLElement {
+    constructor() {
+      super();
+      const headerLink = this.querySelector("#header-link");
+
+      // TODO: this cant be null
+      headerLink?.addEventListener("click", (e) => {
+        currentDisplayedResults.set([]);
+        currentTaggedAndCredits.set(null);
+      });
+    }
+  }
+  customElements.define("sidebar-wrapper", SidebarWrapper);
+</script>
