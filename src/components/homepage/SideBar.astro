@@ -4,35 +4,33 @@ import TaggedColumn from "./TaggedColumn";
 
 <sidebar-wrapper>
   <div
-    class="border-r-primary-lightGrey border-r shrink-0 py-12 px-8 sticky top-0 h-svh flex flex-col w-60"
+    class="h-svh shrink-0 pt-12 pr-8 sticky top-0 flex flex-col min-w-60 border-r border-primary-blue"
   >
-    <header class="grow">
-      <img src="film-camera.svg" class="h-8" />
-      <a href="/people"
-        ><h1 class="text-heading font-oswald font-semibold text-primary-blue">
-          Feature<br />Films<br />Featuring
-        </h1></a
+    <header>
+      <a
+        class="w-fit gap-4 flex flex-col justify-start items-start mb-6"
+        href="/people"
       >
+        <img class="h-[40px]" src="/film-camera.svg" />
+        <h1 class="text-heading text-primary-blue font-oswald font-semibold">
+          FEATURE FILMS,
+          <br />
+          FEATURING
+        </h1>
+      </a>
     </header>
-    <div class="h-2/3">
-      <form action="/credits" method="POST">
-        <div class="flex justify-between">
-          <h3 class="text-text mb-2">Tagged</h3>
-          <button
-            class="text-[10px] rounded-lg border border-primary-black py-1 px-2 h-fit"
-            id="search-button"
-            type="submit">Clear</button
-          >
-          <button
-            class="text-[10px] rounded-lg border border-primary-black py-1 px-2 h-fit"
-            id="search-button"
-            type="submit">Submit</button
-          >
-        </div>
-        <ul class="flex flex-col gap-2">
-          <TaggedColumn client:load />
-        </ul>
-      </form>
-    </div>
+    <form action="/credits" method="POST">
+      <div class="flex justify-between">
+        <h3 class="text-text text-primary-black font-bold">TAGGED</h3>
+        <button
+          class="text-[10px] rounded-lg border border-primary-black py-1 px-2 h-fit"
+          id="search-button"
+          type="submit">Submit</button
+        >
+      </div>
+      <ul class="flex flex-col gap-2">
+        <TaggedColumn client:load />
+      </ul>
+    </form>
   </div>
 </sidebar-wrapper>

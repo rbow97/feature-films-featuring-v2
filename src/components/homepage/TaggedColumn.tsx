@@ -9,8 +9,18 @@ export default function TaggedColumn() {
     <>
       {$currentTaggedAndCredits !== null &&
         $currentTaggedAndCredits.map((person: any) => (
-          <li class=" flex gap-1 items-center w-fit max-w-full text-tag">
-            <span class="block truncate">{person.person.name}</span>
+          <li class="first:mt-4 flex gap-1 items-center w-full max-w-full text-tag">
+            <img
+              width="100"
+              height="100"
+              class="h-[20px] shrink-0 w-[20px] rounded-full aspect-auto object-cover object-center"
+              src={
+                person.person.profile_path
+                  ? `https://image.tmdb.org/t/p/w185/${person.person.profile_path}`
+                  : "/film-camera.svg"
+              }
+            />
+            <span class="block truncate mr-auto">{person.person.name}</span>
             <button
               type="button"
               onClick={() =>
@@ -18,7 +28,7 @@ export default function TaggedColumn() {
               }
             >
               <svg
-                fill="#011502"
+                fill="#b7b7b7"
                 height="200px"
                 width="200px"
                 viewBox="0 0 460.775 460.775"
