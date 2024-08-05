@@ -1,11 +1,8 @@
 import { useStore } from "@nanostores/preact";
+import { currentTaggedAndCredits } from "@stores/newSystem";
+import { currentDisplayedResults } from "@stores/taggingSystemStore";
+import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
 import { useEffect, useState } from "preact/hooks";
-import {
-  currentTaggedAndCredits,
-  resultsType,
-} from "../../../stores/newSystem";
-import { handleTagButtonClick } from "../../../utils/taggingSystem/handleTagButtonClick";
-import { currentDisplayedResults } from "../../../stores/taggingSystemStore";
 import { ImageWithText } from "../ImageWithText";
 
 interface Props {

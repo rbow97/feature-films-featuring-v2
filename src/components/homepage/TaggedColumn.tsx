@@ -1,6 +1,6 @@
 import { useStore } from "@nanostores/preact";
-import { handleRemoveFromTags } from "../../utils/taggingSystem/handleRemoveFromTags";
-import { currentTaggedAndCredits } from "../../stores/newSystem";
+import { currentTaggedAndCredits } from "@stores/newSystem";
+import { handleRemoveFromTags } from "@utils/taggingSystem/handleRemoveFromTags";
 
 export default function TaggedColumn() {
   const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
@@ -9,7 +9,7 @@ export default function TaggedColumn() {
     <>
       {$currentTaggedAndCredits !== null &&
         $currentTaggedAndCredits.map((person: any) => (
-          <li class="first:mtSmall flex gapyXS items-center w-full max-w-full text-tag">
+          <li class="first:mt-4 flex gapxXS items-center w-full max-w-full text-tag">
             <img
               width="100"
               height="100"

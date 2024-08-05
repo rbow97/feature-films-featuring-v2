@@ -1,7 +1,7 @@
 ---
-import { getPopularPeople } from "../../api";
-import DisplayPeople from "../../components/Display/DisplayResults/DisplayPeople";
-import Layout from "../../layouts/Layout.astro";
+import DisplayPeople from "@components/Display/DisplayResults/DisplayPeople";
+import { getPopularPeople } from "src/api";
+import Layout from "@layouts/Layout.astro";
 
 const people = await getPopularPeople();
 ---

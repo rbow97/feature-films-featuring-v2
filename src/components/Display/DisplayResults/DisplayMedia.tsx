@@ -1,7 +1,7 @@
 import { useStore } from "@nanostores/preact";
+import { currentTaggedAndCredits } from "@stores/newSystem";
+import { getAllCommonCredits } from "@utils/getAllCommonCredits";
 import { ImageWithText } from "../ImageWithText";
-import { getAllCommonCredits } from "../../../utils/getAllCommonCredits";
-import { currentTaggedAndCredits } from "../../../stores/newSystem";
 
 export default function DisplayMedia() {
   const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
