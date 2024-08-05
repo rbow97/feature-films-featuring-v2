@@ -11,6 +11,26 @@ export default {
         small: "20px",
         medium: "100px",
       },
+      gap: {
+        xs: "8px",
+        sm: "16px",
+        md: "32px",
+        lg: "40px",
+      },
+      padding: {
+        xs: "8px",
+        sm: "16px",
+        md: "32px",
+        lg: "40px",
+        xl: "48px",
+      },
+      margin: {
+        xs: "8px",
+        sm: "16px",
+        md: "32px",
+        lg: "40px",
+        xl: "48px",
+      },
       colors: {
         primary: {
           black: "#011502",

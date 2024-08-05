@@ -1,18 +1,19 @@
 ---
+import { Image } from "astro:assets";
 import TaggedColumn from "../homepage/TaggedColumn";
 ---
 
 <sidebar-wrapper>
   <div
-    class="h-svh shrink-0 ptXL prMedium sticky top-0 flexCol min-w-60 border-r border-primary-blue"
+    class="h-svh shrink-0 pt-xl pr-md sticky top-0 flexCol min-w-60 border-r border-primary-blue"
   >
     <header>
       <a
-        class="w-fit gapxSmall flexCol justify-start items-start mbSmall"
+        class="w-fit gap-x-sm flexCol justify-start items-start mb-sm"
         href="/people"
         id="header-link"
       >
-        <img class="h-[40px]" src="/film-camera.svg" />
+        <Image width={40} height={40} alt="hello" src="/film-camera.svg" />
         <h1 class="text-heading text-primary-blue font-oswald font-semibold">
           FEATURE FILMS,
           <br />
@@ -24,12 +25,12 @@ import TaggedColumn from "../homepage/TaggedColumn";
       <div class="flex justify-between h-fit items-center">
         <h3 class="text-text text-primary-black font-bold">TAGGED</h3>
         <button
-          class="text-buttonSmall rounded-lg border h-fit border-primary-black pxSmall pyXS"
+          class="text-buttonSmall rounded-lg border h-fit border-primary-black px-sm py-xs"
           id="search-button"
           type="submit">Submit</button
         >
       </div>
-      <ul class="flexCol gapxXS">
+      <ul class="flexCol gap-x-xs">
         <TaggedColumn client:load />
       </ul>
     </form>

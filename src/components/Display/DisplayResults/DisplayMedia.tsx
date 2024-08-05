@@ -10,7 +10,7 @@ export default function DisplayMedia() {
   return (
     <>
       {credits.map((credit) => (
-        <div class="col-span-1 prSmall pbSmall relative group">
+        <div class="col-span-1 pr-sm pb-sm relative group">
           <ImageWithText imagePath={credit.poster_path}>
             <div class="flexCol grow">
               <p>{credit.title || credit.original_name}</p>

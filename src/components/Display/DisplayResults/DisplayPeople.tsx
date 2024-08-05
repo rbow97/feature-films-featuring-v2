@@ -47,12 +47,12 @@ export default function DisplayPeople({ people }: Props) {
                   <p class="text-sm text-primary-grey">
                     {currentPerson.known_for_department}
                   </p>
-                  <div class="flex gapxXS overflow-x-auto w-full mtSmall">
+                  <div class="flex gap-x-xs overflow-x-auto w-full mt-sm">
                     {currentPerson.known_for.map((item: any, i: number) => {
                       // TODO: figure out why this doesnt work with 3
                       if (i < 2) {
                         return (
-                          <div class="py-0.5 pxXS border shrink-0 border-primary-black rounded-full">
+                          <div class="py-0.5 px-xs border shrink-0 border-primary-black rounded-full">
                             <p class="text-[10px] uppercase">
                               {item.title || item.name}
                             </p>
