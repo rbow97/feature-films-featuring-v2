@@ -31,15 +31,9 @@
       const submitButton = this.querySelector("#submit");
 
       textInput.addEventListener("keydown", function (e) {
-        if (e.key == "Enter") {
+        setTimeout(() => {
           handleInputSearchButton((e.target as HTMLTextAreaElement).value);
-        }
-      });
-
-      submitButton?.addEventListener("click", () => {
-        handleInputSearchButton(
-          (this.querySelector(textInputString) as HTMLTextAreaElement)?.value
-        );
+        }, 1000);
       });
     }
   }

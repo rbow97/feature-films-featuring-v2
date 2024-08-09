@@ -1,3 +1,4 @@
+import { getAllCommonCredits } from "@utils/getAllCommonCredits";
 import { getCreditsPerPerson } from "../../api";
 import {
   currentTaggedAndCredits,
@@ -22,7 +23,7 @@ async function handleAddToTags(
 ) {
   const credits = await getCreditsPerPerson(clickedPerson.id);
 
-  $currentTaggedAndCredits !== null
+  $currentTaggedAndCredits.length > 0
     ? currentTaggedAndCredits.set([
         ...$currentTaggedAndCredits,
         { person: clickedPerson, credits },

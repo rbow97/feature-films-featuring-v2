@@ -10,9 +10,12 @@ export type CurrentTaggedAndCreditsType =
       person: any;
       credits: any;
     }[]
-  | null;
+  | [];
 
 export const resultsType = atom<"person" | "media">("person");
 
-export const currentTaggedAndCredits = atom<CurrentTaggedAndCreditsType>(null);
+// TODO: remove null
+export const currentTaggedAndCredits = atom<CurrentTaggedAndCreditsType>([]);
 export const creditsTotalStore = atom<any>([]);
+
+export const allCredits = atom<any>(null);

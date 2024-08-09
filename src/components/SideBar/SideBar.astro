@@ -38,8 +38,10 @@ import TaggedColumn from "../homepage/TaggedColumn";
 </sidebar-wrapper>
 
 <script>
+  import { getPopularPeople } from "src/api";
   import { currentTaggedAndCredits } from "../../stores/newSystem";
   import { currentDisplayedResults } from "../../stores/taggingSystemStore";
+  const people = await getPopularPeople();
 
   class SidebarWrapper extends HTMLElement {
     constructor() {
@@ -48,8 +50,8 @@ import TaggedColumn from "../homepage/TaggedColumn";
 
       // TODO: this cant be null
       headerLink?.addEventListener("click", (e) => {
-        currentDisplayedResults.set([]);
-        currentTaggedAndCredits.set(null);
+        currentDisplayedResults.set(people);
+        currentTaggedAndCredits.set([]);
       });
     }
   }

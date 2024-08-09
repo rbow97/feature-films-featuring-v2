@@ -1,4 +1,9 @@
-import { type CurrentTaggedAndCreditsType } from "../stores/newSystem";
+import { currentDisplayedResults } from "@stores/taggingSystemStore";
+import {
+  allCredits,
+  currentTaggedAndCredits,
+  type CurrentTaggedAndCreditsType,
+} from "../stores/newSystem";
 
 // Function to filter out projects with specified genre_ids
 function filterProjects(projects, excludedGenreIds) {
@@ -40,7 +45,7 @@ export function getAllCommonCredits(people: CurrentTaggedAndCreditsType) {
     );
   }
 
-  // // Convert the set of common project IDs back to project objects
+  // Convert the set of common project IDs back to project objects
   const commonProjects = allFilteredProjects[0].filter((project) =>
     commonProjectIds.has(project.id)
   );

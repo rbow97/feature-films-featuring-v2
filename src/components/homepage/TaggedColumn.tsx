@@ -1,9 +1,22 @@
 import { useStore } from "@nanostores/preact";
 import { currentTaggedAndCredits } from "@stores/newSystem";
+import { currentDisplayedResults } from "@stores/taggingSystemStore";
+import { getAllCommonCredits } from "@utils/getAllCommonCredits";
 import { handleRemoveFromTags } from "@utils/taggingSystem/handleRemoveFromTags";
+import { useEffect } from "preact/hooks";
+import { getPopularPeople } from "src/api";
 
 export default function TaggedColumn() {
   const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
+
+  useEffect(() => {
+    if ($currentTaggedAndCredits.length > 1) {
+      const credits = getAllCommonCredits($currentTaggedAndCredits);
+      currentDisplayedResults.set(credits);
+    } else {
+      // currentDisplayedResults.set(people);
+    }
+  }, [$currentTaggedAndCredits]);
 
   return (
     <>

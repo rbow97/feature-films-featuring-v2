@@ -1,8 +1,8 @@
 ---
+import Container from "@components/Container.astro";
+import SideBar from "@components/SideBar/SideBar.astro";
+import SearchForPeople from "@components/homepage/SearchForPeople.astro";
 import { ViewTransitions } from "astro:transitions";
-import SideBar from "../components/SideBar/SideBar.astro";
-import Container from "../components/Container.astro";
-import SearchForPeople from "../components/homepage/SearchForPeople.astro";
 
 interface Props {
   title: string;
@@ -63,6 +63,16 @@ const { title } = Astro.props;
     </main>
   </body>
 </html>
+
+<script>
+  import { currentDisplayedResults } from "@stores/taggingSystemStore";
+  import { getPopularPeople } from "src/api";
+
+  const people = await getPopularPeople();
+
+  currentDisplayedResults.set(people);
+</script>
+
 <style is:global>
   html {
     font-family: "DM Sans", sans-serif;
