@@ -1,13 +1,28 @@
 import { atom } from "nanostores";
 
+export namespace Person {
+  export interface PersonProps {
+    id: string;
+    name: string;
+    profile_path: string;
+    known_for_department: string;
+    known_for: KnownForProps;
+  }
+
+  export interface KnownForProps {
+    title: string;
+  }
+  [];
+}
+
 export interface CurrentTaggedAndCredits {
-  person: any;
+  person: Person.PersonProps;
   credits: any;
 }
 
 export type CurrentTaggedAndCreditsType =
   | {
-      person: any;
+      person: Person.PersonProps;
       credits: any;
     }[]
   | [];

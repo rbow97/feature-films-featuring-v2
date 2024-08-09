@@ -2,7 +2,7 @@ import { useStore } from "@nanostores/preact";
 import { currentTaggedAndCredits } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
-import { ImageWithText } from "../ImageWithText";
+import { ImageWithText } from "./Display/ImageWithText";
 
 export default function DisplayPeople() {
   const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
@@ -16,7 +16,7 @@ export default function DisplayPeople() {
             return (
               // TODO:
               // On hover, image expands to take up whole space, some kind of tooltip appears with more info, can click whole image to tag
-              <div class="col-span-1 relative group">
+              <div class="col-span-1 relative group ">
                 <ImageWithText
                   imagePath={
                     currentPerson.profile_path || currentPerson.poster_path

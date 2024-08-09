@@ -1,11 +1,12 @@
 import { getCreditsPerPerson } from "../../api";
 import {
   currentTaggedAndCredits,
+  Person,
   type CurrentTaggedAndCredits,
 } from "../../stores/newSystem";
 
 export async function handleAddToTags(
-  clickedPerson: any,
+  clickedPerson: Person.PersonProps,
   $currentTaggedAndCredits: CurrentTaggedAndCredits[]
 ) {
   const credits = await getCreditsPerPerson(clickedPerson.id);

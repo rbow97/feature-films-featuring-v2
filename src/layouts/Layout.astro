@@ -49,9 +49,9 @@ const { title } = Astro.props;
   </head>
   <body class="h-full bg-white text-primary-black">
     <main class="h-fit flexCol">
+      <SideBar />
       <Container>
-        <SideBar />
-        <div class="flexCol pb-md gap-y-md w-full mt-xl">
+        <div class="flexCol pb-md gap-y-md mt-xl md:pl-[240px] w-full">
           <SearchForPeople />
           <div
             class="grid gap-x-8 gap-y-10 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full"
