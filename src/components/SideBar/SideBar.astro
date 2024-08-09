@@ -48,7 +48,7 @@ import TaggedColumn from "../homepage/TaggedColumn";
 
       // TODO: this cant be null
       headerLink?.addEventListener("click", (e) => {
-        currentDisplayedResults.set(people);
+        currentDisplayedResults.set({ type: "people", results: people });
         currentTaggedAndCredits.set([]);
       });
     }

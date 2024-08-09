@@ -70,7 +70,7 @@ const { title } = Astro.props;
 
   const people = await getPopularPeople();
 
-  currentDisplayedResults.set(people);
+  currentDisplayedResults.set({ type: "people", results: people });
 </script>
 
 <style is:global>

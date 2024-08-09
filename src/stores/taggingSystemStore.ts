@@ -1,3 +1,18 @@
 import { atom } from "nanostores";
+import type { Person } from "./newSystem";
 
-export const currentDisplayedResults = atom([]);
+export namespace DisplayedResults {
+  export interface DisplayedResultsPeopleProps {
+    type: "people";
+    results: Person.PersonProps[];
+  }
+  export interface DisplayedResultsMediaProps {
+    type: "media";
+    results: Person.CreditProps[];
+  }
+}
+
+export const currentDisplayedResults = atom<
+  | DisplayedResults.DisplayedResultsPeopleProps
+  | DisplayedResults.DisplayedResultsMediaProps
+>({ type: "people", results: [] });

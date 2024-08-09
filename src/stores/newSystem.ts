@@ -6,31 +6,27 @@ export namespace Person {
     name: string;
     profile_path: string;
     known_for_department: string;
-    known_for: KnownForProps;
+    known_for: Array<KnownForProps>;
+  }
+
+  export interface CreditProps {
+    title: string;
+    poster_path: string;
+    vote_average: string;
   }
 
   export interface KnownForProps {
-    title: string;
+    title?: string;
+    name?: string;
   }
-  [];
 }
 
 export interface CurrentTaggedAndCredits {
   person: Person.PersonProps;
-  credits: any;
+  credits: Person.CreditProps[];
 }
-
-export type CurrentTaggedAndCreditsType =
-  | {
-      person: Person.PersonProps;
-      credits: any;
-    }[]
-  | [];
 
 export const resultsType = atom<"person" | "media">("person");
 
-// TODO: remove null
-export const currentTaggedAndCredits = atom<CurrentTaggedAndCreditsType>([]);
+export const currentTaggedAndCredits = atom<CurrentTaggedAndCredits[]>([]);
 export const creditsTotalStore = atom<any>([]);
-
-export const allCredits = atom<any>(null);

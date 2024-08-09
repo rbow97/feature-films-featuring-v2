@@ -1,9 +1,4 @@
-import { currentDisplayedResults } from "@stores/taggingSystemStore";
-import {
-  allCredits,
-  currentTaggedAndCredits,
-  type CurrentTaggedAndCreditsType,
-} from "../stores/newSystem";
+import { type CurrentTaggedAndCredits } from "../stores/newSystem";
 
 // Function to filter out projects with specified genre_ids
 function filterProjects(projects, excludedGenreIds) {
@@ -13,7 +8,7 @@ function filterProjects(projects, excludedGenreIds) {
 }
 
 // Function to find projects that all people have in common
-export function getAllCommonCredits(people: CurrentTaggedAndCreditsType) {
+export function getAllCommonCredits(people: CurrentTaggedAndCredits[]) {
   const excludedGenreIds = [10767, 10763, 27023];
 
   if (people === null) return [];

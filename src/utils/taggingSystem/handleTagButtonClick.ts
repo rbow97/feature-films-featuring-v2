@@ -1,16 +1,14 @@
-import { getAllCommonCredits } from "@utils/getAllCommonCredits";
 import { getCreditsPerPerson } from "../../api";
 import {
   currentTaggedAndCredits,
-  Person,
   type CurrentTaggedAndCredits,
-  type CurrentTaggedAndCreditsType,
+  type Person,
 } from "../../stores/newSystem";
 import { handleRemoveFromTags } from "./handleRemoveFromTags";
 
 function returnDoesHaveClickedPerson(
   clickedPerson: Person.PersonProps,
-  $currentTaggedAndCredits: CurrentTaggedAndCreditsType
+  $currentTaggedAndCredits: CurrentTaggedAndCredits[]
 ): boolean {
   return Boolean(
     $currentTaggedAndCredits?.find(
@@ -21,7 +19,7 @@ function returnDoesHaveClickedPerson(
 
 async function handleAddToTags(
   clickedPerson: Person.PersonProps,
-  $currentTaggedAndCredits: CurrentTaggedAndCreditsType
+  $currentTaggedAndCredits: CurrentTaggedAndCredits[]
 ) {
   const credits = await getCreditsPerPerson(clickedPerson.id);
 
@@ -35,7 +33,7 @@ async function handleAddToTags(
 
 export function handleTagButtonClick(
   clickedPerson: Person.PersonProps,
-  $currentTaggedAndCredits: CurrentTaggedAndCreditsType
+  $currentTaggedAndCredits: CurrentTaggedAndCredits[]
 ) {
   const doesHaveClickedPerson = returnDoesHaveClickedPerson(
     clickedPerson,

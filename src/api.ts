@@ -1,7 +1,8 @@
+import type { Person } from "@stores/newSystem";
 import axios from "axios";
 
 // Get popular people
-export const getPopularPeople = async (): Promise<any> => {
+export const getPopularPeople = async (): Promise<Person.PersonProps[]> => {
   const response: any = await axios
     .get(
       `https://api.themoviedb.org/3/person/popular?api_key=${
@@ -15,7 +16,9 @@ export const getPopularPeople = async (): Promise<any> => {
 };
 
 // Get the result of searching for a person by name
-export const getSearchedPeople = async (input: string): Promise<any> => {
+export const getSearchedPeople = async (
+  input: string
+): Promise<Person.PersonProps[]> => {
   const response: any = await axios
     .get(
       `https://api.themoviedb.org/3/search/person?query=${input}&api_key=${
@@ -29,7 +32,9 @@ export const getSearchedPeople = async (input: string): Promise<any> => {
 };
 
 // Get the credits of a single person's id
-export const getCreditsPerPerson = async (id: string): Promise<any> => {
+export const getCreditsPerPerson = async (
+  id: string
+): Promise<Person.CreditProps[]> => {
   const response: any = await axios
     .get(
       `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${

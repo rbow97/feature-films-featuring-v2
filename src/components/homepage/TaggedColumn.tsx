@@ -1,5 +1,8 @@
 import { useStore } from "@nanostores/preact";
-import { currentTaggedAndCredits } from "@stores/newSystem";
+import {
+  currentTaggedAndCredits,
+  type CurrentTaggedAndCredits,
+} from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { getAllCommonCredits } from "@utils/getAllCommonCredits";
 import { handleRemoveFromTags } from "@utils/taggingSystem/handleRemoveFromTags";
@@ -11,7 +14,7 @@ export default function TaggedColumn() {
   useEffect(() => {
     if ($currentTaggedAndCredits.length > 1) {
       const credits = getAllCommonCredits($currentTaggedAndCredits);
-      currentDisplayedResults.set(credits);
+      currentDisplayedResults.set({ type: "media", results: credits });
     } else {
       // currentDisplayedResults.set(people);
     }
@@ -19,8 +22,8 @@ export default function TaggedColumn() {
 
   return (
     <>
-      {$currentTaggedAndCredits !== null &&
-        $currentTaggedAndCredits.map((person: any) => (
+      {$currentTaggedAndCredits.length > 0 &&
+        $currentTaggedAndCredits.map((person: CurrentTaggedAndCredits) => (
           <li class="flex gap-x-[8px] md:gap-x-xs items-center md:w-full shrink-0 min-w-[120px] md:max-w-full h-fit text-tag px-xs md:px-[unset] py-[4px] rounded-full border md:border-none border-black">
             <img
               width="100"
