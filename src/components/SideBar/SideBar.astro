@@ -5,35 +5,33 @@ import TaggedColumn from "../homepage/TaggedColumn";
 
 <sidebar-wrapper>
   <div
-    class="h-svh shrink-0 pt-xl pr-md sticky top-0 flexCol min-w-60 border-r border-primary-blue"
+    class="md:h-svh gap-x-sm md:gap-x-[unset] md:shrink-0 md:sticky md:top-0 md:pt-xl md:pr-md fixed flex md:flex-col border-r border-primary-blue w-full md:w-fit bottom-0 md:bottom-[unset] left-0 right-0 md:right-[unset] z-10 bg-white border-t border-t-primary-lightGrey p-xs md:p-[unset]"
   >
     <header>
       <a
-        class="w-fit gap-x-sm flexCol justify-start items-start mb-sm"
+        class="w-full md:w-fit gap-x-sm flexCol justify-start items-start md:mb-[72px]"
         href="/people"
         id="header-link"
       >
-        <Image width={40} height={40} alt="hello" src="/film-camera.svg" />
-        <h1 class="text-heading text-primary-blue font-oswald font-semibold">
+        <Image
+          width={40}
+          height={40}
+          alt="film camera"
+          src="/film-camera.svg"
+          class="md:block hidden"
+        />
+        <h1
+          class="md:text-heading text-primary-blue whitespace-nowrap font-oswald font-semibold"
+        >
           FEATURE FILMS,
           <br />
           FEATURING
         </h1>
       </a>
     </header>
-    <form action="/credits" method="POST">
-      <div class="flex justify-between h-fit items-center">
-        <h3 class="text-text text-primary-black font-bold">TAGGED</h3>
-        <button
-          class="text-buttonSmall rounded-lg border h-fit border-primary-black px-sm py-xs"
-          id="search-button"
-          type="submit">Submit</button
-        >
-      </div>
-      <ul class="flexCol gap-x-xs">
-        <TaggedColumn client:load />
-      </ul>
-    </form>
+    <ul class="md:flex-col flex items-center gap-x-xs overflow-scroll gap-y-xs">
+      <TaggedColumn client:load />
+    </ul>
   </div>
 </sidebar-wrapper>
 

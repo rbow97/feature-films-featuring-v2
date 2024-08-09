@@ -4,7 +4,6 @@ import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { getAllCommonCredits } from "@utils/getAllCommonCredits";
 import { handleRemoveFromTags } from "@utils/taggingSystem/handleRemoveFromTags";
 import { useEffect } from "preact/hooks";
-import { getPopularPeople } from "src/api";
 
 export default function TaggedColumn() {
   const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
@@ -22,11 +21,11 @@ export default function TaggedColumn() {
     <>
       {$currentTaggedAndCredits !== null &&
         $currentTaggedAndCredits.map((person: any) => (
-          <li class="first:mt-4 flex gap-x-xs items-center w-full max-w-full text-tag">
+          <li class="flex gap-x-[8px] md:gap-x-xs items-center md:w-full shrink-0 min-w-[120px] md:max-w-full h-fit text-tag px-xs md:px-[unset] py-[4px] rounded-full border md:border-none border-black">
             <img
               width="100"
               height="100"
-              class="imageLayout h-small w-small"
+              class="imageLayout md:h-small md:w-small h-[24px] w-[24px]"
               src={
                 person.person.profile_path
                   ? `https://image.tmdb.org/t/p/w185/${person.person.profile_path}`

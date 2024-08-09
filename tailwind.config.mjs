@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       height: {
-        small: "20px",
+        small: "32px",
         medium: "100px",
       },
       width: {
-        small: "20px",
+        small: "32px",
         medium: "100px",
       },
       gap: {

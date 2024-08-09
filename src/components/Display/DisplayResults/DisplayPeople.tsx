@@ -1,20 +1,12 @@
 import { useStore } from "@nanostores/preact";
-import { allCredits, currentTaggedAndCredits } from "@stores/newSystem";
+import { currentTaggedAndCredits } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
-import { useEffect, useState } from "preact/hooks";
 import { ImageWithText } from "../ImageWithText";
-import { getAllCommonCredits } from "@utils/getAllCommonCredits";
-
-interface Props {
-  people: any;
-}
 
 export default function DisplayPeople() {
   const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
   const $currentDisplayedResults = useStore(currentDisplayedResults);
-
-  console.log($currentDisplayedResults);
 
   return (
     <>
@@ -33,20 +25,23 @@ export default function DisplayPeople() {
                   <div class="flexCol grow">
                     <div class="flex justify-between">
                       <p>{currentPerson.name || currentPerson.title}</p>
-                      <button
-                        class="w-fit"
-                        onClick={() =>
-                          handleTagButtonClick(
-                            currentPerson,
-                            $currentTaggedAndCredits
-                          )
-                        }
-                      >
-                        <span class="block h-3 w-3 relative after:absolute after:-translate-x-1/2 before:-translate-y-1/2 before:absolute after:top-0 after:left-1/2 before:top-1/2 before:left-0 after:h-3 after:w-0.5 after:bg-primary-black before:w-3 before:h-0.5 before:bg-primary-black" />
-                      </button>
+                      {currentPerson.name && (
+                        <button
+                          class="w-fit"
+                          onClick={() =>
+                            handleTagButtonClick(
+                              currentPerson,
+                              $currentTaggedAndCredits
+                            )
+                          }
+                        >
+                          <span class="block h-3 w-3 relative after:absolute after:-translate-x-1/2 before:-translate-y-1/2 before:absolute after:top-0 after:left-1/2 before:top-1/2 before:left-0 after:h-3 after:w-0.5 after:bg-primary-black before:w-3 before:h-0.5 before:bg-primary-black" />
+                        </button>
+                      )}
                     </div>
                     <p class="text-sm text-primary-grey">
-                      {currentPerson.known_for_department}
+                      {currentPerson.known_for_department ||
+                        currentPerson.vote_average}
                     </p>
                     {currentPerson.known_for && (
                       <div class="flex gap-x-xs overflow-x-auto w-full mt-sm">

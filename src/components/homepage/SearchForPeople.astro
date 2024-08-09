@@ -12,11 +12,6 @@
     type="text"
     class="bg-primary-lightGrey px-sm py-xs rounded-lg grow"
   />
-  <button
-    id="submit"
-    class="rounded-lg px-sm py-xs bg-primary-lightGrey text-primary-black"
-    >Search</button
-  >
 </search-wrapper>
 
 <script>
@@ -28,7 +23,6 @@
       const textInputString = "#text-input";
       const textInput: HTMLTextAreaElement =
         this.querySelector(textInputString)!;
-      const submitButton = this.querySelector("#submit");
 
       textInput.addEventListener("keydown", function (e) {
         setTimeout(() => {
