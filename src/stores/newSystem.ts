@@ -9,10 +9,17 @@ export namespace Person {
     known_for: Array<KnownForProps>;
   }
 
-  export interface CreditProps {
+  export interface CastAndCrewProps {
     title: string;
     poster_path: string;
     vote_average: string;
+    genre_ids: Array<number>;
+    id: string;
+  }
+
+  export interface CreditProps {
+    cast: CastAndCrewProps[];
+    crew: CastAndCrewProps[];
   }
 
   export interface KnownForProps {
@@ -23,7 +30,7 @@ export namespace Person {
 
 export interface CurrentTaggedAndCredits {
   person: Person.PersonProps;
-  credits: Person.CreditProps[];
+  credits: Person.CreditProps;
   theme: {
     backgroundColour: string;
     textColour: string;

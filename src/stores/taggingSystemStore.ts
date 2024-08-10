@@ -8,7 +8,7 @@ export namespace DisplayedResults {
   }
   export interface DisplayedResultsMediaProps {
     type: "media";
-    results: Person.CreditProps[];
+    results: Person.CastAndCrewProps[];
   }
 }
 

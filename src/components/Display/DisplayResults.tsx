@@ -15,7 +15,7 @@ export default function DisplayPeople() {
     <>
       {$currentDisplayedResults.type === "people"
         ? $currentDisplayedResults?.results.map(
-            (person: Person.PersonProps, i: number) => (
+            (person: Person.PersonProps) => (
               // TODO:
               // On hover, image expands to take up whole space, some kind of tooltip appears with more info, can click whole image to tag
               <InfoCard
@@ -28,7 +28,7 @@ export default function DisplayPeople() {
             )
           )
         : $currentDisplayedResults?.results.map(
-            (media: Person.CreditProps, i: number) => (
+            (media: Person.CastAndCrewProps) => (
               <InfoCard imagePath={media.poster_path} title={media.title} />
             )
           )}

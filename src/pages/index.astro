@@ -1,8 +1,5 @@
 ---
-import { getPopularPeople } from "../api";
 import Layout from "../layouts/Layout.astro";
-
-const people = await getPopularPeople();
 
 // REQUIREMENTS
 // One central location to store if it is a film/tv result or a people result 'media' | 'person' - resultsType
@@ -25,10 +22,3 @@ const people = await getPopularPeople();
 <Layout title="Feature Films Featuring.">
   <p>hi</p>
 </Layout>
-
-<script>
-  import { useStore } from "@nanostores/preact";
-  import { resultsType } from "../stores/newSystem";
-
-  const $resultsType = useStore(resultsType);
-</script>

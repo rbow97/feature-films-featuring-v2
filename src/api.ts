@@ -34,7 +34,7 @@ export const getSearchedPeople = async (
 // Get the credits of a single person's id
 export const getCreditsPerPerson = async (
   id: string
-): Promise<Person.CreditProps[]> => {
+): Promise<Person.CreditProps> => {
   const response: any = await axios
     .get(
       `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${

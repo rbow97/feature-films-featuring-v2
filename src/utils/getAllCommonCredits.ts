@@ -1,7 +1,7 @@
-import { type CurrentTaggedAndCredits } from "../stores/newSystem";
+import { type CurrentTaggedAndCredits, type Person } from "../stores/newSystem";
 
 // Function to filter out projects with specified genre_ids
-function filterProjects(projects, excludedGenreIds) {
+function filterProjects(projects: Person.CastAndCrewProps[], excludedGenreIds: Array<number>) {
   return projects.filter(
     (project) => !excludedGenreIds.some((id) => project.genre_ids.includes(id))
   );
@@ -9,6 +9,7 @@ function filterProjects(projects, excludedGenreIds) {
 
 // Function to find projects that all people have in common
 export function getAllCommonCredits(people: CurrentTaggedAndCredits[]) {
+  console.log(people);
   const excludedGenreIds = [10767, 10763, 27023];
 
   if (people === null) return [];
