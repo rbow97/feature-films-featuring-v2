@@ -2,7 +2,7 @@ import { useStore } from "@nanostores/preact";
 import { currentTaggedAndCredits, type Person } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
-import InfoCard from "./Display/InfoCard";
+import InfoCard from "./InfoCard";
 
 export default function DisplayPeople() {
   const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
