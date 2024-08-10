@@ -1,0 +1,42 @@
+---
+import Pill from "./SideBar/Pill.astro";
+---
+
+<header-wrapper>
+  <a href="/people" id="header-link">
+    <h1 class="font-semibold font-oswald text-4xl mt-16 text-primary-blue">
+      Feature Films Featuring
+    </h1>
+  </a>
+  <h2 class="text-text text-primary-grey mt-xs max-w-[400px]">
+    Tag and cross reference those working in the entertainment industry
+  </h2>
+  <p
+    class="text-[14px] my-auto flex items-center gap-2 mt-md text-primary-grey"
+  >
+    Created by
+    <Pill href="https://rose-bowen-visuals.vercel.app/"> Rose Bowen </Pill>
+  </p>
+</header-wrapper>
+
+<script>
+  import { currentTaggedAndCredits } from "@stores/newSystem";
+  import { currentDisplayedResults } from "@stores/taggingSystemStore";
+  import { getPopularPeople } from "src/api";
+
+  const people = await getPopularPeople();
+
+  class HeaderWrapper extends HTMLElement {
+    constructor() {
+      super();
+      const headerLink = this.querySelector("#header-link");
+
+      // TODO: this cant be null
+      headerLink?.addEventListener("click", (e) => {
+        currentDisplayedResults.set({ type: "people", results: people });
+        currentTaggedAndCredits.set([]);
+      });
+    }
+  }
+  customElements.define("header-wrapper", HeaderWrapper);
+</script>

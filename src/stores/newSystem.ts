@@ -24,6 +24,10 @@ export namespace Person {
 export interface CurrentTaggedAndCredits {
   person: Person.PersonProps;
   credits: Person.CreditProps[];
+  theme: {
+    backgroundColour: string;
+    textColour: string;
+  };
 }
 
 export const resultsType = atom<"person" | "media">("person");

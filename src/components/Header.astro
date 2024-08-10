@@ -1,0 +1,37 @@
+<header
+  class="w-full py-4 flex gap-sm items-center justify-between border-b border-b-primary-lightGrey mx-auto max-w-screen-2xl px-sm"
+>
+  <img src="/film-camera.svg" class="h-[24px] w-[24px]" height="40" />
+  <search-wrapper class="grow">
+    <label for="text-input" class="sr-only">Search for someone</label>
+    <input
+      autocomplete="off"
+      id="text-input"
+      name="text-input"
+      placeholder="Search for someone..."
+      type="text"
+      class="border-l border-primary-lightGrey p-2 pl-sm w-full"
+    />
+  </search-wrapper>
+
+  <script>
+    import { handleInputSearchButton } from "@utils/handleInputSearch";
+
+    class SearchWrapper extends HTMLElement {
+      constructor() {
+        super();
+        const textInputString = "#text-input";
+        const textInput: HTMLTextAreaElement =
+          this.querySelector(textInputString)!;
+
+        textInput.addEventListener("keydown", function (e) {
+          setTimeout(() => {
+            handleInputSearchButton((e.target as HTMLTextAreaElement).value);
+          }, 1000);
+        });
+      }
+    }
+
+    customElements.define("search-wrapper", SearchWrapper);
+  </script>
+</header>

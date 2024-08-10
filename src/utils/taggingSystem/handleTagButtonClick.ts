@@ -6,6 +6,13 @@ import {
 } from "../../stores/newSystem";
 import { handleRemoveFromTags } from "./handleRemoveFromTags";
 
+const colours = [
+  { background: "#FC60A8", text: "#000000" },
+  { background: "#4C1A57", text: "#FFFFFF" },
+  { background: "#00916E", text: "#FFFFFF" },
+  { background: "#3454D1", text: "#FFFFFF" },
+];
+
 function returnDoesHaveClickedPerson(
   clickedPerson: Person.PersonProps,
   $currentTaggedAndCredits: CurrentTaggedAndCredits[]
@@ -23,12 +30,30 @@ async function handleAddToTags(
 ) {
   const credits = await getCreditsPerPerson(clickedPerson.id);
 
+  const randomColour = colours[Math.floor(Math.random() * colours.length)];
+
   $currentTaggedAndCredits.length > 0
     ? currentTaggedAndCredits.set([
         ...$currentTaggedAndCredits,
-        { person: clickedPerson, credits },
+        {
+          person: clickedPerson,
+          credits,
+          theme: {
+            backgroundColour: randomColour.background,
+            textColour: randomColour.text,
+          },
+        },
       ])
-    : currentTaggedAndCredits.set([{ person: clickedPerson, credits }]);
+    : currentTaggedAndCredits.set([
+        {
+          person: clickedPerson,
+          credits,
+          theme: {
+            backgroundColour: randomColour.background,
+            textColour: randomColour.text,
+          },
+        },
+      ]);
 }
 
 export function handleTagButtonClick(

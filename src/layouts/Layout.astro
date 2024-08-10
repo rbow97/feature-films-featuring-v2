@@ -1,7 +1,8 @@
 ---
 import Container from "@components/Container.astro";
-import SideBar from "@components/SideBar/SideBar.astro";
-import SearchForPeople from "@components/Search/SearchForPeople.astro";
+import FilterAndTags from "@components/FilterAndTags.astro";
+import Header from "@components/Header.astro";
+import Hero from "@components/Hero.astro";
 import { ViewTransitions } from "astro:transitions";
 
 interface Props {
@@ -39,7 +40,14 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yeseva+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yeseva+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -48,16 +56,15 @@ const { title } = Astro.props;
     <ViewTransitions />
   </head>
   <body class="h-full bg-white text-primary-black">
-    <main class="h-fit flexCol">
-      <SideBar />
+    <main class="h-fit">
+      <Header />
       <Container>
-        <div class="flexCol pb-md gap-y-md mt-xl md:pl-[240px] w-full">
-          <SearchForPeople />
-          <div
-            class="grid gap-x-8 gap-y-10 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full"
-          >
-            <slot />
-          </div>
+        <Hero />
+        <FilterAndTags />
+        <div
+          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 4xl:grid-cols-6"
+        >
+          <slot />
         </div>
       </Container>
     </main>
@@ -75,7 +82,7 @@ const { title } = Astro.props;
 
 <style is:global>
   html {
-    font-family: "DM Sans", sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
   .imageLayout {

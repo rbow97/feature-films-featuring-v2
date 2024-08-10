@@ -1,50 +1,52 @@
-import type { Person } from "@stores/newSystem";
-import { ImageWithText } from "./ImageWithText";
-
 interface Props {
   imagePath: string;
   title: string;
-  subtitle: string;
-  pillsArray?: Person.KnownForProps[];
-  tag?: boolean;
   handleTagButtonClick?: () => void;
 }
 
 export default function InfoCard(props: Props) {
-  const { imagePath, title, subtitle, tag, pillsArray, handleTagButtonClick } =
-    props;
+  const { imagePath, title, handleTagButtonClick } = props;
 
   return (
-    <div class="col-span-1 relative group">
-      <ImageWithText imagePath={imagePath}>
-        <div class="flexCol grow">
-          <div class="flex justify-between">
-            <p>{title}</p>
-            {tag && (
-              <button class="w-fit" onClick={handleTagButtonClick}>
-                <span class="block h-3 w-3 relative after:absolute after:-translate-x-1/2 before:-translate-y-1/2 before:absolute after:top-0 after:left-1/2 before:top-1/2 before:left-0 after:h-3 after:w-0.5 after:bg-primary-black before:w-3 before:h-0.5 before:bg-primary-black" />
+    <div class="col-span-1 relative">
+      <article class="w-fit h-full flex flex-col">
+        <img
+          loading="lazy"
+          width="150"
+          height="150"
+          decoding="async"
+          class="w-full  object-cover rounded-lg border-2 border-primary-grey grow"
+          src={
+            imagePath
+              ? `https://image.tmdb.org/t/p/w500/${imagePath}`
+              : "/film-camera.svg"
+          }
+        />
+        <div class="flex justify-between mt-xs gap-xs">
+          <p class="text-md text-primary-grey">{title}</p>
+          <div class="flex gap-4 items-start">
+            {handleTagButtonClick && (
+              <button
+                onClick={handleTagButtonClick}
+                class="group relative"
+                aria-describedby="tag-person"
+              >
+                <div class="h-4 w-4 relative after:absolute after:top-0 after:bottom-0 after:left-1/2 after:w-0.5 after:bg-primary-black after:opacity-50 before:opacity-50 after:rounded-md before:absolute before:left-0 before:right-0 before:top-1/2 before:h-0.5 before:-translate-y-1/2 after:-translate-x-1/2 before:bg-primary-black before:rounded-md group-hover:after:opacity-100 group-hover:before:opacity-100 after:transition-opacity before:transition-opacity after:duration-200 before:duration-200" />
+                <div
+                  role="tooltip"
+                  id="tag-person"
+                  class="absolute -top-[30px] left-1/2 -translate-x-1/2 text-[10px] whitespace-nowrap bg-primary-black rounded-md py-1 px-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease"
+                >
+                  <p>Tag this person</p>
+                </div>
               </button>
             )}
+            <button class="group">
+              <div class="h-3 w-3 border-t-2 border-primary-black opacity-50 border-r-2 relative after:absolute after:w-0.5 after:h-5 after:-right-0.5 after:-top-[1px] after:rotate-45 after:bg-primary-black after:origin-top group-hover:opacity-100 transition-all duration-200 " />
+            </button>
           </div>
-          <p class="text-sm text-primary-grey">{subtitle}</p>
-          {pillsArray && (
-            <div class="flex gap-x-xs overflow-x-auto w-full mt-sm">
-              {pillsArray.map((item: Person.KnownForProps, i: number) => {
-                // TODO: figure out why this doesnt work with 3
-                if (i < 2) {
-                  return (
-                    <div class="py-0.5 px-xs border shrink-0 border-primary-black rounded-full">
-                      <p class="text-[10px] uppercase">
-                        {item.title || item.name}
-                      </p>
-                    </div>
-                  );
-                }
-              })}
-            </div>
-          )}
         </div>
-      </ImageWithText>
+      </article>
     </div>
   );
 }
