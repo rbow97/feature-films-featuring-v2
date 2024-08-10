@@ -15,7 +15,7 @@ export default function InfoCard(props: Props) {
           width="150"
           height="150"
           decoding="async"
-          class="w-full  object-cover rounded-lg border-2 border-primary-grey grow"
+          class="w-full  object-cover rounded-lg border-2 border-primary-lightGrey grow"
           src={
             imagePath
               ? `https://image.tmdb.org/t/p/w500/${imagePath}`
