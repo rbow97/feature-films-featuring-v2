@@ -3,8 +3,6 @@ import DisplayResults from "@components/Display/DisplayResults";
 import Layout from "@layouts/Layout.astro";
 import { getPopularPeople } from "src/api";
 
-export const prerender = false;
-
 const people = await getPopularPeople();
 ---
 
