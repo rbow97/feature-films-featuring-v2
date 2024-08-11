@@ -34,9 +34,12 @@ export default {
       colors: {
         primary: {
           black: "#011502",
-          darkGrey: "rgba(45,86,128,.06)",
-          lightGrey: "rgba(63, 86, 109, 0.12)",
-          grey: "#6B7D7D",
+          darkGrey: "#7F7F7F",
+          // darkGrey: "rgba(45,86,128,.06)",
+          // lightGrey: "rgba(63, 86, 109, 0.12)",
+          lightGrey: "#F7F8FB",
+          // grey: "#6B7D7D",
+          grey: "#EEF1F7",
           lightBlack: "#0e1111",
           blue: "#00228E",
           white: "#FCFCFC",
