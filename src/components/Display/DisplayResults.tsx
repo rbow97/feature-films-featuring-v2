@@ -30,7 +30,7 @@ export default function DisplayPeople({ popularPeople }: Props) {
       {typeof window !== "undefined" &&
         ($currentDisplayedResults.type === "people"
           ? $currentDisplayedResults?.results.map(
-              (person: Person.PersonProps, index: number) => (
+              (person: Person.PersonProps) => (
                 <InfoCard
                   imagePath={person.profile_path}
                   title={person.name}

@@ -1,19 +1,9 @@
-import { getCreditsPerPerson } from "../../api";
 import {
   taggedPeople,
   type CurrentTaggedAndCredits,
   type Person,
-  resultsUrlWithParams,
   type TaggedPersonProps,
 } from "../../stores/newSystem";
-import { handleRemoveFromTags } from "./handleRemoveFromTags";
-
-const colours = [
-  { background: "#FC60A8", text: "#000000" },
-  { background: "#4C1A57", text: "#FFFFFF" },
-  { background: "#00916E", text: "#FFFFFF" },
-  { background: "#3454D1", text: "#FFFFFF" },
-];
 
 function returnDoesHaveClickedPerson(
   clickedPerson: Person.PersonProps,
@@ -31,14 +21,9 @@ async function handleAddToTags(
   index: number,
   url: any
 ) {
-  // const credits = await getCreditsPerPerson(clickedPerson.id);
-
   if (url) {
     url.searchParams.set(`person-${index + 1}`, clickedPerson.id);
   }
-  console.log(url);
-
-  // const randomColour = colours[Math.floor(Math.random() * colours.length)];
 
   // $currentTaggedAndCredits.length > 0
   //   ? currentTaggedAndCredits.set([

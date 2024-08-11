@@ -1,4 +1,4 @@
-import { type CurrentTaggedAndCredits, type Person } from "../stores/newSystem";
+import { type Person } from "../stores/newSystem";
 
 // Function to filter out projects with specified genre_ids
 function filterProjects(

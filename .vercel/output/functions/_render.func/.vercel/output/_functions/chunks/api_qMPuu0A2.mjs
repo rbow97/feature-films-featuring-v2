@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { jsx, jsxs, Fragment } from 'preact/jsx-runtime';
 import { c as createComponent, r as renderTemplate, m as maybeRenderHead, e as renderSlot, d as renderComponent, a as addAttribute, b as createAstro, f as renderHead } from './astro/server_Ch05GP6F.mjs';
 import 'kleur/colors';
@@ -7,6 +6,7 @@ import { listenKeys, atom } from 'nanostores';
 import { useState, useEffect } from 'preact/hooks';
 import cx from 'classnames';
 /* empty css                         */
+import axios from 'axios';
 
 function useStore(store, opts = {}) {
   let [, forceRender] = useState({});
@@ -46,19 +46,6 @@ atom([]);
 const taggedPeople = atom([]);
 atom([]);
 const resultsUrlWithParams = atom("");
-
-const getPopularPeople = async () => {
-  const response = await axios.get(`https://api.themoviedb.org/3/person/popular?api_key=${"35596d0ce1799b9e4c7617c1698f94dd"}&language=en-US&page=1`).catch((error) => {
-    console.log(error);
-  });
-  return response.data.results;
-};
-const getCreditsPerPerson = async (id) => {
-  const response = await axios.get(`https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${"35596d0ce1799b9e4c7617c1698f94dd"}&language=en-US`).catch((error) => {
-    console.log(error);
-  });
-  return response.data;
-};
 
 function InfoCard(props) {
   const {
@@ -181,5 +168,18 @@ const $$Layout = createComponent(($$result, $$props, $$slots) => {
   const { title } = Astro2.props;
   return renderTemplate`<html lang="en" class="h-full"> <head><meta charset="UTF-8"><meta name="description" content="Feature Films Featuring is a website that allows you to cross reference cast and crew of films to see what they worked on together"><meta name="viewport" content="width=device-width"><!-- Google font --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Oswald:wght@200..700&family=Yeseva+One&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yeseva+One&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yeseva+One&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator"${addAttribute(Astro2.generator, "content")}><title>${title}</title>${renderComponent($$result, "ViewTransitions", $$ViewTransitions, {})}${renderHead()}</head> <body class="h-full bg-white text-primary-black"> <main class="h-fit pb-20"> ${renderComponent($$result, "Header", $$Header, {})} ${renderComponent($$result, "Container", $$Container, {}, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "Hero", $$Hero, {})} ${renderComponent($$result2, "FilterAndTags", $$FilterAndTags, {})} <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 4xl:grid-cols-6"> ${renderSlot($$result2, $$slots["default"])} </div> ` })} </main> </body></html>`;
 }, "/Users/rosebowen/workspace/dev/personal/feature-films-featuring/src/layouts/Layout.astro", void 0);
+
+const getPopularPeople = async () => {
+  const response = await axios.get(`https://api.themoviedb.org/3/person/popular?api_key=${"35596d0ce1799b9e4c7617c1698f94dd"}&language=en-US&page=1`).catch((error) => {
+    console.log(error);
+  });
+  return response.data.results;
+};
+const getCreditsPerPerson = async (id) => {
+  const response = await axios.get(`https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${"35596d0ce1799b9e4c7617c1698f94dd"}&language=en-US`).catch((error) => {
+    console.log(error);
+  });
+  return response.data;
+};
 
 export { $$Layout as $, InfoCard as I, getCreditsPerPerson as a, getPopularPeople as g, resultsUrlWithParams as r, taggedPeople as t, useStore as u };
