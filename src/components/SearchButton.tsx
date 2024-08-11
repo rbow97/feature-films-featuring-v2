@@ -9,4 +9,4 @@ export default function SearchButton() {
       <a href="/results">Search</a>
     </button>
   );
-}cj
+}

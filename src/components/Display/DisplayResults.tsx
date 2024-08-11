@@ -1,7 +1,6 @@
 import { useStore } from "@nanostores/preact";
 import { taggedPeople, type Person } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
-import { addSearchParams } from "@utils/buildResultsUrl";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
 import { useEffect } from "preact/hooks";
 import InfoCard from "./InfoCard";
@@ -18,9 +17,9 @@ export default function DisplayPeople({ popularPeople }: Props) {
   const $currentDisplayedResults = useStore(currentDisplayedResults);
   const $taggedPeople = useStore(taggedPeople);
 
-  useEffect(() => {
-    addSearchParams($taggedPeople);
-  }, [$taggedPeople]);
+  // useEffect(() => {
+  //   addSearchParams($taggedPeople);
+  // }, [$taggedPeople]);
 
   // filter out job 'thanks' from job
   // filter out oscars, and any credit with no title

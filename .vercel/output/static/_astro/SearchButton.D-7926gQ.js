@@ -1,1 +1,0 @@
-import{a,u as r}from"./jsxRuntime.module.Bl9H15-G.js";import{r as e}from"./newSystem.B5xtTJ18.js";import"./hooks.module.CYQm0EAo.js";import"./preact.module.9bA1UASV.js";function l(){const t=a(e);return r("button",{class:"bg-primary-lightGrey text-primary-black p-xs rounded-md ",children:r("a",{href:t,children:"Search"})})}export{l as default};
