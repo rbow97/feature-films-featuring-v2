@@ -1,7 +1,7 @@
 /* empty css                                 */
 import { c as createComponent, r as renderTemplate, d as renderComponent, b as createAstro, m as maybeRenderHead } from '../chunks/astro/server_Ch05GP6F.mjs';
 import 'kleur/colors';
-import { a as getCreditsPerPerson, I as InfoCard, $ as $$Layout } from '../chunks/api_qMPuu0A2.mjs';
+import { a as getCreditsPerPerson, I as InfoCard, $ as $$Layout } from '../chunks/api_CEOzNfqQ.mjs';
 export { renderers } from '../renderers.mjs';
 
 function filterProjects(projects, excludedGenreIds) {

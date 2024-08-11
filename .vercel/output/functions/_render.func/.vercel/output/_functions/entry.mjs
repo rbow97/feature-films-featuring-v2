@@ -2536,11 +2536,13 @@ const createExports = (manifest, { middlewareSecret, skewProtection }) => {
 const _page0 = () => import('./pages/_image.astro.mjs');
 const _page1 = () => import('./pages/people.astro.mjs');
 const _page2 = () => import('./pages/results.astro.mjs');
+const _page3 = () => import('./pages/index.astro.mjs');
 
 const pageMap = new Map([
     ["node_modules/astro/dist/assets/endpoint/generic.js", _page0],
     ["src/pages/people/index.astro", _page1],
-    ["src/pages/results/index.astro", _page2]
+    ["src/pages/results/index.astro", _page2],
+    ["src/pages/index.astro", _page3]
 ]);
 const serverIslandMap = new Map();
 
@@ -2551,7 +2553,7 @@ const _manifest = Object.assign(manifest, {
     middleware: onRequest
 });
 const _args = {
-    "middlewareSecret": "c09c0271-511a-4e3e-b519-fcef7ece37c1",
+    "middlewareSecret": "071bbce9-2c41-487b-855b-69c2375145a0",
     "skewProtection": false
 };
 const _exports = createExports(_manifest, _args);

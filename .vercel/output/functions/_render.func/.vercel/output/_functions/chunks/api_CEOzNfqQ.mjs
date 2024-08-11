@@ -144,7 +144,7 @@ const $$Pill = createComponent(($$result, $$props, $$slots) => {
 }, "/Users/rosebowen/workspace/dev/personal/feature-films-featuring/src/components/SideBar/Pill.astro", void 0);
 
 const $$Hero = createComponent(($$result, $$props, $$slots) => {
-  return renderTemplate`${renderComponent($$result, "header-wrapper", "header-wrapper", {}, { "default": () => renderTemplate` ${maybeRenderHead()}<a href="/people" id="header-link"> <h1 class="font-semibold font-oswald text-4xl mt-16 text-primary-blue">
+  return renderTemplate`${renderComponent($$result, "header-wrapper", "header-wrapper", {}, { "default": () => renderTemplate` ${maybeRenderHead()}<a href="/" id="header-link"> <h1 class="font-semibold font-oswald text-4xl mt-16 text-primary-blue">
 Feature Films Featuring
 </h1> </a> <h2 class="text-text text-primary-darkGrey mt-xs max-w-[400px]">
 Tag and cross reference those working in the entertainment industry
