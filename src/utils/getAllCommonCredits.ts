@@ -11,15 +11,15 @@ function filterProjects(
 }
 
 // Function to find projects that all people have in common
-export function getAllCommonCredits(people: Person.CreditProps[]) {
+export function getAllCommonCredits(taggedPeople: Person.CreditProps[]) {
   const excludedGenreIds = [10767, 10763, 27023];
 
-  if (people === null) return [];
+  if (taggedPeople === null) return [];
 
   let allFilteredProjects = [];
 
   // Step 1: Filter and combine projects for each person
-  allFilteredProjects = people.map((person) => {
+  allFilteredProjects = taggedPeople.map((person) => {
     const { cast, crew } = person;
     const castProjects = filterProjects(cast || [], excludedGenreIds);
     const crewProjects = filterProjects(crew || [], excludedGenreIds);

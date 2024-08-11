@@ -28,6 +28,11 @@ export namespace Person {
   }
 }
 
+export interface TaggedPersonProps {
+  name: string;
+  id: number;
+}
+
 export interface CurrentTaggedAndCredits {
   person: Person.PersonProps;
   credits: Person.CreditProps;
@@ -40,6 +45,6 @@ export interface CurrentTaggedAndCredits {
 export const resultsType = atom<"person" | "media">("person");
 
 export const currentTaggedAndCredits = atom<CurrentTaggedAndCredits[]>([]);
-export const taggedPeople = atom<number[]>([]);
+export const taggedPeople = atom<TaggedPersonProps[]>([]);
 export const creditsTotalStore = atom<any>([]);
 export const resultsUrlWithParams = atom<string>("");

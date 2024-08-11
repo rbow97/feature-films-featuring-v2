@@ -20,22 +20,16 @@ import Pill from "./SideBar/Pill.astro";
 </header-wrapper>
 
 <script>
-  import { currentTaggedAndCredits } from "@stores/newSystem";
-  import { currentDisplayedResults } from "@stores/taggingSystemStore";
-  import { getPopularPeople } from "src/api";
-
-  // const people = await getPopularPeople();
+  import { taggedPeople } from "@stores/newSystem";
 
   class HeaderWrapper extends HTMLElement {
     constructor() {
       super();
-      // const headerLink = this.querySelector("#header-link");
+      const headerLink = this.querySelector("#header-link");
 
-      // // TODO: this cant be null
-      // headerLink?.addEventListener("click", (e) => {
-      //   currentDisplayedResults.set({ type: "people", results: people });
-      //   currentTaggedAndCredits.set([]);
-      // });
+      headerLink?.addEventListener("click", () => {
+        taggedPeople.set([]);
+      });
     }
   }
   customElements.define("header-wrapper", HeaderWrapper);

@@ -4,6 +4,7 @@ import {
   type CurrentTaggedAndCredits,
   type Person,
   resultsUrlWithParams,
+  type TaggedPersonProps,
 } from "../../stores/newSystem";
 import { handleRemoveFromTags } from "./handleRemoveFromTags";
 
@@ -65,9 +66,12 @@ async function handleAddToTags(
 
 export function handleTagButtonClick(
   clickedPerson: Person.PersonProps,
-  $taggedPeople: number[]
+  $taggedPeople: TaggedPersonProps[]
 ) {
-  taggedPeople.set([...$taggedPeople, clickedPerson.id]);
+  taggedPeople.set([
+    ...$taggedPeople,
+    { name: clickedPerson.name, id: clickedPerson.id },
+  ]);
 
   // handleAddToTags(clickedPerson, index, url);
   // const doesHaveClickedPerson = returnDoesHaveClickedPerson(

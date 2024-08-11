@@ -1,10 +1,13 @@
-import { resultsUrlWithParams } from "@stores/newSystem";
+import {
+  resultsUrlWithParams,
+  type TaggedPersonProps,
+} from "@stores/newSystem";
 
-export function addSearchParams(idArray: any) {
+export function addSearchParams(taggedPeopleArr: TaggedPersonProps[]) {
   const add_params: any = {};
 
-  idArray.map((id: number, index: number) => {
-    add_params[`person-${index + 1}`] = id;
+  taggedPeopleArr.map((taggedPerson: TaggedPersonProps, index: number) => {
+    add_params[`person-${index + 1}`] = taggedPerson.id;
   });
 
   resultsUrlWithParams.set(

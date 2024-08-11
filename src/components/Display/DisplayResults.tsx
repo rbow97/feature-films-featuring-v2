@@ -1,14 +1,10 @@
 import { useStore } from "@nanostores/preact";
-import {
-  taggedPeople,
-  type Person,
-  resultsUrlWithParams,
-} from "@stores/newSystem";
+import { taggedPeople, type Person } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
-import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
-import InfoCard from "./InfoCard";
-import { useEffect, useState } from "preact/hooks";
 import { addSearchParams } from "@utils/buildResultsUrl";
+import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
+import { useEffect } from "preact/hooks";
+import InfoCard from "./InfoCard";
 
 interface Props {
   popularPeople: Person.PersonProps[];
@@ -35,8 +31,6 @@ export default function DisplayPeople({ popularPeople }: Props) {
         ($currentDisplayedResults.type === "people"
           ? $currentDisplayedResults?.results.map(
               (person: Person.PersonProps, index: number) => (
-                // TODO:
-                // On hover, image expands to take up whole space, some kind of tooltip appears with more info, can click whole image to tag
                 <InfoCard
                   imagePath={person.profile_path}
                   title={person.name}
