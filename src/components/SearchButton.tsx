@@ -6,7 +6,7 @@ export default function SearchButton() {
 
   return (
     <button class="bg-primary-lightGrey text-primary-black p-xs rounded-md ">
-      <a href={$resultsUrlWithParams}>Search</a>
+      <a href="/results">Search</a>
     </button>
   );
 }
