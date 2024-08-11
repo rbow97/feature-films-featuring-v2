@@ -12,7 +12,7 @@ export default function TaggedRow() {
           return (
             <li
               class={cx(
-                "text-[14px] py-1.5 px-2 md:py-2 md:px-3 border-2 border-primary-lightGrey rounded-full h-fit  last:mr-md"
+                "text-[16px] px-4 py-3 border-2 border-primary-grey rounded-full h-fit  last:mr-md"
               )}
             >
               <span class="block truncate mr-auto">{taggedPerson.name}</span>

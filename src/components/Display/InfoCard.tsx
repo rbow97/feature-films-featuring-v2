@@ -1,6 +1,6 @@
 interface Props {
   imagePath: string;
-  title: string;
+  title?: string;
   handleTagButtonClick?: () => void;
 }
 
@@ -8,8 +8,8 @@ export default function InfoCard(props: Props) {
   const { imagePath, title, handleTagButtonClick } = props;
 
   return (
-    <div class="col-span-1 relative mx-auto">
-      <article class="w-fit  max-h-[400px] max-w-full h-full flex flex-col ">
+    <div class="col-span-1 w-full relative mx-auto">
+      <article class=" max-h-[400px] h-full flex flex-col ">
         <img
           loading="lazy"
           width="150"
@@ -18,7 +18,7 @@ export default function InfoCard(props: Props) {
           class="w-full object-cover overflow-hidden grow rounded-lg border-2 border-primary-lightGrey"
           src={
             imagePath
-              ? `https://image.tmdb.org/t/p/w500/${imagePath}`
+              ? `https://image.tmdb.org/t/p/w500${imagePath}`
               : "/film-camera.svg"
           }
         />

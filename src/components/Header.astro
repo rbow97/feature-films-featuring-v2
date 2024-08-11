@@ -3,10 +3,10 @@
 ---
 
 <header
-  class="w-full py-4 flex gap-[24px] items-center justify-between mx-auto max-w-screen-2xl px-sm"
+  class="w-full py-4 flex gap-[24px] items-center justify-between mx-auto px-md"
 >
   <img src="/film-camera.svg" class="h-[48px] w-[48px]" height="40" />
-  <search-wrapper class="grow">
+  <search-wrapper class="grow max-w-screen-2xl">
     <label for="text-input" class="sr-only">Search for someone</label>
     <input
       autocomplete="off"
@@ -17,25 +17,26 @@
       class="rounded-2xl bg-primary-lightGrey border border-primary-grey pl-12 h-14 w-full"
     />
   </search-wrapper>
-
-  <script>
-    import { handleInputSearchButton } from "@utils/handleInputSearch";
-
-    class SearchWrapper extends HTMLElement {
-      constructor() {
-        super();
-        const textInputString = "#text-input";
-        const textInput: HTMLTextAreaElement =
-          this.querySelector(textInputString)!;
-
-        textInput.addEventListener("keydown", function (e) {
-          setTimeout(() => {
-            handleInputSearchButton((e.target as HTMLTextAreaElement).value);
-          }, 1000);
-        });
-      }
-    }
-
-    customElements.define("search-wrapper", SearchWrapper);
-  </script>
+  <img src="/me.svg" class="h-[48px] w-[48px]" height="40" />
 </header>
+
+<script>
+  import { handleInputSearchButton } from "@utils/handleInputSearch";
+
+  class SearchWrapper extends HTMLElement {
+    constructor() {
+      super();
+      const textInputString = "#text-input";
+      const textInput: HTMLTextAreaElement =
+        this.querySelector(textInputString)!;
+
+      textInput.addEventListener("keydown", function (e) {
+        setTimeout(() => {
+          handleInputSearchButton((e.target as HTMLTextAreaElement).value);
+        }, 1000);
+      });
+    }
+  }
+
+  customElements.define("search-wrapper", SearchWrapper);
+</script>

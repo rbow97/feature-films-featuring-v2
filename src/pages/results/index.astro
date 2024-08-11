@@ -16,13 +16,20 @@ for (const [key, value] of search) {
 }
 
 const commonCredits = getAllCommonCredits(creditsArr);
+const creditsWithoutDuplicates = commonCredits.filter(
+  (credit, index, self) =>
+    index === self.findIndex((obj) => obj.id === credit.id)
+);
 ---
 
 <Layout title="Feature Films Featuring">
   {
-    commonCredits.length > 0 ? (
-      commonCredits.map((credit) => (
-        <InfoCard imagePath={credit.poster_path} title={credit.title} />
+    creditsWithoutDuplicates.length > 0 ? (
+      creditsWithoutDuplicates.map((credit) => (
+        <InfoCard
+          imagePath={credit.poster_path}
+          title={credit.title || credit.original_name}
+        />
       ))
     ) : (
       <p>Nothing here!</p>

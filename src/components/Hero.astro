@@ -4,15 +4,19 @@ import Pill from "./SideBar/Pill.astro";
 
 <header-wrapper>
   <a href="/" id="header-link">
-    <h1 class="font-semibold font-oswald text-4xl mt-16 text-primary-blue">
+    <h1
+      class="font-semibold font-oswald text-4xl md:text-6xl mt-12 md:mt-16 text-primary-blue text-center md:text-start"
+    >
       Feature Films Featuring
     </h1>
   </a>
-  <h2 class="text-text text-primary-darkGrey mt-xs max-w-[400px]">
+  <h2
+    class="text-text text-center md:text-start text-primary-darkGrey mt-xs md:max-w-[400px]"
+  >
     Tag and cross reference those working in the entertainment industry
   </h2>
   <p
-    class="text-[14px] my-auto flex items-center gap-2 mt-md text-primary-darkGrey"
+    class="text-[14px] justify-center md:justify-start my-auto flex items-center gap-2 mt-sm md:mt-md text-primary-darkGrey"
   >
     Created by
     <Pill href="https://rose-bowen-visuals.vercel.app/"> Rose Bowen </Pill>

@@ -10,7 +10,8 @@ export namespace Person {
   }
 
   export interface CastAndCrewProps {
-    title: string;
+    title?: string;
+    original_name?: string;
     poster_path: string;
     vote_average: string;
     genre_ids: Array<number>;
