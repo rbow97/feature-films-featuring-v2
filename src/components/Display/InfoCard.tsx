@@ -23,7 +23,7 @@ export default function InfoCard(props: Props) {
           }
         />
         <div class="flex justify-between mt-xs gap-xs w-full">
-          <p class="text-md text-primary-grey truncate">{title}</p>
+          <p class="text-md text-primary-darkGrey truncate">{title}</p>
           <div class="flex gap-4 items-start">
             {handleTagButtonClick && (
               <button
