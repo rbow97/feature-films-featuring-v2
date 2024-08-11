@@ -1,0 +1,32 @@
+---
+import DisplayResults from "@components/Display/DisplayResults";
+import InfoCard from "@components/Display/InfoCard";
+import Layout from "@layouts/Layout.astro";
+import { getAllCommonCredits } from "@utils/getAllCommonCredits";
+import { getCreditsPerPerson, getPopularPeople } from "src/api";
+
+export const prerender = false;
+
+const creditsArr = [];
+
+const search = Astro.url.searchParams;
+
+for (const [, value] of search) {
+  const credit = await getCreditsPerPerson(value);
+  creditsArr.push(credit);
+}
+
+const commonCredits = getAllCommonCredits(creditsArr);
+---
+
+<Layout title="Feature Films Featuring">
+  {
+    commonCredits.length > 0 ? (
+      commonCredits.map((credit) => (
+        <InfoCard imagePath={credit.poster_path} title={credit.title} />
+      ))
+    ) : (
+      <p>Nothing here!</p>
+    )
+  }
+</Layout>
