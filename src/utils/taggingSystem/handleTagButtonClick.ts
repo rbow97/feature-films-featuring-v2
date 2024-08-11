@@ -1,8 +1,9 @@
 import { getCreditsPerPerson } from "../../api";
 import {
-  currentTaggedAndCredits,
+  taggedPeople,
   type CurrentTaggedAndCredits,
   type Person,
+  resultsUrlWithParams,
 } from "../../stores/newSystem";
 import { handleRemoveFromTags } from "./handleRemoveFromTags";
 
@@ -26,46 +27,55 @@ function returnDoesHaveClickedPerson(
 
 async function handleAddToTags(
   clickedPerson: Person.PersonProps,
-  $currentTaggedAndCredits: CurrentTaggedAndCredits[]
+  index: number,
+  url: any
 ) {
-  const credits = await getCreditsPerPerson(clickedPerson.id);
+  // const credits = await getCreditsPerPerson(clickedPerson.id);
 
-  const randomColour = colours[Math.floor(Math.random() * colours.length)];
+  if (url) {
+    url.searchParams.set(`person-${index + 1}`, clickedPerson.id);
+  }
+  console.log(url);
 
-  $currentTaggedAndCredits.length > 0
-    ? currentTaggedAndCredits.set([
-        ...$currentTaggedAndCredits,
-        {
-          person: clickedPerson,
-          credits,
-          theme: {
-            backgroundColour: randomColour.background,
-            textColour: randomColour.text,
-          },
-        },
-      ])
-    : currentTaggedAndCredits.set([
-        {
-          person: clickedPerson,
-          credits,
-          theme: {
-            backgroundColour: randomColour.background,
-            textColour: randomColour.text,
-          },
-        },
-      ]);
+  // const randomColour = colours[Math.floor(Math.random() * colours.length)];
+
+  // $currentTaggedAndCredits.length > 0
+  //   ? currentTaggedAndCredits.set([
+  //       ...$currentTaggedAndCredits,
+  //       {
+  //         person: clickedPerson,
+  //         credits,
+  //         theme: {
+  //           backgroundColour: randomColour.background,
+  //           textColour: randomColour.text,
+  //         },
+  //       },
+  //     ])
+  //   : currentTaggedAndCredits.set([
+  //       {
+  //         person: clickedPerson,
+  //         credits,
+  //         theme: {
+  //           backgroundColour: randomColour.background,
+  //           textColour: randomColour.text,
+  //         },
+  //       },
+  //     ]);
 }
 
 export function handleTagButtonClick(
   clickedPerson: Person.PersonProps,
-  $currentTaggedAndCredits: CurrentTaggedAndCredits[]
+  $taggedPeople: number[]
 ) {
-  const doesHaveClickedPerson = returnDoesHaveClickedPerson(
-    clickedPerson,
-    $currentTaggedAndCredits
-  );
+  taggedPeople.set([...$taggedPeople, clickedPerson.id]);
 
-  doesHaveClickedPerson
-    ? handleRemoveFromTags(clickedPerson, $currentTaggedAndCredits!)
-    : handleAddToTags(clickedPerson, $currentTaggedAndCredits);
+  // handleAddToTags(clickedPerson, index, url);
+  // const doesHaveClickedPerson = returnDoesHaveClickedPerson(
+  //   clickedPerson,
+  //   $currentTaggedAndCredits
+  // );
+
+  // doesHaveClickedPerson
+  //   ? handleRemoveFromTags(clickedPerson, $currentTaggedAndCredits!)
+  //   : handleAddToTags(clickedPerson, index, $currentTaggedAndCredits);
 }

@@ -1,4 +1,5 @@
 ---
+import SearchButton from "./SearchButton";
 import TaggedRow from "./SideBar/TaggedRow";
 ---
 
@@ -13,4 +14,6 @@ import TaggedRow from "./SideBar/TaggedRow";
   <ul class="flex gap-2 items-center justify-start overflow-scroll">
     <TaggedRow client:load />
   </ul>
+
+  <SearchButton client:load />
 </div>

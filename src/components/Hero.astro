@@ -24,18 +24,18 @@ import Pill from "./SideBar/Pill.astro";
   import { currentDisplayedResults } from "@stores/taggingSystemStore";
   import { getPopularPeople } from "src/api";
 
-  const people = await getPopularPeople();
+  // const people = await getPopularPeople();
 
   class HeaderWrapper extends HTMLElement {
     constructor() {
       super();
-      const headerLink = this.querySelector("#header-link");
+      // const headerLink = this.querySelector("#header-link");
 
-      // TODO: this cant be null
-      headerLink?.addEventListener("click", (e) => {
-        currentDisplayedResults.set({ type: "people", results: people });
-        currentTaggedAndCredits.set([]);
-      });
+      // // TODO: this cant be null
+      // headerLink?.addEventListener("click", (e) => {
+      //   currentDisplayedResults.set({ type: "people", results: people });
+      //   currentTaggedAndCredits.set([]);
+      // });
     }
   }
   customElements.define("header-wrapper", HeaderWrapper);

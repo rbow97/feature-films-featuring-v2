@@ -1,6 +1,7 @@
 import { useStore } from "@nanostores/preact";
 import {
   currentTaggedAndCredits,
+  taggedPeople,
   type CurrentTaggedAndCredits,
 } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
@@ -9,20 +10,21 @@ import { useEffect } from "preact/hooks";
 import cx from "classnames";
 
 export default function TaggedRow() {
-  const $currentTaggedAndCredits = useStore(currentTaggedAndCredits);
+  const $taggedPeople = useStore(taggedPeople);
 
-  useEffect(() => {
-    if ($currentTaggedAndCredits.length > 1) {
-      const credits = getAllCommonCredits($currentTaggedAndCredits);
-      currentDisplayedResults.set({ type: "media", results: credits });
-    } else {
-      // currentDisplayedResults.set(people);
-    }
-  }, [$currentTaggedAndCredits]);
+  // useEffect(() => {
+  //   if ($currentTaggedAndCredits.length > 1) {
+  //     const credits = getAllCommonCredits($currentTaggedAndCredits);
+  //     currentDisplayedResults.set({ type: "media", results: credits });
+  //   } else {
+  //     // currentDisplayedResults.set(people);
+  //   }
+  // }, [$currentTaggedAndCredits]);
 
   return (
     <>
-      {$currentTaggedAndCredits.length > 0 &&
+      <p>hi</p>
+      {/* {$currentTaggedAndCredits.length > 0 &&
         $currentTaggedAndCredits.map((person: CurrentTaggedAndCredits) => {
           return (
             <li
@@ -37,7 +39,7 @@ export default function TaggedRow() {
               <span class="block truncate mr-auto">{person.person.name}</span>
             </li>
           );
-        })}
+        })} */}
     </>
   );
 }

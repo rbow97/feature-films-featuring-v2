@@ -2,7 +2,7 @@ import { atom } from "nanostores";
 
 export namespace Person {
   export interface PersonProps {
-    id: string;
+    id: number;
     name: string;
     profile_path: string;
     known_for_department: string;
@@ -40,4 +40,6 @@ export interface CurrentTaggedAndCredits {
 export const resultsType = atom<"person" | "media">("person");
 
 export const currentTaggedAndCredits = atom<CurrentTaggedAndCredits[]>([]);
+export const taggedPeople = atom<number[]>([]);
 export const creditsTotalStore = atom<any>([]);
+export const resultsUrlWithParams = atom<string>("");

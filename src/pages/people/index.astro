@@ -1,8 +1,11 @@
 ---
 import DisplayResults from "@components/Display/DisplayResults";
 import Layout from "@layouts/Layout.astro";
+import { getPopularPeople } from "src/api";
+
+const people = await getPopularPeople();
 ---
 
 <Layout title="Feature Films Featuring">
-  <DisplayResults client:load />
+  <DisplayResults client:load popularPeople={people} />
 </Layout>
