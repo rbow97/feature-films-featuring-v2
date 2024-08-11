@@ -8,22 +8,22 @@ export default function InfoCard(props: Props) {
   const { imagePath, title, handleTagButtonClick } = props;
 
   return (
-    <div class="col-span-1 relative">
-      <article class="w-fit h-full flex flex-col">
+    <div class="col-span-1 relative mx-auto">
+      <article class="w-fit  max-h-[400px] max-w-full h-full flex flex-col ">
         <img
           loading="lazy"
           width="150"
           height="150"
           decoding="async"
-          class="w-full  object-cover rounded-lg border-2 border-primary-lightGrey grow"
+          class="w-full object-cover overflow-hidden grow rounded-lg border-2 border-primary-lightGrey"
           src={
             imagePath
               ? `https://image.tmdb.org/t/p/w500/${imagePath}`
               : "/film-camera.svg"
           }
         />
-        <div class="flex justify-between mt-xs gap-xs">
-          <p class="text-md text-primary-grey">{title}</p>
+        <div class="flex justify-between mt-xs gap-xs w-full">
+          <p class="text-md text-primary-grey truncate">{title}</p>
           <div class="flex gap-4 items-start">
             {handleTagButtonClick && (
               <button

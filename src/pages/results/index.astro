@@ -21,8 +21,12 @@ const commonCredits = getAllCommonCredits(creditsArr);
 
 <Layout title="Feature Films Featuring">
   {
-    commonCredits.map((credit) => (
-      <InfoCard imagePath={credit.poster_path} title={credit.title} />
-    ))
+    commonCredits.length > 0 ? (
+      commonCredits.map((credit) => (
+        <InfoCard imagePath={credit.poster_path} title={credit.title} />
+      ))
+    ) : (
+      <p>Nothing here!</p>
+    )
   }
 </Layout>
