@@ -10,7 +10,7 @@ const creditsArr = [];
 
 const search = Astro.url.searchParams;
 
-for (const [, value] of search) {
+for (const [key, value] of search) {
   const credit = await getCreditsPerPerson(value);
   creditsArr.push(credit);
 }
