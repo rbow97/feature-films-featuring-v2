@@ -21,13 +21,9 @@ async function handleAddToTags(
   index: number,
   url: any
 ) {
-  // const credits = await getCreditsPerPerson(clickedPerson.id);
-
   if (url) {
     url.searchParams.set(`person-${index + 1}`, clickedPerson.id);
   }
-
-  // const randomColour = colours[Math.floor(Math.random() * colours.length)];
 
   // $currentTaggedAndCredits.length > 0
   //   ? currentTaggedAndCredits.set([
