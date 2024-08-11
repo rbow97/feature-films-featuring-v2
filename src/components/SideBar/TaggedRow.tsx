@@ -15,11 +15,15 @@ export default function TaggedRow() {
                 onClick={() =>
                   handleRemoveFromTags(taggedPerson, $taggedPeople)
                 }
-                class="px-4 py-3 text-[16px] border-2 border-primary-grey rounded-full relative overflow-hidden group md:hover:border-none transition-all duration-75"
+                class="px-3 py-2 md:px-4 md:py-3 text-[14px] md:text-[16px] border-2 border-primary-grey rounded-full relative overflow-hidden group md:hover:bg-primary-red md:hover:border-primary-red transition-all duration-200"
               >
-                <span class="block truncate ">{taggedPerson.name}</span>
-                <div class="absolute hidden md:flex items-center justify-center -top-2 -bottom-2 -right-2 -left-2  bg-primary-red translate-x-full rounded-full md:group-hover:translate-x-0 transition-all duration-300 ease-primary">
-                  <span class="text-white text-[16px]">Remove?</span>
+                <span class="block truncate md:group-hover:opacity-0 transition- duration-200">
+                  {taggedPerson.name}
+                </span>
+                <div class="absolute hidden md:flex items-center justify-center -top-2 -bottom-2 -right-2 -left-2 translate-x-full rounded-full md:group-hover:translate-x-0 transition-all duration-300 ease-primary">
+                  <span class="text-white text-[14px] md:text-[16px]">
+                    Remove?
+                  </span>
                 </div>
               </button>
             </li>
