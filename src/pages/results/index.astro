@@ -6,20 +6,23 @@ import { getCreditsPerPerson } from "src/api";
 
 export const prerender = false;
 
-const creditsArr = [];
+// const creditsArr = [];
 
-const search = Astro.url.searchParams;
+// const search = Astro.url.searchParams;
 
-for (const [key, value] of search) {
-  const credit = await getCreditsPerPerson(value);
-  creditsArr.push(credit);
-}
+// for (const [key, value] of search) {
+//   const credit = await getCreditsPerPerson(value);
+//   creditsArr.push(credit);
+// }
 
-const commonCredits = getAllCommonCredits(creditsArr);
+// const commonCredits = getAllCommonCredits(creditsArr);
+
+const commonCredits = [];
 ---
 
 <Layout title="Feature Films Featuring">
-  {
+  <p>hi</p>
+  <!-- {
     commonCredits.length > 0 ? (
       commonCredits.map((credit) => (
         <InfoCard imagePath={credit.poster_path} title={credit.title} />
@@ -27,5 +30,5 @@ const commonCredits = getAllCommonCredits(creditsArr);
     ) : (
       <p>Nothing here!</p>
     )
-  }
+  } -->
 </Layout>
