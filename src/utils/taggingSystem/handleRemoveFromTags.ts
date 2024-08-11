@@ -1,16 +1,16 @@
 import {
-  currentTaggedAndCredits,
-  type CurrentTaggedAndCredits,
+  taggedPeople,
   type Person,
+  type TaggedPersonProps,
 } from "../../stores/newSystem";
 
 export function handleRemoveFromTags(
   clickedPerson: Person.PersonProps,
-  $currentTaggedAndCredits: CurrentTaggedAndCredits[]
+  $taggedPeople: TaggedPersonProps[]
 ) {
-  return currentTaggedAndCredits.set(
-    $currentTaggedAndCredits.filter((person: CurrentTaggedAndCredits) => {
-      return person.person.id !== clickedPerson.id;
+  return taggedPeople.set(
+    $taggedPeople.filter((person: TaggedPersonProps) => {
+      return person.id !== clickedPerson.id;
     })
   );
 }

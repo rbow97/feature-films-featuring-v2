@@ -31,9 +31,10 @@
         this.querySelector(textInputString)!;
 
       textInput.addEventListener("keydown", function (e) {
-        setTimeout(() => {
+        if (e.key === "Enter") {
+          e.preventDefault();
           handleInputSearchButton((e.target as HTMLTextAreaElement).value);
-        }, 1000);
+        }
       });
     }
   }

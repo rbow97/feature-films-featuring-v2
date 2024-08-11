@@ -1,52 +1,29 @@
 import {
   taggedPeople,
-  type CurrentTaggedAndCredits,
   type Person,
   type TaggedPersonProps,
 } from "../../stores/newSystem";
+import { handleRemoveFromTags } from "./handleRemoveFromTags";
 
 function returnDoesHaveClickedPerson(
   clickedPerson: Person.PersonProps,
-  $currentTaggedAndCredits: CurrentTaggedAndCredits[]
+  $taggedPeople: TaggedPersonProps[]
 ): boolean {
   return Boolean(
-    $currentTaggedAndCredits?.find(
-      (person: CurrentTaggedAndCredits) => person.person.id === clickedPerson.id
+    $taggedPeople?.find(
+      (person: TaggedPersonProps) => person.id === clickedPerson.id
     ) !== undefined
   );
 }
 
 async function handleAddToTags(
   clickedPerson: Person.PersonProps,
-  index: number,
-  url: any
+  $taggedPeople: TaggedPersonProps[]
 ) {
-  if (url) {
-    url.searchParams.set(`person-${index + 1}`, clickedPerson.id);
-  }
-
-  // $currentTaggedAndCredits.length > 0
-  //   ? currentTaggedAndCredits.set([
-  //       ...$currentTaggedAndCredits,
-  //       {
-  //         person: clickedPerson,
-  //         credits,
-  //         theme: {
-  //           backgroundColour: randomColour.background,
-  //           textColour: randomColour.text,
-  //         },
-  //       },
-  //     ])
-  //   : currentTaggedAndCredits.set([
-  //       {
-  //         person: clickedPerson,
-  //         credits,
-  //         theme: {
-  //           backgroundColour: randomColour.background,
-  //           textColour: randomColour.text,
-  //         },
-  //       },
-  //     ]);
+  taggedPeople.set([
+    ...$taggedPeople,
+    { name: clickedPerson.name, id: clickedPerson.id },
+  ]);
 }
 
 export function handleTagButtonClick(
@@ -58,13 +35,12 @@ export function handleTagButtonClick(
     { name: clickedPerson.name, id: clickedPerson.id },
   ]);
 
-  // handleAddToTags(clickedPerson, index, url);
-  // const doesHaveClickedPerson = returnDoesHaveClickedPerson(
-  //   clickedPerson,
-  //   $currentTaggedAndCredits
-  // );
+  const doesHaveClickedPerson = returnDoesHaveClickedPerson(
+    clickedPerson,
+    $taggedPeople
+  );
 
-  // doesHaveClickedPerson
-  //   ? handleRemoveFromTags(clickedPerson, $currentTaggedAndCredits!)
-  //   : handleAddToTags(clickedPerson, index, $currentTaggedAndCredits);
+  doesHaveClickedPerson
+    ? handleRemoveFromTags(clickedPerson, $taggedPeople!)
+    : handleAddToTags(clickedPerson, $taggedPeople);
 }

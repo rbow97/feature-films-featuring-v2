@@ -19,7 +19,7 @@ export default function DisplayPeople({ popularPeople }: Props) {
   const $taggedPeople = useStore(taggedPeople);
 
   useEffect(() => {
-    addSearchParams($taggedPeople);
+    addSearchParams("/results", $taggedPeople);
   }, [$taggedPeople]);
 
   // filter out job 'thanks' from job
@@ -27,24 +27,23 @@ export default function DisplayPeople({ popularPeople }: Props) {
 
   return (
     <>
-      {typeof window !== "undefined" &&
-        ($currentDisplayedResults.type === "people"
-          ? $currentDisplayedResults?.results.map(
-              (person: Person.PersonProps) => (
-                <InfoCard
-                  imagePath={person.profile_path}
-                  title={person.name}
-                  handleTagButtonClick={() =>
-                    handleTagButtonClick(person, $taggedPeople)
-                  }
-                />
-              )
+      {$currentDisplayedResults.type === "people"
+        ? $currentDisplayedResults?.results.map(
+            (person: Person.PersonProps) => (
+              <InfoCard
+                imagePath={person.profile_path}
+                title={person.name}
+                handleTagButtonClick={() =>
+                  handleTagButtonClick(person, $taggedPeople)
+                }
+              />
             )
-          : $currentDisplayedResults?.results.map(
-              (media: Person.CastAndCrewProps) => (
-                <InfoCard imagePath={media.poster_path} title={media.title} />
-              )
-            ))}
+          )
+        : $currentDisplayedResults?.results.map(
+            (media: Person.CastAndCrewProps) => (
+              <InfoCard imagePath={media.poster_path} title={media.title} />
+            )
+          )}
     </>
   );
 }

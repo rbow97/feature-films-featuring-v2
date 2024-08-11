@@ -3,7 +3,10 @@ import {
   type TaggedPersonProps,
 } from "@stores/newSystem";
 
-export function addSearchParams(taggedPeopleArr: TaggedPersonProps[]) {
+export function addSearchParams(
+  route: string,
+  taggedPeopleArr: TaggedPersonProps[]
+) {
   const add_params: { [key: string]: string } = {};
 
   taggedPeopleArr.map((taggedPerson: TaggedPersonProps, index: number) => {
@@ -11,6 +14,6 @@ export function addSearchParams(taggedPeopleArr: TaggedPersonProps[]) {
   });
 
   resultsUrlWithParams.set(
-    `/results?${new URLSearchParams([...Object.entries(add_params)])}`
+    `${route}?${new URLSearchParams([...Object.entries(add_params)])}`
   );
 }
