@@ -5,7 +5,7 @@ import {
 } from "../../stores/newSystem";
 
 export function handleRemoveFromTags(
-  clickedPerson: Person.PersonProps,
+  clickedPerson: Person.PersonProps | TaggedPersonProps,
   $taggedPeople: TaggedPersonProps[]
 ) {
   return taggedPeople.set(
