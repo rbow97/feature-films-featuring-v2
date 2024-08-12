@@ -5,17 +5,22 @@ export default {
     extend: {
       keyframes: {
         riseUp: {
-          "0%": { transform: "translateY(calc(100% + 20px))", opacity: 0 },
+          "0%": { transform: "translateY(calc(100% + 50px))", opacity: 0 },
           "100%": { transform: "translateY(0%)", opacity: 100 },
         },
         dropOut: {
           "0%": { transform: "translateY(0%)" },
-          "100%": { transform: "translateY(calc(100% + 20px))" },
+          "100%": { transform: "translateY(calc(100% + 50px))" },
+        },
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
       },
       animation: {
         riseUp: "riseUp 500ms cubic-bezier(.76,0,.24,1) forwards",
-        dropOut: "dropOut 500ms cubic-bezier(.76,0,.24,1) ",
+        dropOut: "dropOut 500ms cubic-bezier(.76,0,.24,1)",
+        rotate: "rotate 3s infinite",
       },
       height: {
         xs: "24px",
