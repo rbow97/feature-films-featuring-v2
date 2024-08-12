@@ -37,7 +37,7 @@ export default function InfoCard(props: Props) {
                 <div
                   role="tooltip"
                   id="tag-person"
-                  class="absolute -top-[30px] left-1/2 -translate-x-1/2 text-[10px] whitespace-nowrap bg-primary-black rounded-md py-1 px-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease"
+                  class="absolute -top-[30px] left-1/2 -translate-x-1/2 text-xs whitespace-nowrap bg-primary-black rounded-md py-1 px-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease"
                 >
                   <p>Tag this person</p>
                 </div>

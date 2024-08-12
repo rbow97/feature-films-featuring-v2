@@ -1,17 +1,17 @@
 ---
-import MobileSearch from "./MobileSearch";
+import Arrow from "./Arrow";
 ---
 
 <header
-  class="w-full py-4 flex gap-4 md:gap-[24px] items-center justify-between mx-auto px-md relative"
+  class="w-full py-sm flex gap-sm md:gap-md items-center justify-between mx-auto px-md relative"
 >
   <img
     src="/film-camera.svg"
-    class="h-[32px] w-[32px] md:h-[48px] md:w-[48px] hidden md:block"
+    class="h-medium w-medium md:h-md md:w-md hidden md:block"
     height="40"
   />
   <search-wrapper
-    class="grow max-w-screen-2xl flex items-center gap-4 md:gap-[24px]"
+    class="grow max-w-screen-2xl flex items-center gap-sm md:gap-md"
   >
     <label for="text-input" class="sr-only">Search for someone</label>
     <input
@@ -20,19 +20,15 @@ import MobileSearch from "./MobileSearch";
       name="text-input"
       placeholder='Try searching "Rami Malek"'
       type="text"
-      class="rounded-2xl bg-primary-lightGrey border border-primary-grey pl-3 h-12 md:h-14 w-full"
+      class="rounded-2xl bg-primary-lightGrey border border-primary-grey pl-sm h-md md:h-lg w-full"
     />
     <button
-      class="flex items-center justify-center bg-primary-lightGrey border-2 rounded-full border-primary-grey shrink-0 h-[48px] w-[48px]"
+      class="flex items-center justify-center bg-primary-lightGrey border-2 rounded-full border-primary-grey shrink-0 h-md w-md"
       id="search-people-button"
     >
-      <div
-        class="h-3 w-3 border-t-2 border-primary-black border-r-2 relative after:absolute after:w-0.5 after:h-5 after:-right-0.5 after:-top-[1px] after:rotate-45 after:bg-primary-black after:origin-top transition-all after:transition-all after:duration-500 after:ease-secondary duration-500 ease-secondary rotate-45 group-hover:translate-x-2 group-hover:after:h-7"
-      >
-      </div>
+      <Arrow />
     </button>
   </search-wrapper>
-  <!-- <MobileSearch client:load /> -->
 </header>
 
 <script>
