@@ -16,7 +16,7 @@ import Pill from "./SideBar/Pill.astro";
     Tag and cross reference those working in the entertainment industry
   </h2>
   <p
-    class="text-sm justify-center md:justify-start my-auto flex items-center gap-xs mt-sm md:mt-md text-primary-darkGrey"
+    class="text-sm justify-center md:justify-start my-auto flex items-center gap-xs mt-sm md:mt-md text-primary-darkGrey mb-xl md:mb-2xl"
   >
     Created by
     <Pill href="https://rose-bowen-visuals.vercel.app/"> Rose Bowen </Pill>
@@ -24,7 +24,7 @@ import Pill from "./SideBar/Pill.astro";
 </header-wrapper>
 
 <script>
-  import { taggedPeople } from "@stores/newSystem";
+  import { showTaggedList, taggedPeople } from "@stores/newSystem";
 
   class HeaderWrapper extends HTMLElement {
     constructor() {
@@ -33,6 +33,7 @@ import Pill from "./SideBar/Pill.astro";
 
       headerLink?.addEventListener("click", () => {
         taggedPeople.set([]);
+        showTaggedList.set(false);
       });
     }
   }

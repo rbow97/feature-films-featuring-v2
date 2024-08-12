@@ -1,16 +1,22 @@
 import { useStore } from "@nanostores/preact";
 import { taggedPeople, type TaggedPersonProps } from "@stores/newSystem";
 import { handleRemoveFromTags } from "@utils/taggingSystem/handleRemoveFromTags";
+import cx from "classnames";
 
 export default function TaggedRow() {
   const $taggedPeople = useStore(taggedPeople);
 
   return (
-    <>
+    <ul>
       {$taggedPeople.length > 0 &&
         $taggedPeople.map((taggedPerson: TaggedPersonProps) => {
           return (
-            <li class="last:mr-md ">
+            <li
+              class={cx(
+                "last:mr-md bg-primary-red",
+                $taggedPeople.length > 0 ? "animate-riseUp" : "animate-dropOut"
+              )}
+            >
               <button
                 onClick={() =>
                   handleRemoveFromTags(taggedPerson, $taggedPeople)
@@ -27,6 +33,6 @@ export default function TaggedRow() {
             </li>
           );
         })}
-    </>
+    </ul>
   );
 }

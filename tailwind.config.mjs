@@ -4,18 +4,18 @@ export default {
   theme: {
     extend: {
       keyframes: {
-        dropIn: {
-          "0%": { transform: "translateY(calc(-100% - 20px))" },
-          "100%": { transform: "translateY(0%)" },
+        riseUp: {
+          "0%": { transform: "translate(-50%,calc(100% + 20px))", opacity: 0 },
+          "100%": { transform: "translate(-50%,0%)", opacity: 100 },
         },
-        riseOut: {
-          "0%": { transform: "translateY(0%)" },
-          "100%": { transform: "translateY(calc(-100% - 20px))" },
+        dropOut: {
+          "0%": { transform: "translate(-50%,0%)" },
+          "100%": { transform: "translate(-50%,calc(100% + 20px))" },
         },
       },
       animation: {
-        dropIn: "dropIn 500ms cubic-bezier(.76,0,.24,1) forwards",
-        riseOut: "riseOut 500ms cubic-bezier(.76,0,.24,1) forwards",
+        riseUp: "riseUp 500ms cubic-bezier(.76,0,.24,1) forwards",
+        dropOut: "dropOut 500ms cubic-bezier(.76,0,.24,1) ",
       },
       height: {
         xs: "24px",
@@ -46,7 +46,7 @@ export default {
         md: "24px",
         lg: "32px",
         xl: "40px",
-        "2xl": '96px'
+        "2xl": "96px",
       },
       margin: {
         xs: "8px",
@@ -75,7 +75,7 @@ export default {
         spaceGrotesk: ["Space Grotesk", "sans-serif"],
       },
       fontSize: {
-        xs: '10px',
+        xs: "10px",
         sm: "14px",
         md: "16px",
         lg: "36px",

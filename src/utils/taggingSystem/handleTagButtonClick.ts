@@ -30,11 +30,6 @@ export function handleTagButtonClick(
   clickedPerson: Person.PersonProps,
   $taggedPeople: TaggedPersonProps[]
 ) {
-  taggedPeople.set([
-    ...$taggedPeople,
-    { name: clickedPerson.name, id: clickedPerson.id },
-  ]);
-
   const doesHaveClickedPerson = returnDoesHaveClickedPerson(
     clickedPerson,
     $taggedPeople
