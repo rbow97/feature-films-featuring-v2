@@ -9,7 +9,7 @@ export default function ListItem({
   taggedPeople: TaggedPersonProps[];
 }) {
   return (
-    <li>
+    <li class="animate-riseUp">
       <button
         onClick={() => handleRemoveFromTags(taggedPerson, taggedPeople)}
         class="rounded-full p-1 md:p-2 hover:bg-primary-darkGrey/30 text-primary-lightBlack text-xs md:text-sm ease group/list-item transition-all duration-500 ease-secondary flex items-center justify-center relative overflow-hidden"

@@ -24,13 +24,16 @@ export default function FloatingTagsList() {
     <>
       <div
         class={cx(
-          "fixed bottom-5 md:bottom-10 flex gap-xs md:gap-sm items-center left-1/2 -translate-x-1/2 z-10",
-          $taggedPeople.length > 0 ? "animate-riseUp " : ""
+          "fixed bottom-5 md:bottom-10 flex  items-center left-1/2 -translate-x-1/2 z-10"
+          // $taggedPeople.length > 0 ? "animate-riseUp " : ""
         )}
       >
         <ul
           class={cx(
-            "flex items-center gap-1 md:gap-xs justify-center rounded-full bg-primary-darkWhite/50 p-[4px] backdrop-blur-lg shadow-[0_0_1px_.4px_rgba(12,41,126,.03),0_1px_3px_rgba(12,41,126,.09)]"
+            "flex items-center gap-1  md:gap-xs justify-center rounded-full ,126,.03),0_1px_3px_rgba(12,41,126,.09)]",
+            $taggedPeople.length > 0
+              ? "bg-primary-darkWhite/50  backdrop-blur-lg shadow-[0_0_1px_.4px_rgba(12,41"
+              : ""
           )}
         >
           {$taggedPeople.map((taggedPerson: TaggedPersonProps) => {
@@ -47,3 +50,5 @@ export default function FloatingTagsList() {
     </>
   );
 }
+
+// bg-primary-darkWhite/50  backdrop-blur-lg shadow-[0_0_1px_.4px_rgba(12,41,126,.03),0_1px_3px_rgba(12,41,126,.09)]

@@ -5,12 +5,12 @@ export default {
     extend: {
       keyframes: {
         riseUp: {
-          "0%": { transform: "translate(-50%,calc(100% + 20px))", opacity: 0 },
-          "100%": { transform: "translate(-50%,0%)", opacity: 100 },
+          "0%": { transform: "translateY(calc(100% + 20px))", opacity: 0 },
+          "100%": { transform: "translateY(0%)", opacity: 100 },
         },
         dropOut: {
-          "0%": { transform: "translate(-50%,0%)" },
-          "100%": { transform: "translate(-50%,calc(100% + 20px))" },
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(calc(100% + 20px))" },
         },
       },
       animation: {
