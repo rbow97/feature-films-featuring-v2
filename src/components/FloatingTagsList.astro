@@ -1,0 +1,30 @@
+---
+import Arrow from "./Arrow";
+---
+
+<div
+  class="fixed bottom-10 flex gap-sm items-center left-1/2 -translate-x-1/2 z-10"
+>
+  <ul
+    class="flex items-center gap-xs justify-center rounded-full bg-primary-darkWhite/50 p-[4px] backdrop-blur-lg shadow-[0_0_1px_.4px_rgba(12,41,126,.03),0_1px_3px_rgba(12,41,126,.09)]"
+  >
+    <button
+      class="rounded-full p-2 hover:bg-primary-darkGrey/30 text-primary-lightBlack text-sm transition-all duration-500 ease"
+      ><span>Gary Oldman</span>
+    </button>
+    <button
+      class="rounded-full p-2 hover:bg-primary-darkGrey/30 text-primary-lightBlack text-sm transition-all duration-500 ease"
+    >
+      <span>Scarlett Johansson</span>
+    </button>
+  </ul>
+  <button
+    class="flex items-center justify-center bg-primary-lightGrey/50 backdrop-blur-lg border-2 rounded-full border-primary-lightBlack/10 shrink-0 h-md w-md shadow-[0_0_1px_.4px_rgba(12,41,126,.03),0_1px_3px_rgba(12,41,126,.09)] group"
+    id="tagged-people-button "
+  >
+    <Arrow
+      client:load
+      className="group-hover:translate-x-2 group-hover:after:h-7 after:transition-all after:duration-500 after:ease-secondary duration-500 ease-secondary"
+    />
+  </button>
+</div>
