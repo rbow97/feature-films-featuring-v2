@@ -3,9 +3,9 @@ import SearchButton from "./SearchButton";
 import TaggedRow from "./SideBar/TaggedRow";
 ---
 
-<div class="py-4 mt-lg md:mt-xl flex items-center gap-4">
-  <SearchButton client:load />
+<div class="py-4 mt-lg md:mt-xl flex items-center gap-4 w-full">
   <ul class="flex gap-2 items-center justify-start overflow-scroll">
     <TaggedRow client:load />
   </ul>
+  <SearchButton client:load />
 </div>

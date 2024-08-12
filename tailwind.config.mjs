@@ -35,15 +35,11 @@ export default {
         primary: {
           black: "#011502",
           darkGrey: "#7F7F7F",
-          // darkGrey: "rgba(45,86,128,.06)",
-          // lightGrey: "rgba(63, 86, 109, 0.12)",
           lightGrey: "#F7F8FB",
-          // grey: "#6B7D7D",
           grey: "#EEF1F7",
           lightBlack: "#0e1111",
           blue: "#00228E",
           white: "#FCFCFC",
-          // darkWhite: "#FBF7F4",
           darkWhite: "#ECE7DB",
           red: "#BA3B46",
         },
@@ -67,6 +63,7 @@ export default {
       },
       transitionTimingFunction: {
         primary: "cubic-bezier(.16,1,.3,1)",
+        secondary: "cubic-bezier(.76,0,.24,1)",
       },
     },
   },
