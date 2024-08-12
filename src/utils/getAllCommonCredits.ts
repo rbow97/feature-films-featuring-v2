@@ -1,7 +1,7 @@
 import { type Person } from "../stores/newSystem";
 
 // Function to filter out projects with specified genre_ids
-function filterProjects(
+export function filterProjects(
   projects: Person.CastAndCrewProps[],
   excludedGenreIds: Array<number>
 ) {
