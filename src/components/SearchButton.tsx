@@ -1,10 +1,8 @@
 import { useStore } from "@nanostores/preact";
-import { resultsUrlWithParams, taggedPeople } from "@stores/newSystem";
+import { resultsUrlWithParams } from "@stores/newSystem";
 import cx from "classnames";
-import { useEffect, useState } from "preact/hooks";
 
 export default function SearchButton() {
-  const $taggedPeople = useStore(taggedPeople);
   const $resultsUrlWithParams = useStore(resultsUrlWithParams);
 
   return (

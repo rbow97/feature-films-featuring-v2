@@ -3,6 +3,20 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      keyframes: {
+        dropIn: {
+          "0%": { transform: "translateY(calc(-100% - 20px))" },
+          "100%": { transform: "translateY(0%)" },
+        },
+        riseOut: {
+          "0%": { transform: "translateY(0%)" },
+          "100%": { transform: "translateY(calc(-100% - 20px))" },
+        },
+      },
+      animation: {
+        dropIn: "dropIn 500ms cubic-bezier(.76,0,.24,1) forwards",
+        riseOut: "riseOut 500ms cubic-bezier(.76,0,.24,1) forwards",
+      },
       height: {
         small: "32px",
         medium: "100px",
