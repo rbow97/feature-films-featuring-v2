@@ -1,15 +1,18 @@
 ---
 import Container from "@components/Container.astro";
-import FloatingTagsList from "@components/FloatingTagsList/FloatingTagsList";
 import Header from "@components/Header.astro";
 import Hero from "@components/Hero.astro";
+import Tabs from "@components/Tabs/Tabs.astro";
+import TagsList from "@components/TagsList/TagsList";
 import { ViewTransitions } from "astro:transitions";
+import { getPopularPeople } from "src/api";
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
+const popularPeople = await getPopularPeople();
 ---
 
 <!doctype html>
@@ -65,9 +68,10 @@ const { title } = Astro.props;
   <body class="h-full bg-white text-primary-black">
     <main class="h-fit pb-20 relative">
       <Header />
-      <Container>
+      <Container popularPeople={popularPeople}>
         <Hero />
-        <FloatingTagsList client:load />
+        <Tabs />
+        <TagsList client:load />
         <div
           class="grid gap-sm sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 4xl:grid-cols-6"
         >

@@ -51,4 +51,6 @@ export const creditsTotalStore = atom<any>([]);
 export const resultsUrlWithParams = atom<string>("");
 export const searchUrlWithParams = atom<string>("");
 
-export const showTaggedList = atom<boolean>(false);
+export const allTabResults = atom<{ popularPeople: Person.PersonProps[] }>({
+  popularPeople: [],
+});

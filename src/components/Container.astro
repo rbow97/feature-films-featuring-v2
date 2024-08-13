@@ -1,7 +1,43 @@
 ---
-
+const { popularPeople } = Astro.props;
 ---
 
-<div class="mx-auto w-full max-w-screen-2xl flexCol px-md md:px-2xl">
-  <slot />
-</div>
+<container-element>
+  <div
+    id="container"
+    data-popular-people={JSON.stringify(popularPeople)}
+    class="mx-auto w-full max-w-screen-2xl flexCol px-md md:px-2xl"
+  >
+    <slot />
+  </div>
+</container-element>
+
+<script>
+  import { allTabResults } from "@stores/newSystem";
+  import { currentDisplayedResults } from "@stores/taggingSystemStore";
+
+  class ContainerElement extends HTMLElement {
+    constructor() {
+      super();
+
+      const containerElement: HTMLDivElement =
+        this.querySelector("#container")!;
+
+      setPopularPeopleToStore(containerElement);
+    }
+  }
+
+  customElements.define("container-element", ContainerElement);
+
+  function parseJson(json: any) {
+    if (!json) return;
+    return JSON.parse(json);
+  }
+
+  function setPopularPeopleToStore(containerElement: HTMLDivElement) {
+    const json = containerElement.dataset.popularPeople;
+    if (!json) return;
+    const popularPeople = JSON.parse(json);
+    allTabResults.set({ popularPeople });
+  }
+</script>

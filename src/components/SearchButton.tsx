@@ -9,7 +9,7 @@ export default function SearchButton({ children }: { children: JSX.Element }) {
   return (
     <button
       class={cx(
-        "rounded-full bg-primary-grey h-fit shadow-[0_0_1px_.4px_rgba(12,41,126,.03),0_1px_3px_rgba(12,41,126,.09)] ml-auto text-[14px] md:text-[16px] "
+        "rounded-full bg-primary-white h-fit  ml-auto text-[14px] md:text-[16px] "
       )}
     >
       <a

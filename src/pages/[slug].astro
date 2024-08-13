@@ -1,0 +1,19 @@
+---
+import Tabs from "@components/Tabs/Tabs.astro";
+import Layout from "@layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "popular-people" } },
+    { params: { slug: "popular-movies" } },
+    { params: { slug: "popular-tv" } },
+    { params: { slug: "top-rated" } },
+  ];
+}
+
+const { slug } = Astro.params;
+---
+
+<Layout title="Feature Films Featuring">
+  <div>{slug}</div>
+</Layout>

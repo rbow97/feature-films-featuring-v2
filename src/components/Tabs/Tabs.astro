@@ -1,0 +1,110 @@
+---
+
+---
+
+<div
+  class="tabs-container rounded-2xl bg-primary-lightGrey border border-primary-grey h-md md:h-lg w-full p-[4px] gap-xs flex justify-between relative text-[12px] md:text-sm"
+>
+  <div class="animated-bg"></div>
+  <button
+    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md relative transition-bg ease duration-200"
+    data-tab="1"
+  >
+    <p>Popular People</p>
+  </button>
+  <button
+    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+    data-tab="2"
+  >
+    <p>Popular Movies</p>
+  </button>
+  <a
+    href="javascript:setTimeout(()=>{window. location = '/popular-people' },500);"
+    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+    data-tab="3"
+  >
+    <p>Popular TV</p>
+  </a>
+  <button
+    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+    data-tab="4"
+  >
+    <p>Now Playing</p>
+  </button>
+  <button
+    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+    data-tab="5"
+  >
+    <p>Top Rated</p>
+  </button>
+</div>
+
+<style>
+  .tabs-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animated-bg {
+    position: absolute;
+    top: 4;
+    left: 0;
+    width: 0;
+    height: calc(100% - 8px);
+    background-color: #ffffff; /* You can replace this with the color you prefer */
+    border-radius: 12px;
+    transition:
+      width 0.3s ease,
+      left 0.3s ease;
+    z-index: 0;
+  }
+
+  .tab-btn:hover:not(.active) {
+    background-color: #eef1f7; /* Change to desired hover color */
+  }
+
+  .tab-btn {
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .tab-btn.active .animated-bg {
+    background-color: #007bff; /* Active background color */
+  }
+
+  .tab-btn p {
+    z-index: 2;
+    position: relative;
+  }
+</style>
+
+<script>
+  const tabs: NodeListOf<HTMLDivElement> =
+    document.querySelectorAll(".tab-btn");
+  const animatedBg: HTMLDivElement = document.querySelector(".animated-bg")!;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      // Remove active class from all tabs
+      tabs.forEach((tab) => tab.classList.remove("active"));
+
+      // Add active class to the clicked tab
+      tab.classList.add("active");
+
+      // Calculate the position and width of the clicked tab
+      const tabRect = tab.getBoundingClientRect();
+      const containerRect = tab.parentElement?.getBoundingClientRect();
+
+      const leftPosition = containerRect && tabRect.left - containerRect.left;
+      const tabWidth = tabRect.width;
+
+      // Move and resize the animated background
+      animatedBg.style.width = `${tabWidth}px`;
+      animatedBg.style.left = `${leftPosition}px`;
+    });
+  });
+
+  // Initialize the animation on the first tab
+  tabs[0].click();
+</script>

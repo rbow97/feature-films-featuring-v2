@@ -1,12 +1,12 @@
 ---
 import DisplayResults from "@components/Display/DisplayResults";
-import FloatingTagsList from "@components/FloatingTagsList/FloatingTagsList";
+import Tabs from "@components/Tabs/Tabs.astro";
 import Layout from "@layouts/Layout.astro";
 import { getPopularPeople } from "src/api";
 
-const people = await getPopularPeople();
+const popularPeople = await getPopularPeople();
 ---
 
 <Layout title="Feature Films Featuring">
-  <DisplayResults client:load popularPeople={people} />
+  <DisplayResults client:load popularPeople={popularPeople} />
 </Layout>

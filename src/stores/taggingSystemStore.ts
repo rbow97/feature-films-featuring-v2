@@ -12,7 +12,4 @@ export namespace DisplayedResults {
   }
 }
 
-export const currentDisplayedResults = atom<
-  | DisplayedResults.DisplayedResultsPeopleProps
-  | DisplayedResults.DisplayedResultsMediaProps
->({ type: "people", results: [] });
+export const currentDisplayedResults = atom<Person.PersonProps[]>([]);
