@@ -2,23 +2,18 @@ import { useStore } from "@nanostores/preact";
 import {
   resultsUrlWithParams,
   taggedPeople,
-  type Person,
   type TaggedPersonProps,
-  allTabResults,
 } from "@stores/newSystem";
 import { addSearchParams } from "@utils/addSearchParams";
 import cx from "classnames";
 import { useEffect } from "preact/hooks";
 import ListItem from "./ListItem";
 import TagsSearchButton from "./TagsSearchButton";
-import { getPopularPeople } from "src/api";
-
-
 
 export default function FloatingTagsList() {
   const $taggedPeople = useStore(taggedPeople);
   const $resultsUrlWithParams = useStore(resultsUrlWithParams);
-
+  const buttonIsVisible = $taggedPeople.length > 1;
 
   useEffect(() => {
     addSearchParams("/results", $taggedPeople);
@@ -26,10 +21,10 @@ export default function FloatingTagsList() {
 
   return (
     <>
-      <div class="flex justify-between my-xs">
+      <div class="flex justify-between h-fit my-sm z-10">
         <ul
           class={cx(
-            "flex items-center gap-1  md:gap-xs justify-center rounded-full"
+            "flex items-center gap-1 md:gap-xs justify-center rounded-full"
           )}
         >
           {$taggedPeople.map((taggedPerson: TaggedPersonProps) => {
@@ -42,7 +37,7 @@ export default function FloatingTagsList() {
           })}
         </ul>
         <TagsSearchButton
-          taggedPeople={$taggedPeople}
+          visible={buttonIsVisible}
           resultsUrlWithParams={$resultsUrlWithParams}
         />
       </div>

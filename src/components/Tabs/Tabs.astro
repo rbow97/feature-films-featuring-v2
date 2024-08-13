@@ -4,11 +4,11 @@
 
 <nav-wrapper>
   <nav
-    class="tabs-container rounded-2xl bg-primary-lightGrey border border-primary-grey h-md md:h-lg w-full p-[4px] gap-xs flex justify-between relative text-[12px] md:text-sm"
+    class="tabs-container rounded-2xl bg-primary-lightGrey border border-primary-grey h-md md:h-lg w-full p-[4px] gap-xs flex justify-between relative text-sm md:text-md"
   >
     <div class="animated-bg"></div>
     <a
-      href="/popular-people"
+      href="/"
       class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md relative transition-bg ease duration-200"
       data-tab="popular-people"
     >
@@ -137,22 +137,35 @@
     tabs: NodeListOf<HTMLAnchorElement>,
     animatedBg: HTMLDivElement
   ) {
-    // Check if tab is saved in local storage
+    /** STEP 1 */
+
+    // Check localStorage and apply background
     if (activeTabData) {
       const activeTab = document.querySelector(
         `.tab-btn[data-tab="${activeTabData}"]`
       );
 
-      // If it is, apply background without animation
       if (activeTab) {
         activeTab.classList.add("active");
-        moveBackground(activeTab, animatedBg, false); // Position without animation
+        moveBackground(activeTab, animatedBg, false);
         localStorage.removeItem("activeTab");
       }
-    } else {
-      // If active tab isn't in local storage, check the URL and apply background based on path
-      const currentPath = window.location.pathname;
+    }
 
+    /** STEP 2 */
+
+    // If active tab isn't in local storage, check the URL for results page
+    // else if (window.location.pathname.includes("/results")) {
+    //   console.log("here");
+    //   let matchedTab = document.querySelector('.tab-btn[data-tab="results"]')!;
+    //   moveBackground(matchedTab, animatedBg, false);
+    // }
+
+    /** STEP 3 */
+
+    // If we are not on the results page, check the URL and apply background
+    else {
+      const currentPath = window.location.pathname;
       let matchedTab = null;
 
       tabs.forEach((tab) => {
@@ -166,7 +179,7 @@
       });
 
       if (matchedTab) {
-        moveBackground(matchedTab, animatedBg, false); // Position without animation
+        moveBackground(matchedTab, animatedBg, false);
       }
     }
   }

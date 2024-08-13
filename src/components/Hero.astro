@@ -3,7 +3,12 @@ import Pill from "./SideBar/Pill.astro";
 ---
 
 <header-wrapper>
-  <a href="/" id="header-link" class="w-fit block mx-auto md:mx-[unset]">
+  <a
+    href="/"
+    id="header-link"
+    data-tab="popular-people"
+    class="w-fit block mx-auto md:mx-[unset]"
+  >
     <h1
       class="font-semibold font-oswald text-lg md:text-xl mt-2xl md:mt-3xl text-primary-blue text-center md:text-start"
     >
@@ -32,6 +37,8 @@ import Pill from "./SideBar/Pill.astro";
       const headerLink = this.querySelector("#header-link");
 
       headerLink?.addEventListener("click", () => {
+        const tabData = headerLink.getAttribute("data-tab")!;
+        localStorage.setItem("activeTab", tabData);
         taggedPeople.set([]);
       });
     }

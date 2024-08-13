@@ -22,7 +22,7 @@ export default function ListItem({
           }, 500);
         }}
         class={cx(
-          "p-1.5 md:p-2 text-xs bg-white border-2 rounded-full border-primary-grey hover:bg-primary-grey text-primary-lightBlack/70 md:text-[12px] ease group/list-item transition-all duration-500 ease-secondary flex items-center justify-center relative overflow-hidden"
+          "px-sm py-xs md:h-md text-sm bg-white border-2 rounded-full border-primary-grey hover:bg-primary-grey text-primary-lightBlack/70 ease group/list-item transition-all duration-500 ease-secondary flex items-center justify-center relative overflow-hidden"
         )}
       >
         <span class="block truncate md:group-hover/list-item:-translate-x-5  md:group-hover/list-item:opacity-0 transition-all duration-500 ease-secondary">

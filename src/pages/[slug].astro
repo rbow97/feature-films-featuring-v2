@@ -1,10 +1,8 @@
 ---
-import Tabs from "@components/Tabs/Tabs.astro";
 import Layout from "@layouts/Layout.astro";
 
 export function getStaticPaths() {
   return [
-    { params: { slug: "popular-people" } },
     { params: { slug: "popular-movies" } },
     { params: { slug: "popular-tv" } },
     { params: { slug: "now-playing" } },
