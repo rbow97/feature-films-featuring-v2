@@ -22,38 +22,58 @@ import Arrow from "./Arrow";
       type="text"
       class="rounded-2xl bg-primary-lightGrey border border-primary-grey pl-sm h-md md:h-lg w-full"
     />
-    <button
+    <a
       class="flex items-center justify-center bg-primary-lightGrey border-2 rounded-full border-primary-grey shrink-0 h-md w-md"
-      id="search-people-button"
+      id="search-people-link"
+      href="#"
     >
       <Arrow
         className="group-hover/search-button:translate-x-2 group-hover/search-button:after:h-7 after:transition-all after:duration-500 after:ease-secondary duration-500 ease-secondary"
       />
-    </button>
+    </a>
   </search-wrapper>
 </header>
 
 <script>
-  import { handleInputSearchButton } from "@utils/handleInputSearch";
+  import { navigate } from "astro:transitions/client";
 
   class SearchWrapper extends HTMLElement {
-    constructor() {
+    constructor() {Ì
       super();
       const textInputString = "#text-input";
-      const searchPeopleButton = "#search-people-button";
+      const searchPeopleLinkString = "#search-people-link";
+
       const textInput: HTMLTextAreaElement =
         this.querySelector(textInputString)!;
-      const searchPeople: HTMLButtonElement =
-        this.querySelector(searchPeopleButton)!;
 
-      searchPeople.addEventListener("click", function (e) {
-        handleInputSearchButton(textInput.value);
+      const searchPeopleLink: HTMLAnchorElement = this.querySelector(
+        searchPeopleLinkString
+      )!;
+
+      const updateLink = (inputValue: string) => {
+        const add_params = {
+          query: inputValue,
+        };
+        const searchUrl = `/search?${new URLSearchParams([...Object.entries(add_params)])}`;
+        searchPeopleLink.href = searchUrl;
+      };
+
+      searchPeopleLink.addEventListener("click", function (e) {
+        if (!textInput.value.trim()) {
+          e.preventDefault();
+        }
       });
 
-      textInput.addEventListener("keydown", function (e) {
+      textInput.addEventListener("input", function (e: Event) {
+        const element = e.currentTarget as HTMLInputElement;
+        const value = element.value;
+        updateLink(value);
+      });
+
+      textInput.addEventListener("keydown", async function (e) {
         if (e.key === "Enter") {
           e.preventDefault();
-          handleInputSearchButton((e.target as HTMLTextAreaElement).value);
+          navigate(searchPeopleLink.href);
         }
       });
     }

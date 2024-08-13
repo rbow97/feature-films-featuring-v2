@@ -1,9 +1,7 @@
 ---
 import DisplayPeople from "@components/Display/DisplayResults";
-import InfoCard from "@components/Display/InfoCard";
 import Layout from "@layouts/Layout.astro";
-import { getAllCommonCredits } from "@utils/getAllCommonCredits";
-import { getCreditsPerPerson, getSearchedPeople } from "src/api";
+import { getSearchedPeople } from "src/api";
 
 export const prerender = false;
 
@@ -20,17 +18,4 @@ const searchedPeopleArr = await getSearchedPeople(formattedQuery);
 
 <Layout title="Feature Films Featuring">
   <DisplayPeople client:load popularPeople={searchedPeopleArr} />
-  <!-- {
-    searchedPeopleArr.length > 0 ? (
-      searchedPeopleArr.map((person) => (
-        <InfoCard
-          handleTagButtonClick={() => {}}
-          imagePath={person.profile_path}
-          title={person.name}
-        />
-      ))
-    ) : (
-      <p>Nothing here!</p>
-    )
-  } -->
 </Layout>
