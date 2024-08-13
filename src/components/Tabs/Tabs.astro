@@ -2,42 +2,48 @@
 
 ---
 
-<div
-  class="tabs-container rounded-2xl bg-primary-lightGrey border border-primary-grey h-md md:h-lg w-full p-[4px] gap-xs flex justify-between relative text-[12px] md:text-sm"
->
-  <div class="animated-bg"></div>
-  <button
-    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md relative transition-bg ease duration-200"
-    data-tab="1"
+<nav-wrapper>
+  <nav
+    class="tabs-container rounded-2xl bg-primary-lightGrey border border-primary-grey h-md md:h-lg w-full p-[4px] gap-xs flex justify-between relative text-[12px] md:text-sm"
   >
-    <p>Popular People</p>
-  </button>
-  <button
-    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
-    data-tab="2"
-  >
-    <p>Popular Movies</p>
-  </button>
-  <a
-    href="javascript:setTimeout(()=>{window. location = '/popular-people' },500);"
-    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
-    data-tab="3"
-  >
-    <p>Popular TV</p>
-  </a>
-  <button
-    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
-    data-tab="4"
-  >
-    <p>Now Playing</p>
-  </button>
-  <button
-    class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
-    data-tab="5"
-  >
-    <p>Top Rated</p>
-  </button>
-</div>
+    <div class="animated-bg"></div>
+    <a
+      href="/popular-people"
+      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md relative transition-bg ease duration-200"
+      data-tab="popular-people"
+    >
+      <p>Popular People</p>
+    </a>
+    <a
+      href="/popular-movies"
+      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+      data-tab="popular-movies"
+    >
+      <p>Popular Movies</p>
+    </a>
+    <a
+      href="/popular-tv"
+      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+      data-tab="popular-tv"
+    >
+      <p>Popular TV</p>
+    </a>
+    <a
+      href="/now-playing"
+      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+      data-tab="now-playing"
+    >
+      <p>Now Playing</p>
+    </a>
+    <a
+      href="/top-rated"
+      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+      data-tab="top-rated"
+    >
+      <p>Top Rated</p>
+    </a>
+  </nav>
+</nav-wrapper>
 
 <style>
   .tabs-container {
@@ -47,20 +53,16 @@
 
   .animated-bg {
     position: absolute;
-    top: 4;
+    top: 4px;
     left: 0;
     width: 0;
     height: calc(100% - 8px);
     background-color: #ffffff; /* You can replace this with the color you prefer */
-    border-radius: 12px;
+    border-radius: 16px;
     transition:
       width 0.3s ease,
       left 0.3s ease;
     z-index: 0;
-  }
-
-  .tab-btn:hover:not(.active) {
-    background-color: #eef1f7; /* Change to desired hover color */
   }
 
   .tab-btn {
@@ -80,31 +82,101 @@
 </style>
 
 <script>
-  const tabs: NodeListOf<HTMLDivElement> =
-    document.querySelectorAll(".tab-btn");
-  const animatedBg: HTMLDivElement = document.querySelector(".animated-bg")!;
+  import { navigate } from "astro:transitions/client";
 
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      // Remove active class from all tabs
-      tabs.forEach((tab) => tab.classList.remove("active"));
+  class NavWrapper extends HTMLElement {
+    constructor() {
+      super();
 
-      // Add active class to the clicked tab
-      tab.classList.add("active");
+      const tabs = document.querySelectorAll(".tab-btn");
+      const animatedBg = document.querySelector(".animated-bg");
 
-      // Calculate the position and width of the clicked tab
-      const tabRect = tab.getBoundingClientRect();
-      const containerRect = tab.parentElement?.getBoundingClientRect();
+      // Function to move the background to the correct position
+      const moveBackground = (tab, animate = true) => {
+        const tabRect = tab.getBoundingClientRect();
+        const containerRect = tab.parentElement.getBoundingClientRect();
 
-      const leftPosition = containerRect && tabRect.left - containerRect.left;
-      const tabWidth = tabRect.width;
+        const leftPosition = tabRect.left - containerRect.left;
+        const tabWidth = tabRect.width;
 
-      // Move and resize the animated background
-      animatedBg.style.width = `${tabWidth}px`;
-      animatedBg.style.left = `${leftPosition}px`;
-    });
-  });
+        // Conditionally apply transition if animate is true
+        if (!animate) {
+          animatedBg.style.transition = "none";
+        } else {
+          animatedBg.style.transition = "width 0.3s ease, left 0.3s ease";
+        }
 
-  // Initialize the animation on the first tab
-  tabs[0].click();
+        // Move and resize the animated background
+        animatedBg.style.width = `${tabWidth}px`;
+        animatedBg.style.left = `${leftPosition}px`;
+
+        // Force a reflow to apply the immediate styles if animation is disabled
+        if (!animate) {
+          animatedBg.offsetHeight; // Trigger reflow
+          animatedBg.style.transition = ""; // Re-enable transitions
+        }
+      };
+
+      // Load the active tab from localStorage
+      const activeTabData = localStorage.getItem("activeTab");
+      if (activeTabData) {
+        const activeTab = document.querySelector(
+          `.tab-btn[data-tab="${activeTabData}"]`
+        );
+        if (activeTab) {
+          activeTab.classList.add("active");
+          moveBackground(activeTab, false); // Position without animation
+          localStorage.removeItem("activeTab");
+        }
+      } else {
+        console.log("hi");
+        const currentPath = window.location.pathname;
+
+        let matchedTab = null;
+
+        tabs.forEach((tab) => {
+          const tabHref = tab.getAttribute("href");
+          if (tabHref && currentPath.includes(tabHref)) {
+            tab.classList.add("active");
+            matchedTab = tab;
+          } else {
+            tab.classList.remove("active");
+          }
+        });
+
+        if (matchedTab) {
+          moveBackground(matchedTab, false); // Position without animation
+        }
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", (e) => {
+          e.preventDefault(); // Prevent the default anchor behavior
+
+          // Remove active class from all tabs
+          tabs.forEach((tab) => tab.classList.remove("active"));
+
+          // Add active class to the clicked tab
+          tab.classList.add("active");
+
+          // Store the clicked tab's data-tab in localStorage
+          const tabData = tab.getAttribute("data-tab");
+          localStorage.setItem("activeTab", tabData);
+
+          // Move the background to the clicked tab with animation
+          moveBackground(tab);
+
+          // Delay the rerouting by 1 second (1000 ms)
+          setTimeout(() => {
+            const href = tab.getAttribute("href");
+            if (href) {
+              navigate(href);
+            }
+          }, 300); // 1000 ms = 1 second
+        });
+      });
+    }
+  }
+
+  customElements.define("nav-wrapper", NavWrapper);
 </script>

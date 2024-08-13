@@ -18,7 +18,7 @@ export default function DisplayPeople({ popularPeople }: Props) {
   const $taggedPeople = useStore(taggedPeople);
   const $allTabResults = useStore(allTabResults);
 
-  console.log($allTabResults, $currentDisplayedResults);
+  // console.log($allTabResults, $currentDisplayedResults);
 
   // filter out job 'thanks' from job
   // filter out oscars
