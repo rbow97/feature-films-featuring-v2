@@ -58,7 +58,7 @@
     width: 0;
     height: calc(100% - 8px);
     background-color: #ffffff; /* You can replace this with the color you prefer */
-    border-radius: 16px;
+    border-radius: 12px;
     transition:
       width 0.3s ease,
       left 0.3s ease;
@@ -88,95 +88,118 @@
     constructor() {
       super();
 
-      const tabs = document.querySelectorAll(".tab-btn");
-      const animatedBg = document.querySelector(".animated-bg");
-
-      // Function to move the background to the correct position
-      const moveBackground = (tab, animate = true) => {
-        const tabRect = tab.getBoundingClientRect();
-        const containerRect = tab.parentElement.getBoundingClientRect();
-
-        const leftPosition = tabRect.left - containerRect.left;
-        const tabWidth = tabRect.width;
-
-        // Conditionally apply transition if animate is true
-        if (!animate) {
-          animatedBg.style.transition = "none";
-        } else {
-          animatedBg.style.transition = "width 0.3s ease, left 0.3s ease";
-        }
-
-        // Move and resize the animated background
-        animatedBg.style.width = `${tabWidth}px`;
-        animatedBg.style.left = `${leftPosition}px`;
-
-        // Force a reflow to apply the immediate styles if animation is disabled
-        if (!animate) {
-          animatedBg.offsetHeight; // Trigger reflow
-          animatedBg.style.transition = ""; // Re-enable transitions
-        }
-      };
+      const tabs: NodeListOf<HTMLAnchorElement> =
+        document.querySelectorAll(".tab-btn")!;
+      const animatedBg: HTMLDivElement =
+        document.querySelector(".animated-bg")!;
 
       // Load the active tab from localStorage
-      const activeTabData = localStorage.getItem("activeTab");
-      if (activeTabData) {
-        const activeTab = document.querySelector(
-          `.tab-btn[data-tab="${activeTabData}"]`
-        );
-        if (activeTab) {
-          activeTab.classList.add("active");
-          moveBackground(activeTab, false); // Position without animation
-          localStorage.removeItem("activeTab");
-        }
-      } else {
-        console.log("hi");
-        const currentPath = window.location.pathname;
+      const activeTabData = localStorage.getItem("activeTab") ?? false;
 
-        let matchedTab = null;
-
-        tabs.forEach((tab) => {
-          const tabHref = tab.getAttribute("href");
-          if (tabHref && currentPath.includes(tabHref)) {
-            tab.classList.add("active");
-            matchedTab = tab;
-          } else {
-            tab.classList.remove("active");
-          }
-        });
-
-        if (matchedTab) {
-          moveBackground(matchedTab, false); // Position without animation
-        }
-      }
-
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", (e) => {
-          e.preventDefault(); // Prevent the default anchor behavior
-
-          // Remove active class from all tabs
-          tabs.forEach((tab) => tab.classList.remove("active"));
-
-          // Add active class to the clicked tab
-          tab.classList.add("active");
-
-          // Store the clicked tab's data-tab in localStorage
-          const tabData = tab.getAttribute("data-tab");
-          localStorage.setItem("activeTab", tabData);
-
-          // Move the background to the clicked tab with animation
-          moveBackground(tab);
-
-          // Delay the rerouting by 1 second (1000 ms)
-          setTimeout(() => {
-            const href = tab.getAttribute("href");
-            if (href) {
-              navigate(href);
-            }
-          }, 300); // 1000 ms = 1 second
-        });
-      });
+      setTabBackgroundBasedOnLocalStorage(activeTabData, tabs, animatedBg);
+      setActiveTabAndNavigate(tabs, animatedBg);
     }
   }
 
   customElements.define("nav-wrapper", NavWrapper);
+
+  function moveBackground(
+    tab: Element,
+    animatedBg: HTMLDivElement,
+    animate = true
+  ) {
+    const containerRect = tab.parentElement!.getBoundingClientRect();
+    const tabRect = tab.getBoundingClientRect();
+
+    const leftPosition = tabRect.left - containerRect.left;
+    const tabWidth = tabRect.width;
+
+    // Conditionally apply transition if animate is true
+    if (!animate) {
+      animatedBg.style.transition = "none";
+    } else {
+      animatedBg.style.transition = "width 0.3s ease, left 0.3s ease";
+    }
+
+    // Move and resize the animated background
+    animatedBg.style.width = `${tabWidth}px`;
+    animatedBg.style.left = `${leftPosition}px`;
+
+    // Force a reflow to apply the immediate styles if animation is disabled
+    if (!animate) {
+      animatedBg.offsetHeight; // Trigger reflow
+      animatedBg.style.transition = ""; // Re-enable transitions
+    }
+  }
+
+  function setTabBackgroundBasedOnLocalStorage(
+    activeTabData: string | false,
+    tabs: NodeListOf<HTMLAnchorElement>,
+    animatedBg: HTMLDivElement
+  ) {
+    // Check if tab is saved in local storage
+    if (activeTabData) {
+      const activeTab = document.querySelector(
+        `.tab-btn[data-tab="${activeTabData}"]`
+      );
+
+      // If it is, apply background without animation
+      if (activeTab) {
+        activeTab.classList.add("active");
+        moveBackground(activeTab, animatedBg, false); // Position without animation
+        localStorage.removeItem("activeTab");
+      }
+    } else {
+      // If active tab isn't in local storage, check the URL and apply background based on path
+      const currentPath = window.location.pathname;
+
+      let matchedTab = null;
+
+      tabs.forEach((tab) => {
+        const tabHref = tab.getAttribute("href");
+        if (tabHref && currentPath.includes(tabHref)) {
+          tab.classList.add("active");
+          matchedTab = tab;
+        } else {
+          tab.classList.remove("active");
+        }
+      });
+
+      if (matchedTab) {
+        moveBackground(matchedTab, animatedBg, false); // Position without animation
+      }
+    }
+  }
+
+  function setActiveTabAndNavigate(
+    tabs: NodeListOf<HTMLAnchorElement>,
+    animatedBg: HTMLDivElement
+  ) {
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent the default anchor behavior
+
+        // Remove active class from all tabs
+        tabs.forEach((tab) => tab.classList.remove("active"));
+
+        // Add active class to the clicked tab
+        tab.classList.add("active");
+
+        // Store the clicked tab's data-tab in localStorage
+        const tabData = tab.getAttribute("data-tab")!;
+        localStorage.setItem("activeTab", tabData);
+
+        // Move the background to the clicked tab with animation
+        moveBackground(tab, animatedBg);
+
+        // Delay the rerouting by 300ms
+        setTimeout(() => {
+          const href = tab.getAttribute("href");
+          if (href) {
+            navigate(href);
+          }
+        }, 300);
+      });
+    });
+  }
 </script>
