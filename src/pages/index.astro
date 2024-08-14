@@ -1,12 +1,8 @@
 ---
 import DisplayResults from "@components/Display/DisplayResults";
-import TagsList from "@components/TagsList/TagsList";
 import Layout from "@layouts/Layout.astro";
-
-export const prerender = false;
 ---
 
 <Layout title="Feature Films Featuring">
-  <TagsList client:load />
   <DisplayResults client:load />
 </Layout>

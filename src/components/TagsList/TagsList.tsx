@@ -37,7 +37,8 @@ export default function TagsList() {
   return (
     <>
       <div className="flex justify-between h-fit my-sm z-10 gap-md">
-        <ul className={cx("flex items-center md:gap-xs overflow-auto -mx-6")}>
+        <p>hi</p>
+        {/* <ul className={cx("flex items-center md:gap-xs overflow-auto -mx-6")}>
           {$taggedPeople.map((taggedPerson: TaggedPersonProps) => {
             return (
               <ListItem
@@ -50,7 +51,7 @@ export default function TagsList() {
         <TagsSearchButton
           visible={buttonIsVisible}
           resultsUrlWithParams={$resultsUrlWithParams}
-        />
+        /> */}
       </div>
     </>
   );
