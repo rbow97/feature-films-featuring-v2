@@ -11,40 +11,37 @@ import ListItem from "./ListItem";
 import TagsSearchButton from "./TagsSearchButton";
 
 export default function TagsList() {
-  const taggedPeopleLocalStorage =
-    typeof window !== "undefined" &&
-    JSON.parse(localStorage.getItem("tagged-people")!);
-
-  const $taggedPeople = useStore(taggedPeople);
-  const [buttonIsVisible, setButtonIsVisible] = useState(
-    taggedPeopleLocalStorage > 1
-  );
+  const [tags, setTags] = useState([]);
+  const [buttonIsVisible, setButtonIsVisible] = useState(false);
 
   const $resultsUrlWithParams = useStore(resultsUrlWithParams);
+  const $taggedPeople = useStore(taggedPeople);
 
   useEffect(() => {
-    setButtonIsVisible($taggedPeople.length > 1);
+    const storedTags = localStorage.getItem("tagged-people");
+
+    // Check if storedTags is not null before parsing
+    if (storedTags) {
+      try {
+        const parsedTags = JSON.parse(storedTags);
+        setTags(parsedTags);
+      } catch (error) {
+        console.error("Failed to parse tags from localStorage:", error);
+      }
+    }
   }, [$taggedPeople]);
 
   useEffect(() => {
-    taggedPeople.set(taggedPeopleLocalStorage);
-  }, []);
-
-  useEffect(() => {
-    addSearchParams("/results", $taggedPeople);
-  }, [taggedPeople]);
+    setButtonIsVisible(tags.length > 1);
+    addSearchParams("/results", tags);
+  }, [tags]);
 
   return (
     <>
       <div className="flex justify-between h-fit my-sm z-10 gap-md">
         <ul className={cx("flex items-center md:gap-xs overflow-auto -mx-6")}>
-          {$taggedPeople.map((taggedPerson: TaggedPersonProps) => {
-            return (
-              <ListItem
-                taggedPeople={$taggedPeople}
-                taggedPerson={taggedPerson}
-              />
-            );
+          {tags.map((taggedPerson: TaggedPersonProps) => {
+            return <ListItem taggedPeople={tags} taggedPerson={taggedPerson} />;
           })}
         </ul>
         <TagsSearchButton
