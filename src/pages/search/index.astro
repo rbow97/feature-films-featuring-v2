@@ -17,5 +17,5 @@ const searchedPeopleArr = await getSearchedPeople(formattedQuery);
 ---
 
 <Layout title="Feature Films Featuring">
-  <DisplayPeople client:load popularPeople={searchedPeopleArr} />
+  <DisplayPeople client:load searchedPeople={searchedPeopleArr} />
 </Layout>

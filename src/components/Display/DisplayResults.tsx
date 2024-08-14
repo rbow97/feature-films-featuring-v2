@@ -3,12 +3,19 @@ import { taggedPeople, type Person } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
 import InfoCard from "./InfoCard";
+import { useEffect } from "preact/hooks";
 
 interface Props {
-  popularPeople: Person.PersonProps[];
+  searchedPeople?: Person.PersonProps[];
 }
 
-export default function DisplayPeople() {
+export default function DisplayPeople({ searchedPeople }: Props) {
+  useEffect(() => {
+    if (searchedPeople) {
+      currentDisplayedResults.set(searchedPeople);
+    }
+  }, []);
+
   const $currentDisplayedResults = useStore(currentDisplayedResults);
   const $taggedPeople = useStore(taggedPeople);
 
