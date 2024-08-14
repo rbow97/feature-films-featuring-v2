@@ -10,19 +10,16 @@ export default function ListItem({
   taggedPerson: TaggedPersonProps;
   taggedPeople: TaggedPersonProps[];
 }) {
-  const [removeListItem, setRemoveListItem] = useState(false);
-
   return (
-    <li>
+    <li class=" max-w-[200px] shrink-0 snap-start first:pl-md last:pr-xs">
       <button
         onClick={() => {
-          setRemoveListItem(true);
           setTimeout(() => {
             handleRemoveFromTags(taggedPerson, taggedPeople);
           }, 500);
         }}
         class={cx(
-          "px-sm py-xs md:h-md text-sm bg-white border-2 rounded-full border-primary-grey hover:bg-primary-grey text-primary-lightBlack/70 ease group/list-item transition-all duration-500 ease-secondary flex items-center justify-center relative overflow-hidden"
+          "px-sm py-xs w-full md:h-md text-sm bg-white border-2 rounded-full border-primary-grey hover:bg-primary-grey text-primary-lightBlack/70 ease group/list-item transition-all duration-500 ease-secondary flex items-center justify-center relative overflow-hidden"
         )}
       >
         <span class="block truncate md:group-hover/list-item:-translate-x-5  md:group-hover/list-item:opacity-0 transition-all duration-500 ease-secondary">

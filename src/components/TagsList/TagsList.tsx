@@ -36,12 +36,8 @@ export default function TagsList() {
 
   return (
     <>
-      <div class="flex justify-between h-fit my-sm z-10">
-        <ul
-          class={cx(
-            "flex items-center gap-1 md:gap-xs justify-center rounded-full"
-          )}
-        >
+      <div class="flex justify-between h-fit my-sm z-10 gap-md">
+        <ul class={cx("flex items-center md:gap-xs overflow-auto -mx-6")}>
           {$taggedPeople.map((taggedPerson: TaggedPersonProps) => {
             return (
               <ListItem
