@@ -1,22 +1,14 @@
 import { taggedPeople, type Person } from "@stores/newSystem";
-import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
 import InfoCard from "./InfoCard";
 import { useEffect } from "react";
 import { useStore } from "@nanostores/react";
 
 interface Props {
-  searchedPeople?: Person.PersonProps[];
+  people?: Person.PersonProps[];
 }
 
-export default function DisplayPeople({ searchedPeople }: Props) {
-  useEffect(() => {
-    if (searchedPeople) {
-      currentDisplayedResults.set(searchedPeople);
-    }
-  }, []);
-
-  const $currentDisplayedResults = useStore(currentDisplayedResults);
+export default function DisplayPeople({ people }: Props) {
   const $taggedPeople = useStore(taggedPeople);
 
   // filter out job 'thanks' from job
@@ -24,7 +16,7 @@ export default function DisplayPeople({ searchedPeople }: Props) {
 
   return (
     <>
-      {$currentDisplayedResults?.map((person: Person.PersonProps) => (
+      {people?.map((person: Person.PersonProps) => (
         <InfoCard
           imagePath={person.profile_path}
           title={person.name}

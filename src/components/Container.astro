@@ -1,11 +1,10 @@
 ---
-const { popularPeople } = Astro.props;
+
 ---
 
 <container-element>
   <div
     id="container"
-    data-popular-people={JSON.stringify(popularPeople)}
     class="mx-auto w-full max-w-screen-2xl flexCol px-md md:px-2xl"
   >
     <slot />
@@ -13,7 +12,6 @@ const { popularPeople } = Astro.props;
 </container-element>
 
 <script>
-  import { currentDisplayedResults } from "@stores/taggingSystemStore";
   import { taggedPeople } from "@stores/newSystem";
 
   class ContainerElement extends HTMLElement {
@@ -23,20 +21,13 @@ const { popularPeople } = Astro.props;
       const containerElement: HTMLDivElement =
         this.querySelector("#container")!;
 
-      setPopularPeopleToStore(containerElement);
+      setPopularPeopleToStore();
     }
   }
 
   customElements.define("container-element", ContainerElement);
 
-  function setPopularPeopleToStore(containerElement: HTMLDivElement) {
-    const popularPeopleJson = containerElement.dataset.popularPeople;
-    if (!popularPeopleJson) return;
-
-    const popularPeople = JSON.parse(popularPeopleJson);
-    currentDisplayedResults.set(popularPeople);
-    localStorage.setItem("popular-people", popularPeopleJson);
-
+  function setPopularPeopleToStore() {
     const taggedPeopleJson = localStorage.getItem("tagged-people");
     if (!taggedPeopleJson) return;
 
