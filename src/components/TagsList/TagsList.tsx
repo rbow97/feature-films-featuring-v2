@@ -6,13 +6,15 @@ import {
 } from "@stores/store";
 import { addSearchParams } from "@utils/addSearchParams";
 import cx from "classnames";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect, useRef } from "react";
 import ListItem from "./ListItem";
 import TagsSearchButton from "./TagsSearchButton";
 
 export default function TagsList() {
   const [tags, setTags] = useState([]);
   const [buttonIsVisible, setButtonIsVisible] = useState(false);
+  const [positions, setPositions] = useState<number[]>([]);
+  const itemRefs = useRef<HTMLLIElement[]>([]); // Array of refs for each item
 
   const $resultsUrlWithParams = useStore(resultsUrlWithParams);
   const $taggedPeople = useStore(taggedPeople);
@@ -30,6 +32,39 @@ export default function TagsList() {
     }
   }, [$taggedPeople]);
 
+  // Handle position updates using ResizeObserver
+  useLayoutEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      const newPositions: number[] = [];
+      let currentPosition = 0;
+
+      entries.forEach((entry, index) => {
+        if (entry.target instanceof HTMLLIElement) {
+          newPositions[index] = currentPosition;
+          currentPosition += entry.contentRect.width;
+        }
+      });
+
+      setPositions(newPositions);
+    });
+
+    itemRefs.current.forEach((item) => {
+      if (item) {
+        observer.observe(item);
+      }
+    });
+
+    return () => {
+      itemRefs.current.forEach((item) => {
+        if (item) {
+          observer.unobserve(item);
+        }
+      });
+    };
+  }, [tags]);
+
+  console.log(positions);
+
   useEffect(() => {
     setButtonIsVisible(tags.length > 1);
     addSearchParams("/results", tags);
@@ -43,8 +78,21 @@ export default function TagsList() {
             "flex items-center gap-1 md:gap-xs overflow-auto -mx-6"
           )}
         >
-          {tags.map((taggedPerson: TaggedPersonProps) => {
-            return <ListItem taggedPeople={tags} taggedPerson={taggedPerson} />;
+          {tags.map((taggedPerson: TaggedPersonProps, index: number) => {
+            return (
+              <ListItem
+                key={`list-item-${taggedPerson.name}`}
+                taggedPeople={tags}
+                taggedPerson={taggedPerson}
+                position={positions[index] || 0}
+                // ref={(el) => (itemRefs.current[index] = el)} // Set ref for each item
+                ref={(el) => {
+                  if (el) {
+                    itemRefs.current[index] = el as HTMLLIElement; // Type assertion
+                  }
+                }}
+              />
+            );
           })}
         </ul>
         <TagsSearchButton

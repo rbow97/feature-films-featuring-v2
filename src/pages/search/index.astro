@@ -1,5 +1,5 @@
 ---
-import DisplayPeople from "@components/Display/DisplayResults";
+import DisplayResults from "@components/Display/DisplayResults";
 import Layout from "@layouts/Layout.astro";
 import { getSearchedPeople } from "src/api";
 
@@ -17,5 +17,5 @@ const searchedPeopleArr = await getSearchedPeople(formattedQuery);
 ---
 
 <Layout title="Feature Films Featuring">
-  <DisplayPeople client:load people={searchedPeopleArr} />
+  <DisplayResults client:load people={searchedPeopleArr} />
 </Layout>

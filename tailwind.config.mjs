@@ -4,13 +4,25 @@ export default {
   theme: {
     extend: {
       keyframes: {
-        riseUp: {
-          "0%": { transform: "translateY(calc(100% + 50px))", opacity: 0 },
-          "100%": { transform: "translateY(0%)", opacity: 100 },
+        slideIn: {
+          "0%": {
+            transform: "translateY(100%)",
+            opacity: 0,
+          },
+          "100%": {
+            transform:" translateY(0)",
+            opacity: 1,
+          }
         },
-        dropOut: {
-          "0%": { transform: "translateY(0%)" },
-          "100%": { transform: "translateY(calc(100% + 50px))" },
+        slideOut: {
+          "0%": {
+            transform: "translateY(0%)",
+            opacity: 1,
+          },
+          "100%": {
+            transform:" translateY(100%)",
+            opacity: 0,
+          }
         },
         rotate: {
           "0%": { transform: "rotate(0deg)" },
@@ -18,8 +30,8 @@ export default {
         },
       },
       animation: {
-        riseUp: "riseUp 500ms cubic-bezier(.76,0,.24,1) forwards",
-        dropOut: "dropOut 500ms cubic-bezier(.76,0,.24,1)",
+        slideIn: "slideIn 500ms cubic-bezier(.76,0,.24,1) forwards",
+        slideOut: "slideOut 500ms cubic-bezier(.76,0,.24,1) forwards",
         rotate: "rotate 3s infinite",
       },
       height: {

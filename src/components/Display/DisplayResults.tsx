@@ -7,7 +7,7 @@ interface Props {
   people?: Person.PersonProps[];
 }
 
-export default function DisplayPeople({ people }: Props) {
+export default function DisplayResults({ people }: Props) {
   const $taggedPeople = useStore(taggedPeople);
 
   // filter out job 'thanks' from job

@@ -1,22 +1,44 @@
 import { type TaggedPersonProps } from "@stores/store";
 import { handleRemoveFromTags } from "@utils/taggingSystem/handleRemoveFromTags";
 import cx from "classnames";
+import { useState, forwardRef } from "react";
 
-export default function ListItem({
-  taggedPerson,
-  taggedPeople,
-}: {
-  taggedPerson: TaggedPersonProps;
-  taggedPeople: TaggedPersonProps[];
-}) {
+const ListItem = forwardRef(function ListItem(
+  {
+    taggedPerson,
+    taggedPeople,
+    position,
+  }: {
+    taggedPerson: TaggedPersonProps;
+    taggedPeople: TaggedPersonProps[];
+    position: number;
+  },
+  ref: React.Ref<HTMLLIElement>
+) {
+  const [isRemoving, setIsRemoving] = useState(false);
+
+  const handleRemoveClick = () => {
+    setIsRemoving(true);
+    setTimeout(() => {
+      handleRemoveFromTags(taggedPerson, taggedPeople);
+      setIsRemoving(false);
+    }, 500);
+  };
+
   return (
-    <li className=" max-w-[200px] shrink-0 snap-start first:pl-md">
+    <li
+      ref={ref}
+      style={{
+        transform: `translateX(${position}px)`,
+        transition: "transform 0.5s ease-in-out",
+      }}
+      className={cx(
+        "max-w-[200px] shrink-0 snap-start first:pl-md",
+        isRemoving ? "animate-slideOut" : "animate-slideIn"
+      )}
+    >
       <button
-        onClick={() => {
-          setTimeout(() => {
-            handleRemoveFromTags(taggedPerson, taggedPeople);
-          }, 500);
-        }}
+        onClick={handleRemoveClick}
         className={cx(
           "px-sm py-xs w-full md:h-md text-sm bg-white border-2 rounded-full border-primary-grey hover:bg-primary-grey text-primary-lightBlack/70 ease group/list-item transition-all duration-500 ease-secondary flex items-center justify-center relative overflow-hidden"
         )}
@@ -30,4 +52,6 @@ export default function ListItem({
       </button>
     </li>
   );
-}
+});
+
+export default ListItem;
