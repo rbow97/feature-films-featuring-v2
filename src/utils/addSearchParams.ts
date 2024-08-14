@@ -1,7 +1,7 @@
 import {
   resultsUrlWithParams,
   type TaggedPersonProps,
-} from "@stores/newSystem";
+} from "@stores/store";
 
 export function addSearchParams(
   route: string,

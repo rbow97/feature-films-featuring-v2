@@ -1,5 +1,5 @@
 ---
-import Pill from "./SideBar/Pill.astro";
+import Pill from "./Pill.astro";
 ---
 
 <header-wrapper>
@@ -29,7 +29,7 @@ import Pill from "./SideBar/Pill.astro";
 </header-wrapper>
 
 <script>
-  import { taggedPeople } from "@stores/newSystem";
+  import { taggedPeople } from "@stores/store";
 
   class HeaderWrapper extends HTMLElement {
     constructor() {

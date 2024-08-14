@@ -2,7 +2,7 @@ import {
   taggedPeople,
   type Person,
   type TaggedPersonProps,
-} from "../../stores/newSystem";
+} from "../../stores/store";
 import { handleRemoveFromTags } from "./handleRemoveFromTags";
 
 function returnDoesHaveClickedPerson(

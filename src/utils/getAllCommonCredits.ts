@@ -1,4 +1,4 @@
-import { type Person } from "../stores/newSystem";
+import { type Person } from "../stores/store";
 
 // Function to filter out projects with specified genre_ids
 export function filterProjects(

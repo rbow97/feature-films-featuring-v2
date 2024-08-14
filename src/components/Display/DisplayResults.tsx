@@ -1,8 +1,7 @@
-import { taggedPeople, type Person } from "@stores/newSystem";
+import { useStore } from "@nanostores/react";
+import { taggedPeople, type Person } from "@stores/store";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
 import InfoCard from "./InfoCard";
-import { useEffect } from "react";
-import { useStore } from "@nanostores/react";
 
 interface Props {
   people?: Person.PersonProps[];

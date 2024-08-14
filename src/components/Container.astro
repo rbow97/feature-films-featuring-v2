@@ -2,36 +2,9 @@
 
 ---
 
-<container-element>
-  <div
-    id="container"
-    class="mx-auto w-full max-w-screen-2xl flexCol px-md md:px-2xl"
-  >
-    <slot />
-  </div>
-</container-element>
-
-<script>
-  import { taggedPeople } from "@stores/newSystem";
-
-  class ContainerElement extends HTMLElement {
-    constructor() {
-      super();
-
-      const containerElement: HTMLDivElement =
-        this.querySelector("#container")!;
-
-      setPopularPeopleToStore();
-    }
-  }
-
-  customElements.define("container-element", ContainerElement);
-
-  function setPopularPeopleToStore() {
-    const taggedPeopleJson = localStorage.getItem("tagged-people");
-    if (!taggedPeopleJson) return;
-
-    const taggedPeopleLocalStorage = JSON.parse(taggedPeopleJson);
-    taggedPeople.set(taggedPeopleLocalStorage);
-  }
-</script>
+<div
+  id="container"
+  class="mx-auto w-full max-w-screen-2xl flexCol px-md md:px-2xl"
+>
+  <slot />
+</div>

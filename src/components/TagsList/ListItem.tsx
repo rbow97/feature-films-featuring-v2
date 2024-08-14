@@ -1,4 +1,4 @@
-import { type TaggedPersonProps } from "@stores/newSystem";
+import { type TaggedPersonProps } from "@stores/store";
 import { handleRemoveFromTags } from "@utils/taggingSystem/handleRemoveFromTags";
 import cx from "classnames";
 

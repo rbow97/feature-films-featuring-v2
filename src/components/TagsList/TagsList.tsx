@@ -3,7 +3,7 @@ import {
   resultsUrlWithParams,
   taggedPeople,
   type TaggedPersonProps,
-} from "@stores/newSystem";
+} from "@stores/store";
 import { addSearchParams } from "@utils/addSearchParams";
 import cx from "classnames";
 import { useEffect, useState } from "react";

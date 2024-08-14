@@ -1,4 +1,4 @@
-import type { Person } from "@stores/newSystem";
+import type { Person } from "@stores/store";
 import axios from "axios";
 
 // Get popular people
