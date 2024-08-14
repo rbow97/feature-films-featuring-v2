@@ -10,7 +10,7 @@ export default function ListItem({
   taggedPeople: TaggedPersonProps[];
 }) {
   return (
-    <li className=" max-w-[200px] shrink-0 snap-start first:pl-md last:pr-xs">
+    <li className=" max-w-[200px] shrink-0 snap-start first:pl-md">
       <button
         onClick={() => {
           setTimeout(() => {

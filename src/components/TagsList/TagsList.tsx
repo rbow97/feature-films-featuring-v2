@@ -20,7 +20,6 @@ export default function TagsList() {
   useEffect(() => {
     const storedTags = localStorage.getItem("tagged-people");
 
-    // Check if storedTags is not null before parsing
     if (storedTags) {
       try {
         const parsedTags = JSON.parse(storedTags);
@@ -38,8 +37,12 @@ export default function TagsList() {
 
   return (
     <>
-      <div className="flex justify-between h-fit my-sm z-10 gap-md">
-        <ul className={cx("flex items-center md:gap-xs overflow-auto -mx-6")}>
+      <div className="flex justify-between h-md items-center my-xs z-10 gap-md">
+        <ul
+          className={cx(
+            "flex items-center gap-1 md:gap-xs overflow-auto -mx-6"
+          )}
+        >
           {tags.map((taggedPerson: TaggedPersonProps) => {
             return <ListItem taggedPeople={tags} taggedPerson={taggedPerson} />;
           })}
