@@ -3,7 +3,7 @@ import cx from "classnames";
 export default function Arrow({ className }: { className?: string }) {
   return (
     <span
-      class={cx(
+      className={cx(
         "h-3 w-3 border-t-2 border-primary-black border-r-2 relative rotate-45 ",
 
         // pseudo-element

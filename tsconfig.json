@@ -1,8 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact",
+    "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
@@ -10,5 +9,6 @@
       "@stores/*": ["src/stores/*"],
       "@utils/*": ["src/utils/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "dist", ".vercel"]
 }

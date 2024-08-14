@@ -12,9 +12,9 @@ export default function TagsSearchButton({
   return (
     <a
       href={resultsUrlWithParams}
-      class={cx("h-fit ", visible ? "block" : "hidden")}
+      className={cx("h-fit ", visible ? "block" : "hidden")}
     >
-      <div class="flex items-center rounded-full bg-primary-lightGrey border border-primary-grey px-sm py-xs md:h-md  w-fit text-sm">
+      <div className="flex items-center rounded-full bg-primary-lightGrey border border-primary-grey px-sm py-xs md:h-md  w-fit text-sm">
         <span>Search</span>
       </div>
     </a>

@@ -1,9 +1,9 @@
-import { useStore } from "@nanostores/preact";
 import { taggedPeople, type Person } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
 import InfoCard from "./InfoCard";
-import { useEffect } from "preact/hooks";
+import { useEffect } from "react";
+import { useStore } from "@nanostores/react";
 
 interface Props {
   searchedPeople?: Person.PersonProps[];

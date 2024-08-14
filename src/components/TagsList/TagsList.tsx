@@ -1,4 +1,4 @@
-import { useStore } from "@nanostores/preact";
+import { useStore } from "@nanostores/react";
 import {
   resultsUrlWithParams,
   taggedPeople,
@@ -6,7 +6,7 @@ import {
 } from "@stores/newSystem";
 import { addSearchParams } from "@utils/addSearchParams";
 import cx from "classnames";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import TagsSearchButton from "./TagsSearchButton";
 
@@ -36,8 +36,8 @@ export default function TagsList() {
 
   return (
     <>
-      <div class="flex justify-between h-fit my-sm z-10 gap-md">
-        <ul class={cx("flex items-center md:gap-xs overflow-auto -mx-6")}>
+      <div className="flex justify-between h-fit my-sm z-10 gap-md">
+        <ul className={cx("flex items-center md:gap-xs overflow-auto -mx-6")}>
           {$taggedPeople.map((taggedPerson: TaggedPersonProps) => {
             return (
               <ListItem

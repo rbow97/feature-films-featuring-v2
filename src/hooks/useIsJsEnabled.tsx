@@ -1,4 +1,4 @@
-import { useState, useEffect } from "preact/hooks";
+import { useState, useEffect } from "react";
 
 /**
  * Define a boolean which will only be `true` when JavaScript is enabled on the
