@@ -24,6 +24,14 @@ async function handleAddToTags(
     ...$taggedPeople,
     { name: clickedPerson.name, id: clickedPerson.id },
   ]);
+
+  localStorage.setItem(
+    "tagged-people",
+    JSON.stringify([
+      ...$taggedPeople,
+      { name: clickedPerson.name, id: clickedPerson.id },
+    ])
+  );
 }
 
 export function handleTagButtonClick(

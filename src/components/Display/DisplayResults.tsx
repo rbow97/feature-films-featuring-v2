@@ -1,24 +1,16 @@
 import { useStore } from "@nanostores/preact";
-import { taggedPeople, type Person, allTabResults } from "@stores/newSystem";
+import { taggedPeople, type Person } from "@stores/newSystem";
 import { currentDisplayedResults } from "@stores/taggingSystemStore";
 import { handleTagButtonClick } from "@utils/taggingSystem/handleTagButtonClick";
-import { useEffect } from "preact/hooks";
 import InfoCard from "./InfoCard";
 
 interface Props {
   popularPeople: Person.PersonProps[];
 }
 
-export default function DisplayPeople({ popularPeople }: Props) {
-  useEffect(() => {
-    currentDisplayedResults.set(popularPeople);
-  }, []);
-
+export default function DisplayPeople() {
   const $currentDisplayedResults = useStore(currentDisplayedResults);
   const $taggedPeople = useStore(taggedPeople);
-  const $allTabResults = useStore(allTabResults);
-
-  // console.log($allTabResults, $currentDisplayedResults);
 
   // filter out job 'thanks' from job
   // filter out oscars

@@ -8,9 +8,18 @@ export function handleRemoveFromTags(
   clickedPerson: Person.PersonProps | TaggedPersonProps,
   $taggedPeople: TaggedPersonProps[]
 ) {
-  return taggedPeople.set(
+  taggedPeople.set(
     $taggedPeople.filter((person: TaggedPersonProps) => {
       return person.id !== clickedPerson.id;
     })
+  );
+
+  localStorage.setItem(
+    "tagged-people",
+    JSON.stringify(
+      $taggedPeople.filter((person: TaggedPersonProps) => {
+        return person.id !== clickedPerson.id;
+      })
+    )
   );
 }

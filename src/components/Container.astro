@@ -13,8 +13,8 @@ const { popularPeople } = Astro.props;
 </container-element>
 
 <script>
-  import { allTabResults } from "@stores/newSystem";
   import { currentDisplayedResults } from "@stores/taggingSystemStore";
+  import { taggedPeople } from "@stores/newSystem";
 
   class ContainerElement extends HTMLElement {
     constructor() {
@@ -29,15 +29,18 @@ const { popularPeople } = Astro.props;
 
   customElements.define("container-element", ContainerElement);
 
-  function parseJson(json: any) {
-    if (!json) return;
-    return JSON.parse(json);
-  }
-
   function setPopularPeopleToStore(containerElement: HTMLDivElement) {
-    const json = containerElement.dataset.popularPeople;
-    if (!json) return;
-    const popularPeople = JSON.parse(json);
-    allTabResults.set({ popularPeople });
+    const popularPeopleJson = containerElement.dataset.popularPeople;
+    if (!popularPeopleJson) return;
+
+    const popularPeople = JSON.parse(popularPeopleJson);
+    currentDisplayedResults.set(popularPeople);
+    localStorage.setItem("popular-people", popularPeopleJson);
+
+    const taggedPeopleJson = localStorage.getItem("tagged-people");
+    if (!taggedPeopleJson) return;
+
+    const taggedPeopleLocalStorage = JSON.parse(taggedPeopleJson);
+    taggedPeople.set(taggedPeopleLocalStorage);
   }
 </script>

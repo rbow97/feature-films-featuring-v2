@@ -1,3 +1,4 @@
+import { persistentAtom } from "@nanostores/persistent";
 import { atom } from "nanostores";
 
 export namespace Person {
@@ -54,3 +55,12 @@ export const searchUrlWithParams = atom<string>("");
 export const allTabResults = atom<{ popularPeople: Person.PersonProps[] }>({
   popularPeople: [],
 });
+
+export const allTaggedPeople = persistentAtom<TaggedPersonProps[]>(
+  "all-tagged-people",
+  [],
+  {
+    encode: JSON.stringify,
+    decode: JSON.parse,
+  }
+);

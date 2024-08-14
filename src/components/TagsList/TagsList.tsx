@@ -6,18 +6,33 @@ import {
 } from "@stores/newSystem";
 import { addSearchParams } from "@utils/addSearchParams";
 import cx from "classnames";
-import { useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import ListItem from "./ListItem";
 import TagsSearchButton from "./TagsSearchButton";
 
-export default function FloatingTagsList() {
+export default function TagsList() {
+  const taggedPeopleLocalStorage =
+    typeof window !== "undefined" &&
+    JSON.parse(localStorage.getItem("tagged-people")!);
+
   const $taggedPeople = useStore(taggedPeople);
+  const [buttonIsVisible, setButtonIsVisible] = useState(
+    taggedPeopleLocalStorage > 1
+  );
+
   const $resultsUrlWithParams = useStore(resultsUrlWithParams);
-  const buttonIsVisible = $taggedPeople.length > 1;
+
+  useEffect(() => {
+    setButtonIsVisible($taggedPeople.length > 1);
+  }, [$taggedPeople]);
+
+  useEffect(() => {
+    taggedPeople.set(taggedPeopleLocalStorage);
+  }, []);
 
   useEffect(() => {
     addSearchParams("/results", $taggedPeople);
-  }, [$taggedPeople]);
+  }, [taggedPeople]);
 
   return (
     <>
