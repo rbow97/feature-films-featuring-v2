@@ -22,7 +22,7 @@ const ListItem = forwardRef(function ListItem(
     setTimeout(() => {
       handleRemoveFromTags(taggedPerson, taggedPeople);
       setIsRemoving(false);
-    }, 500);
+    }, 1000);
   };
 
   return (

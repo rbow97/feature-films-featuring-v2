@@ -63,8 +63,6 @@ export default function TagsList() {
     };
   }, [tags]);
 
-  console.log(positions);
-
   useEffect(() => {
     setButtonIsVisible(tags.length > 1);
     addSearchParams("/results", tags);
@@ -85,10 +83,9 @@ export default function TagsList() {
                 taggedPeople={tags}
                 taggedPerson={taggedPerson}
                 position={positions[index] || 0}
-                // ref={(el) => (itemRefs.current[index] = el)} // Set ref for each item
                 ref={(el) => {
                   if (el) {
-                    itemRefs.current[index] = el as HTMLLIElement; // Type assertion
+                    itemRefs.current[index] = el as HTMLLIElement;
                   }
                 }}
               />
@@ -103,5 +100,3 @@ export default function TagsList() {
     </>
   );
 }
-
-// bg-primary-darkWhite/50  backdrop-blur-lg shadow-[0_0_1px_.4px_rgba(12,41,126,.03),0_1px_3px_rgba(12,41,126,.09)]

@@ -1,0 +1,64 @@
+---
+
+---
+
+<tags-modal-wrapper>
+  <button
+    id="open-modal-button"
+    class="border border-primary-grey rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center h-fit hover:border-primary-black transition-border ease duration-200"
+  >
+    <p>Tags</p>
+    <span
+      class="bg-primary-grey flex h-6 w-6 items-center justify-center rounded-full text-sm bg-black/5 text-primary-black/50 transition-colors duration-150 ease-in-out"
+      >0</span
+    >
+  </button>
+  <div
+    id="modal"
+    class="fixed inset-0 z-modal items-center justify-center bg-core-black bg-opacity-20 p-4 hidden overlay z-10"
+    role="dialog"
+  >
+    <p>hi</p>
+  </div>
+</tags-modal-wrapper>
+
+<style>
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 3;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .is-open {
+    display: flex;
+  }
+</style>
+
+<script>
+  class TagsModalWrapper extends HTMLElement {
+    constructor() {
+      super();
+      const openModalButton = this.querySelector("#open-modal-button");
+      const modal = this.querySelector("#modal");
+
+      function openModal() {
+        modal?.classList.remove("is-hidden");
+        modal?.classList.add("is-open");
+      }
+
+      openModalButton?.addEventListener("click", openModal);
+    }
+  }
+  customElements.define("tags-modal-wrapper", TagsModalWrapper);
+</script>

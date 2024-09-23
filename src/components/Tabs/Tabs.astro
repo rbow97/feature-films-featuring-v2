@@ -2,42 +2,41 @@
 
 ---
 
-<nav-wrapper>
+<nav-wrapper class="grow">
   <nav
-    class="tabs-container rounded-2xl bg-primary-lightGrey border border-primary-grey h-md md:h-lg w-full p-[4px] gap-xs flex justify-between relative text-sm md:text-md"
+    class="tabs-container rounded-2xl w-full p-[4px] gap-xs flex justify-between relative text-xs md:text-sm h-fit"
   >
-    <div class="animated-bg"></div>
     <a
       href="/"
-      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md relative transition-bg ease duration-200"
+      class="tab-btn border border-primary-grey rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center h-fit relative hover:bg-primary-grey transition-bg ease duration-200"
       data-tab="popular-people"
     >
       <p>Popular People</p>
     </a>
     <a
       href="/popular-movies"
-      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+      class="tab-btn border border-primary-grey rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center h-fit hover:bg-primary-grey relative transition-bg ease duration-200"
       data-tab="popular-movies"
     >
       <p>Popular Movies</p>
     </a>
     <a
       href="/popular-tv"
-      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+      class="tab-btn border border-primary-grey rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center hover:bg-primary-grey h-fit relative transition-bg ease duration-200"
       data-tab="popular-tv"
     >
       <p>Popular TV</p>
     </a>
     <a
       href="/now-playing"
-      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+      class="tab-btn border border-primary-grey rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center hover:bg-primary-grey h-fit relative transition-bg ease duration-200"
       data-tab="now-playing"
     >
       <p>Now Playing</p>
     </a>
     <a
       href="/top-rated"
-      class="tab-btn grow p-sm h-full rounded-xl flex items-center justify-center px-md"
+      class="tab-btn border border-primary-grey rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center hover:bg-primary-grey h-fit relative transition-bg ease duration-200"
       data-tab="top-rated"
     >
       <p>Top Rated</p>
@@ -57,8 +56,8 @@
     left: 0;
     width: 0;
     height: calc(100% - 8px);
-    background-color: #ffffff; /* You can replace this with the color you prefer */
-    border-radius: 12px;
+    background-color: #000000;
+    border-radius: 40px;
     transition:
       width 0.3s ease,
       left 0.3s ease;
@@ -71,8 +70,10 @@
     cursor: pointer;
   }
 
-  .tab-btn.active .animated-bg {
-    background-color: #007bff; /* Active background color */
+  .active {
+    /* background-color: #007bff; Active background color */
+    background-color: transparent;
+    border-color: #011502;
   }
 
   .tab-btn p {
@@ -90,56 +91,21 @@
 
       const tabs: NodeListOf<HTMLAnchorElement> =
         document.querySelectorAll(".tab-btn")!;
-      const animatedBg: HTMLDivElement =
-        document.querySelector(".animated-bg")!;
 
       // Load the active tab from localStorage
       const activeTabData = localStorage.getItem("activeTab") ?? false;
 
-      setTabBackgroundBasedOnLocalStorage(activeTabData, tabs, animatedBg);
-      setActiveTabAndNavigate(tabs, animatedBg);
+      setTabBorderBasedOnLocalStorage(activeTabData, tabs);
+      setActiveTabAndNavigate(tabs);
     }
   }
 
   customElements.define("nav-wrapper", NavWrapper);
 
-  function moveBackground(
-    tab: Element,
-    animatedBg: HTMLDivElement,
-    animate = true
-  ) {
-    const containerRect = tab.parentElement!.getBoundingClientRect();
-    const tabRect = tab.getBoundingClientRect();
-
-    const leftPosition = tabRect.left - containerRect.left;
-    const tabWidth = tabRect.width;
-
-    // Conditionally apply transition if animate is true
-    if (!animate) {
-      animatedBg.style.transition = "none";
-    } else {
-      animatedBg.style.transition = "width 0.3s ease, left 0.3s ease";
-    }
-
-    // Move and resize the animated background
-    animatedBg.style.width = `${tabWidth}px`;
-    animatedBg.style.left = `${leftPosition}px`;
-
-    // Force a reflow to apply the immediate styles if animation is disabled
-    if (!animate) {
-      animatedBg.offsetHeight; // Trigger reflow
-      animatedBg.style.transition = ""; // Re-enable transitions
-    }
-  }
-
-  function setTabBackgroundBasedOnLocalStorage(
+  function setTabBorderBasedOnLocalStorage(
     activeTabData: string | false,
-    tabs: NodeListOf<HTMLAnchorElement>,
-    animatedBg: HTMLDivElement
+    tabs: NodeListOf<HTMLAnchorElement>
   ) {
-    /** STEP 1 */
-
-    // Check localStorage and apply background
     if (activeTabData) {
       const activeTab = document.querySelector(
         `.tab-btn[data-tab="${activeTabData}"]`
@@ -147,24 +113,8 @@
 
       if (activeTab) {
         activeTab.classList.add("active");
-        moveBackground(activeTab, animatedBg, false);
-        localStorage.removeItem("activeTab");
       }
-    }
-
-    /** STEP 2 */
-
-    // If active tab isn't in local storage, check the URL for results page
-    // else if (window.location.pathname.includes("/results")) {
-    //   console.log("here");
-    //   let matchedTab = document.querySelector('.tab-btn[data-tab="results"]')!;
-    //   moveBackground(matchedTab, animatedBg, false);
-    // }
-
-    /** STEP 3 */
-
-    // If we are not on the results page, check the URL and apply background
-    else {
+    } else {
       const currentPath = window.location.pathname;
       let matchedTab = null;
 
@@ -177,17 +127,10 @@
           tab.classList.remove("active");
         }
       });
-
-      if (matchedTab) {
-        moveBackground(matchedTab, animatedBg, false);
-      }
     }
   }
 
-  function setActiveTabAndNavigate(
-    tabs: NodeListOf<HTMLAnchorElement>,
-    animatedBg: HTMLDivElement
-  ) {
+  function setActiveTabAndNavigate(tabs: NodeListOf<HTMLAnchorElement>) {
     tabs.forEach((tab) => {
       tab.addEventListener("click", (e) => {
         e.preventDefault(); // Prevent the default anchor behavior
@@ -202,16 +145,13 @@
         const tabData = tab.getAttribute("data-tab")!;
         localStorage.setItem("activeTab", tabData);
 
-        // Move the background to the clicked tab with animation
-        moveBackground(tab, animatedBg);
-
         // Delay the rerouting by 300ms
         setTimeout(() => {
           const href = tab.getAttribute("href");
           if (href) {
             navigate(href);
           }
-        }, 300);
+        }, 100);
       });
     });
   }
