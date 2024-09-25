@@ -13,7 +13,6 @@ import TagsSearchButton from "./TagsSearchButton";
 export default function TagsList() {
   const [tags, setTags] = useState([]);
   const [buttonIsVisible, setButtonIsVisible] = useState(false);
-  const [positions, setPositions] = useState<number[]>([]);
   const itemRefs = useRef<HTMLLIElement[]>([]); // Array of refs for each item
 
   const $resultsUrlWithParams = useStore(resultsUrlWithParams);
@@ -44,8 +43,6 @@ export default function TagsList() {
           currentPosition += entry.contentRect.width;
         }
       });
-
-      setPositions(newPositions);
     });
 
     itemRefs.current.forEach((item) => {
