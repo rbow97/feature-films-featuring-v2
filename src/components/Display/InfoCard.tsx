@@ -4,49 +4,61 @@ interface Props {
   handleTagButtonClick?: () => void;
 }
 
+const imdbImageUrl = "https://image.tmdb.org/t/p/w500";
+
 export default function InfoCard(props: Props) {
   const { imagePath, title, handleTagButtonClick } = props;
 
   return (
-    <div className="col-span-1 w-full relative mx-auto">
-      <article className=" max-h-[400px] h-full flex flex-col">
-        <img
-          loading="lazy"
-          width="150"
-          height="150"
-          decoding="async"
-          className="w-full object-cover overflow-hidden grow rounded-lg border-2 border-primary-lightGrey"
-          src={
-            imagePath
-              ? `https://image.tmdb.org/t/p/w500${imagePath}`
-              : "/film-camera.svg"
-          }
-        />
-        <div className="flex justify-between mt-xs gap-xs w-full">
-          <p className="text-md text-primary-darkGrey grow truncate max-w-[300px] md:max-w-[unset]">
-            {title}
-          </p>
-          <div className="flex gap-4 items-start">
-            {handleTagButtonClick && (
+    <div className="w-full mx-auto">
+      <article className="flex flex-col h-full overflow-hidden">
+        <div className="relative group h-full">
+          <img
+            loading="lazy"
+            width="150"
+            height="150"
+            decoding="async"
+            className="w-full h-full object-cover rounded-lg grow"
+            src={imagePath ? `${imdbImageUrl}${imagePath}` : "/film-camera.svg"}
+            alt={title}
+          />
+          {handleTagButtonClick && (
+            <>
+              <div className="absolute rounded-lg inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 hidden md:block"></div>
               <button
                 onClick={handleTagButtonClick}
-                className="group relative"
-                aria-describedby="tag-person"
+                className="absolute bottom-2 right-2 md:opacity-0 group-hover:opacity-100 transition-all duration-300"
+                aria-label="Tag"
               >
-                <div className="h-4 w-4 relative after:absolute after:top-0 after:bottom-0 after:left-1/2 after:w-0.5 after:bg-primary-black after:opacity-50 before:opacity-50 after:rounded-md before:absolute before:left-0 before:right-0 before:top-1/2 before:h-0.5 before:-translate-y-1/2 after:-translate-x-1/2 before:bg-primary-black before:rounded-md group-hover:after:opacity-100 group-hover:before:opacity-100 after:transition-opacity before:transition-opacity after:duration-200 before:duration-200" />
-                <div
-                  role="tooltip"
-                  id="tag-person"
-                  className="absolute -top-[30px] left-1/2 -translate-x-1/2 text-xs whitespace-nowrap bg-primary-black rounded-md py-1 px-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease"
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <p>Tag this person</p>
-                </div>
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="10"
+                    fill="black"
+                    fillOpacity="0.5"
+                    className="group-hover:fill-opacity-40 transition-all duration-300"
+                  />
+                  <path
+                    d="M10 6V14M6 10H14"
+                    stroke="white"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </button>
-            )}
-            <button className="group">
-              <div className="h-3 w-3 border-t-2 border-primary-black opacity-50 border-r-2 relative after:absolute after:w-0.5 after:h-5 after:-right-0.5 after:-top-[1px] after:rotate-45 after:bg-primary-black after:origin-top group-hover:opacity-100 transition-all duration-200 " />
-            </button>
-          </div>
+            </>
+          )}
+        </div>
+        <div className="pt-2">
+          <p className="text-sm text-primary-darkGrey truncate">{title}</p>
         </div>
       </article>
     </div>
