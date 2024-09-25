@@ -82,7 +82,6 @@ export default function TagsList() {
                 key={`list-item-${taggedPerson.name}`}
                 taggedPeople={tags}
                 taggedPerson={taggedPerson}
-                position={positions[index] || 0}
                 ref={(el) => {
                   if (el) {
                     itemRefs.current[index] = el as HTMLLIElement;

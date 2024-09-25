@@ -1,9 +1,9 @@
 import {
   taggedPeople,
+  updateTaggedPeople,
   type Person,
   type TaggedPersonProps,
 } from "../../stores/store";
-import { handleRemoveFromTags } from "./handleRemoveFromTags";
 
 function returnDoesHaveClickedPerson(
   clickedPerson: Person.PersonProps,
@@ -16,34 +16,25 @@ function returnDoesHaveClickedPerson(
   );
 }
 
-async function handleAddToTags(
-  clickedPerson: Person.PersonProps,
-  $taggedPeople: TaggedPersonProps[]
-) {
-  taggedPeople.set([
-    ...$taggedPeople,
-    { name: clickedPerson.name, id: clickedPerson.id },
-  ]);
-
-  localStorage.setItem(
-    "tagged-people",
-    JSON.stringify([
-      ...$taggedPeople,
-      { name: clickedPerson.name, id: clickedPerson.id },
-    ])
-  );
-}
-
 export function handleTagButtonClick(
-  clickedPerson: Person.PersonProps,
-  $taggedPeople: TaggedPersonProps[]
+  clickedPerson: Person.PersonProps
 ) {
+  const currentTaggedPeople = taggedPeople.get();
   const doesHaveClickedPerson = returnDoesHaveClickedPerson(
     clickedPerson,
-    $taggedPeople
+    currentTaggedPeople
   );
 
-  doesHaveClickedPerson
-    ? handleRemoveFromTags(clickedPerson, $taggedPeople!)
-    : handleAddToTags(clickedPerson, $taggedPeople);
+  if (doesHaveClickedPerson) {
+    const newTags = currentTaggedPeople.filter(
+      (person) => person.id !== clickedPerson.id
+    );
+    updateTaggedPeople(newTags);
+  } else {
+    const newTags = [
+      ...currentTaggedPeople,
+      { name: clickedPerson.name, id: clickedPerson.id },
+    ];
+    updateTaggedPeople(newTags);
+  }
 }

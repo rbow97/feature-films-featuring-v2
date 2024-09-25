@@ -3,14 +3,17 @@ import Container from "@components/Container.astro";
 import Header from "@components/Header.astro";
 import Hero from "@components/Hero.astro";
 import Tabs from "@components/Tabs/Tabs.astro";
-import TagsList from "@components/TagsList/TagsList";
-import TagsModal from "@components/TagsModal.astro";
 import { ViewTransitions } from "astro:transitions";
+import Modal from "@components/Modal.astro";
+import ModalContent from "@components/ModalContent";
+import { initializeTaggedPeople } from "@stores/store";
 
 export const prerender = false;
 interface Props {
   title: string;
 }
+
+initializeTaggedPeople();
 
 const { title } = Astro.props;
 ---
@@ -70,10 +73,15 @@ const { title } = Astro.props;
       <Header />
       <Container>
         <Hero />
-        <div class="flex gap-sm w-fit items-center mb-md">
-          <TagsModal />
-          <Tabs />
-          <!-- <TagsList client:load /> -->
+        <div
+          class="sticky top-[78px] md:top-[88px] bg-white z-10 w-full flex gap-sm justify-end"
+        >
+          <div class="overflow-x-auto">
+            <Tabs />
+          </div>
+          <Modal>
+            <ModalContent client:load />
+          </Modal>
         </div>
         <div
           class="grid gap-sm sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 4xl:grid-cols-6"

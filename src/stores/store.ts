@@ -51,6 +51,27 @@ export const creditsTotalStore = atom<any>([]);
 export const resultsUrlWithParams = atom<string>("");
 export const searchUrlWithParams = atom<string>("");
 
+export function initializeTaggedPeople() {
+  if (typeof window !== "undefined") {
+    const storedTags = localStorage.getItem("tagged-people");
+    if (storedTags) {
+      try {
+        const parsedTags = JSON.parse(storedTags);
+        taggedPeople.set(parsedTags);
+      } catch (error) {
+        console.error("Failed to parse tags from localStorage:", error);
+      }
+    }
+  }
+}
+
+export function updateTaggedPeople(newTags: TaggedPersonProps[]) {
+  taggedPeople.set(newTags);
+  if (typeof window !== "undefined") {
+    localStorage.setItem("tagged-people", JSON.stringify(newTags));
+  }
+}
+
 export const allTabResults = atom<{ popularPeople: Person.PersonProps[] }>({
   popularPeople: [],
 });
