@@ -2,13 +2,21 @@
 
 ---
 
-<nav-wrapper class="w-full overflow-x-auto">
+<nav-wrapper class="w-full relative flex justify-end">
+  <div
+    class="block md:hidden pointer-events-none absolute bottom-0 left-[106px] top-0 z-20 w-8 bg-gradient-to-r from-white via-white"
+  >
+  </div>
+  <div
+    class="block md:hidden pointer-events-none absolute bottom-0 right-0 top-0 z-20 w-8 bg-gradient-to-l from-white via-white"
+  >
+  </div>
   <nav
-    class="tabs-container rounded-2xl pb-sm gap-xs flex justify-between text-xs md:text-sm h-fit md:w-fit min-w-max overflow-x-auto"
+    class="relative rounded-2xl pb-sm gap-[4px] md:gap-xs flex justify-between text-xs md:text-sm h-fit md:w-fit overflow-x-scroll ml-[106px] md:ml-0"
   >
     <a
       href="/"
-      class="tab-btn border border-primary-grey rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center h-fit relative hover:bg-primary-grey transition-bg ease duration-200"
+      class="tab-btn border border-primary-grey rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center h-fit relative hover:bg-primary-grey transition-bg ease duration-200 ml-md md:ml-0"
       data-tab="popular-people"
     >
       <p class="whitespace-nowrap">Popular People</p>
@@ -45,11 +53,6 @@
 </nav-wrapper>
 
 <style>
-  .tabs-container {
-    position: relative;
-    overflow: hidden;
-  }
-
   .animated-bg {
     position: absolute;
     top: 4px;
@@ -71,7 +74,6 @@
   }
 
   .active {
-    /* background-color: #007bff; Active background color */
     background-color: transparent;
     border-color: #011502;
   }

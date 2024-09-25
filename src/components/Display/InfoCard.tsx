@@ -57,7 +57,7 @@ export default function InfoCard(props: Props) {
             </>
           )}
         </div>
-        <div className="pt-2">
+        <div className="pt-2 truncate">
           <p className="text-sm text-primary-darkGrey truncate">{title}</p>
         </div>
       </article>
