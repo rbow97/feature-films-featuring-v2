@@ -7,13 +7,11 @@ interface Props {
 }
 
 export default function DisplayResults({ people }: Props) {
-  // filter out job 'thanks' from job
-  // filter out oscars
-
   return (
     <>
       {people?.map((person: Person.PersonProps) => (
         <InfoCard
+          key={person.id}
           imagePath={person.profile_path}
           title={person.name}
           handleTagButtonClick={() => handleTagButtonClick(person)}

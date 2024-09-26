@@ -72,6 +72,13 @@ export function updateTaggedPeople(newTags: TaggedPersonProps[]) {
   }
 }
 
+export function clearTaggedPeople() {
+  taggedPeople.set([]);
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("tagged-people");
+  }
+}
+
 export const allTabResults = atom<{ popularPeople: Person.PersonProps[] }>({
   popularPeople: [],
 });

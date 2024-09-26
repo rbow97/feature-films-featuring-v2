@@ -4,7 +4,6 @@ import Header from "@components/Header.astro";
 import Hero from "@components/Hero.astro";
 import Tabs from "@components/Tabs/Tabs.astro";
 import { ViewTransitions } from "astro:transitions";
-import { initializeTaggedPeople } from "@stores/store";
 import ModalButton from "@components/ModalButton.astro";
 import Modal from "@components/Modal.astro";
 
@@ -12,8 +11,6 @@ export const prerender = false;
 interface Props {
   title: string;
 }
-
-initializeTaggedPeople();
 
 const { title } = Astro.props;
 ---
@@ -91,6 +88,15 @@ const { title } = Astro.props;
     </main>
   </body>
 </html>
+
+<script>
+  import { initializeTaggedPeople } from "@stores/store";
+
+  // Wrap in a check for browser environment
+  if (typeof window !== "undefined") {
+    initializeTaggedPeople();
+  }
+</script>
 
 <style is:global>
   html {

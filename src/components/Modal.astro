@@ -41,20 +41,35 @@ import ModalContent from "./ModalContent";
 </style>
 
 <script>
-  import { isModalOpen, closeModal } from "../stores/modalStore";
+  import {
+    isModalOpen,
+    closeModal,
+    initializeModalState,
+  } from "../stores/modalStore";
 
-  const modalContainer = document.querySelector(".modal-container");
-  const modalOverlay = document.getElementById("modal-overlay");
+  function setupModal() {
+    const modalContainer = document.querySelector(".modal-container");
+    const modalOverlay = document.getElementById("modal-overlay");
 
-  if (modalOverlay) {
-    modalOverlay.addEventListener("click", () => {
-      closeModal();
+    if (modalOverlay) {
+      modalOverlay.addEventListener("click", () => {
+        closeModal();
+      });
+    }
+
+    isModalOpen.listen((open) => {
+      if (modalContainer) {
+        modalContainer.setAttribute("data-modal-open", open.toString());
+      }
     });
+
+    // Initialize modal state (closes the modal)
+    initializeModalState();
   }
 
-  isModalOpen.listen((open) => {
-    if (modalContainer) {
-      modalContainer.setAttribute("data-modal-open", open.toString());
-    }
-  });
+  // Run setup on initial load
+  setupModal();
+
+  // Re-run setup on page navigation
+  document.addEventListener("astro:page-load", setupModal);
 </script>

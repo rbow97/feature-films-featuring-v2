@@ -1,4 +1,8 @@
-import { resultsUrlWithParams, taggedPeople } from "@stores/store";
+import {
+  clearTaggedPeople,
+  resultsUrlWithParams,
+  taggedPeople,
+} from "@stores/store";
 import { useStore } from "@nanostores/react";
 import ListItem from "./TagsList/ListItem";
 import { addSearchParams } from "@utils/addSearchParams";
@@ -9,7 +13,7 @@ export default function ModalContent() {
   const $resultsUrlWithParams = useStore(resultsUrlWithParams);
 
   const handleRefresh = () => {
-    taggedPeople.set([]);
+    clearTaggedPeople();
   };
 
   useEffect(() => {
