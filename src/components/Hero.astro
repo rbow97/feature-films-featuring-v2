@@ -29,7 +29,7 @@ import Pill from "./Pill.astro";
 </header-wrapper>
 
 <script>
-  import { taggedPeople } from "@stores/store";
+  import { clearTaggedPeople, taggedPeople } from "@stores/store";
 
   class HeaderWrapper extends HTMLElement {
     constructor() {
@@ -39,7 +39,7 @@ import Pill from "./Pill.astro";
       headerLink?.addEventListener("click", () => {
         const tabData = headerLink.getAttribute("data-tab")!;
         localStorage.setItem("activeTab", tabData);
-        taggedPeople.set([]);
+        clearTaggedPeople();
       });
     }
   }

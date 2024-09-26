@@ -38,6 +38,11 @@ import ModalContent from "./ModalContent";
   .modal-container[data-modal-open="true"] .modal-content {
     animation: fadeIn 0.3s ease-out forwards;
   }
+
+  /* Add this new style */
+  :global(body.modal-open) {
+    overflow: hidden;
+  }
 </style>
 
 <script>
@@ -50,6 +55,7 @@ import ModalContent from "./ModalContent";
   function setupModal() {
     const modalContainer = document.querySelector(".modal-container");
     const modalOverlay = document.getElementById("modal-overlay");
+    const body = document.body;
 
     if (modalOverlay) {
       modalOverlay.addEventListener("click", () => {
@@ -61,6 +67,8 @@ import ModalContent from "./ModalContent";
       if (modalContainer) {
         modalContainer.setAttribute("data-modal-open", open.toString());
       }
+      // Toggle the 'modal-open' class on the body
+      body.classList.toggle("modal-open", open);
     });
 
     // Initialize modal state (closes the modal)

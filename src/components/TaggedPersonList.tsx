@@ -1,20 +1,45 @@
 import { type TaggedPersonProps } from "@stores/store";
 import { handleRemoveFromTags } from "@utils/taggingSystem/handleRemoveFromTags";
 import cx from "classnames";
-import { forwardRef } from "react";
+import { useEffect, useState } from "react";
 
-const ListItem = forwardRef(function ListItem(
-  {
-    taggedPerson,
-    taggedPeople,
-  }: {
-    taggedPerson: TaggedPersonProps;
-    taggedPeople: TaggedPersonProps[];
-  },
-  ref: React.Ref<HTMLLIElement>
-) {
+export function TaggedPersonList({
+  taggedPeople,
+}: {
+  taggedPeople: TaggedPersonProps[];
+}) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; // or a loading placeholder
+  }
+
   return (
-    <li ref={ref} className={cx("max-w-[200px] shrink-0 snap-start h-fit")}>
+    <ul className="flex flex-wrap gap-2">
+      {taggedPeople.map((taggedPerson) => (
+        <TaggedPersonLabel
+          key={taggedPerson.id}
+          taggedPerson={taggedPerson}
+          taggedPeople={taggedPeople}
+        />
+      ))}
+    </ul>
+  );
+}
+
+function TaggedPersonLabel({
+  taggedPerson,
+  taggedPeople,
+}: {
+  taggedPerson: TaggedPersonProps;
+  taggedPeople: TaggedPersonProps[];
+}) {
+  return (
+    <li className={cx("max-w-[200px] shrink-0 snap-start h-fit")}>
       <button
         onClick={() => handleRemoveFromTags(taggedPerson, taggedPeople)}
         className={cx(
@@ -30,6 +55,4 @@ const ListItem = forwardRef(function ListItem(
       </button>
     </li>
   );
-});
-
-export default ListItem;
+}

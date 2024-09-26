@@ -1,12 +1,12 @@
+import { useStore } from "@nanostores/react";
 import {
   clearTaggedPeople,
   resultsUrlWithParams,
   taggedPeople,
 } from "@stores/store";
-import { useStore } from "@nanostores/react";
-import ListItem from "./TagsList/ListItem";
 import { addSearchParams } from "@utils/addSearchParams";
 import { useEffect } from "react";
+import { TaggedPersonList } from "./TaggedPersonList";
 
 export default function ModalContent() {
   const $taggedPeople = useStore(taggedPeople);
@@ -21,21 +21,13 @@ export default function ModalContent() {
   }, [$taggedPeople]);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-[200px] max-h-[400px]">
       <p className="text-[24px] font-bold pl-sm pt-sm pb-sm mb-sm border-b border-b-primary-lightGrey">
         Tags
       </p>
       <div className="flex flex-col h-full px-sm pb-sm overflow-hidden">
         <div className="overflow-y-auto grow h-full">
-          <ul className="flex flex-wrap gap-2 mb-[64px]">
-            {$taggedPeople.map((person) => (
-              <ListItem
-                key={person.id}
-                taggedPerson={person}
-                taggedPeople={$taggedPeople}
-              />
-            ))}
-          </ul>
+          <TaggedPersonList taggedPeople={$taggedPeople} />
         </div>
         <div className="absolute left-0 right-0 bottom-0 w-full flex justify-between items-center px-sm pb-sm">
           <button

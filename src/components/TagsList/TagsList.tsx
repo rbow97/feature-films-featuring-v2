@@ -7,7 +7,7 @@ import {
 import { addSearchParams } from "@utils/addSearchParams";
 import cx from "classnames";
 import { useEffect, useState, useLayoutEffect, useRef } from "react";
-import ListItem from "./ListItem";
+import ListItem from "../TaggedPersonList";
 import TagsSearchButton from "./TagsSearchButton";
 
 export default function TagsList() {
@@ -79,11 +79,7 @@ export default function TagsList() {
                 key={`list-item-${taggedPerson.name}`}
                 taggedPeople={tags}
                 taggedPerson={taggedPerson}
-                ref={(el) => {
-                  if (el) {
-                    itemRefs.current[index] = el as HTMLLIElement;
-                  }
-                }}
+            
               />
             );
           })}
