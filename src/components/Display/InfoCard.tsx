@@ -12,19 +12,19 @@ export default function InfoCard(props: Props) {
   return (
     <div className="w-full mx-auto">
       <article className="flex flex-col h-full overflow-hidden">
-        <div className="relative group h-full">
+        <div className="relative group h-fit">
           <img
             loading="lazy"
             width="150"
             height="150"
             decoding="async"
-            className="w-full h-full object-cover rounded-lg grow"
+            className="w-full h-[250px] object-cover rounded-lg grow"
             src={imagePath ? `${imdbImageUrl}${imagePath}` : "/film-camera.svg"}
             alt={title}
           />
           {handleTagButtonClick && (
             <>
-              <div className="absolute rounded-lg inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 hidden md:block"></div>
+              <div className="absolute rounded-lg top-0 left-0 bottom-0 right-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 hidden md:block"></div>
               <button
                 onClick={handleTagButtonClick}
                 className="absolute bottom-2 right-2 md:opacity-0 group-hover:opacity-100 transition-all duration-300"
