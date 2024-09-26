@@ -1,0 +1,40 @@
+---
+import NumberOfTags from "./NumberOfTags";
+---
+
+<tags-modal-wrapper>
+  <button
+    id="open-modal-button"
+    class="border border-primary-grey text-primary-darkGrey hover:text-primary-black rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center h-fit hover:border-primary-darkGrey transition-all duration-200 ease-in-out disabled:hover:border-primary-grey disabled:hover:text-primary-darkGrey disabled:opacity-50 disabled:cursor-not-allowed"
+  >
+    <p>Tags</p>
+    <NumberOfTags client:load />
+  </button>
+</tags-modal-wrapper>
+
+<script>
+  import { taggedPeople } from "../stores/store";
+  import { openModal, closeModal } from "@stores/modalStore";
+
+  class TagsModalWrapper extends HTMLElement {
+    constructor() {
+      super();
+      const openModalButton = this.querySelector(
+        "#open-modal-button"
+      ) as HTMLButtonElement;
+
+      function openModalFn() {
+        openModal();
+      }
+
+      openModalButton.addEventListener("click", openModalFn);
+
+      // Update button state based on taggedPeople store
+      taggedPeople.subscribe((tags) => {
+        openModalButton.disabled = tags.length === 0;
+      });
+    }
+  }
+
+  customElements.define("tags-modal-wrapper", TagsModalWrapper);
+</script>

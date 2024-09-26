@@ -1,67 +1,21 @@
 ---
-import NumberOfTags from "./NumberOfTags";
+import { isModalOpen } from "../stores/modalStore";
+import ModalContent from "./ModalContent";
 ---
 
-<tags-modal-wrapper>
-  <button
-    id="open-modal-button"
-    class="border border-primary-grey text-primary-darkGrey hover:text-primary-black rounded-[40px] py-1 px-3 md:py-2 text-sm flex gap-1.5 items-center justify-center h-fit hover:border-primary-darkGrey transition-all duration-200 ease-in-out disabled:hover:border-primary-grey disabled:hover:text-primary-darkGrey disabled:opacity-50 disabled:cursor-not-allowed"
-  >
-    <p>Tags</p>
-    <NumberOfTags client:load />
-  </button>
+<div class="modal-container" data-modal-open={isModalOpen.get()}>
   <div
-    id="modal"
-    class="hidden max-w-[400px] min-w-[300px] md:w-[450px] h-[275px] fixed top-1/2 left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-2xl opacity-0 transition-all duration-300 ease-in-out animate-fadeIn max-h-[90vh] z-40"
+    class="modal-overlay fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-20"
+    id="modal-overlay"
+  >
+  </div>
+  <div
+    class="modal-content fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-2xl z-30 p-4 max-w-[400px] min-w-[300px] md:w-[450px] max-h-[90vh] overflow-auto"
     role="dialog"
   >
-    <slot />
+    <ModalContent client:load />
   </div>
-  <div
-    id="overlay"
-    class="hidden fixed inset-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm z-30"
-  >
-  </div>
-</tags-modal-wrapper>
-
-<script>
-  import { taggedPeople } from "../stores/store";
-
-  class TagsModalWrapper extends HTMLElement {
-    constructor() {
-      super();
-      const openModalButton = this.querySelector(
-        "#open-modal-button"
-      ) as HTMLButtonElement;
-      const modal = this.querySelector("#modal");
-      const overlay = this.querySelector("#overlay");
-
-      function closeModal() {
-        modal?.classList.remove("opacity-100", "block", "animate-fadeIn");
-        modal?.classList.add("opacity-0", "hidden");
-        overlay?.classList.add("hidden");
-        document.body.classList.remove("overflow-hidden");
-      }
-
-      function openModal() {
-        modal?.classList.remove("opacity-0", "hidden");
-        modal?.classList.add("opacity-100", "block", "animate-fadeIn");
-        overlay?.classList.remove("hidden");
-        document.body.classList.add("overflow-hidden");
-      }
-
-      openModalButton.addEventListener("click", openModal);
-      overlay?.addEventListener("click", closeModal);
-
-      // Update button state based on taggedPeople store
-      taggedPeople.subscribe((tags) => {
-        openModalButton.disabled = tags.length === 0;
-      });
-    }
-  }
-
-  customElements.define("tags-modal-wrapper", TagsModalWrapper);
-</script>
+</div>
 
 <style>
   @keyframes fadeIn {
@@ -75,7 +29,32 @@ import NumberOfTags from "./NumberOfTags";
     }
   }
 
-  #modal.animate-fadeIn {
+  .modal-container {
+    display: none;
+  }
+  .modal-container[data-modal-open="true"] {
+    display: block;
+  }
+  .modal-container[data-modal-open="true"] .modal-content {
     animation: fadeIn 0.3s ease-out forwards;
   }
 </style>
+
+<script>
+  import { isModalOpen, closeModal } from "../stores/modalStore";
+
+  const modalContainer = document.querySelector(".modal-container");
+  const modalOverlay = document.getElementById("modal-overlay");
+
+  if (modalOverlay) {
+    modalOverlay.addEventListener("click", () => {
+      closeModal();
+    });
+  }
+
+  isModalOpen.listen((open) => {
+    if (modalContainer) {
+      modalContainer.setAttribute("data-modal-open", open.toString());
+    }
+  });
+</script>

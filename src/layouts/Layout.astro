@@ -4,9 +4,9 @@ import Header from "@components/Header.astro";
 import Hero from "@components/Hero.astro";
 import Tabs from "@components/Tabs/Tabs.astro";
 import { ViewTransitions } from "astro:transitions";
-import Modal from "@components/Modal.astro";
-import ModalContent from "@components/ModalContent";
 import { initializeTaggedPeople } from "@stores/store";
+import ModalButton from "@components/ModalButton.astro";
+import Modal from "@components/Modal.astro";
 
 export const prerender = false;
 interface Props {
@@ -71,6 +71,7 @@ const { title } = Astro.props;
   <body class="h-full bg-white text-primary-black">
     <main class="h-fit pb-20 relative">
       <Header />
+      <Modal />
       <Container>
         <Hero />
       </Container>
@@ -78,9 +79,7 @@ const { title } = Astro.props;
         class="sticky top-[80px] md:top-[88px] bg-white z-[5] w-full flex gap-sm justify-end pr-md"
       >
         <Tabs />
-        <Modal>
-          <ModalContent client:load />
-        </Modal>
+        <ModalButton />
       </div>
       <Container>
         <div
